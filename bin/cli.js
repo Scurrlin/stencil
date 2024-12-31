@@ -11,7 +11,7 @@ async function run() {
     .option('start', {
       alias: 's',
       type: 'number',
-      defaut: null,
+      default: null,
       describe: 'Start line number for transformation'
     })
     .option('end', {
@@ -29,7 +29,7 @@ async function run() {
   const { start, end } = argv;
 
   try {
-    const transformedCode = await transformFile(filePath, { startline: start, endLine: end });
+    const transformedCode = await transformFile(filePath, { startLine: start, endLine: end });
     console.log(transformedCode);
   } catch (error) {
     console.error('Error:', error.message);
