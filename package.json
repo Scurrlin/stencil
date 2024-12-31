@@ -1,0 +1,24 @@
+{
+  "name": "stencil",
+  "version": "1.0.0",
+  "description": "A memorization tool that strips code down to first letters and punctuation only.",
+  "main": "src/index.js",
+  "bin": {
+    "stencil": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "keywords": [
+    "stencil",
+    "memory",
+    "study",
+    "code",
+    "promptify"
+  ],
+  "author": "Sean Currlin",
+  "license": "MIT"
+}
