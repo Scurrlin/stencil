@@ -1,15 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
 
-/**
- * Transforms a file by preserving the first character of each word, along with punctuation and numbers.
- * @param {string} filePath - The path to the file to transform.
- * @param {Object} options - Transformation options.
- * @param {number|null} options.startLine - The first line number to transform (1-based). If null, starts from the first line.
- * @param {number|null} options.endLine - The last line number to transform (1-based). If null, continues to the end of the file.
- * @returns {Promise<string>} - The transformed file content.
- */
-
 async function transformFile(filePath, options = {}) {
   const { startLine = null, endLine = null } = options;
 
@@ -51,12 +42,6 @@ async function transformFile(filePath, options = {}) {
 
   return transformedLines.join('\n');
 }
-
-/**
- * Transforms a single line by keeping the first character of each word, preserving punctuation and numbers.
- * @param {string} line - The line of text to transform.
- * @returns {string} - The transformed line.
- */
 
 function transformLine(line) {
   // Regular expression to match sequences of letters and numbers
