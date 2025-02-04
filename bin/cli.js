@@ -7,7 +7,19 @@ const { hideBin } = require('yargs/helpers');
 async function run() {
   const argv = yargs(hideBin(process.argv))
     .usage('Usage: stencil <path> [options]')
-    .example('stencil path/to/file.py --start 2 --end 10', 'Transform only lines 2-10')
+    
+    // Local Installation Example
+    .example(
+      'npx stencil path/to/file.py --start 2 --end 10',
+      'Transform only lines 2-10 (local installation)\n'
+    )
+    
+    // Global Installation Example
+    .example(
+      'stencil path/to/file.py --start 2 --end 10',
+      'Transform only lines 2-10 (global installation)'
+    )
+
     .option('start', {
       alias: 's',
       type: 'number',
