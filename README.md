@@ -1,10 +1,11 @@
 ```
-  ____  _                  _ _ 
- / ___|| |_ ___ _ __   ___(_) |
- \___ \| __/ _ \ '_ \ / __| | |
-  ___) | ||  __/ | | | (__| | |
- |____/ \__\___|_| |_|\___|_|_|
-                                                        
+     _______.___________. _______ .__   __.   ______  __   __      
+    /       |           ||   ____||  \ |  |  /      ||  | |  |     
+   |   (----`---|  |----`|  |__   |   \|  | |  ,----'|  | |  |     
+    \   \       |  |     |   __|  |  . `  | |  |     |  | |  |     
+.----)   |      |  |     |  |____ |  |\   | |  `----.|  | |  `----.
+|_______/       |__|     |_______||__| \__|  \______||__| |_______|
+                                            
 ```
 
 Whether you are studying for technical interviews, or just starting your coding journey, pattern recognition and memorization are absolutely necessary. It doesn't take a valedictorian to figure that out, but how exactly are you supposed to do that? Between data structures, algorithms, and design patterns, the task of incrementally committing a sufficient amount of that information to memory can feel impossible. You could spend hours studying fully implemented algorithms only to draw a blank when staring at an empty code editor.
