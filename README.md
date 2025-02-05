@@ -47,7 +47,7 @@ c S:
 To install **Stencil** locally, run the following command in the terminal of your directory:
 
 ```bash
-npm install stencil
+npm install @scurrlin/stencil
 ```
 
 Once installed, you can run it with the following command:
@@ -61,7 +61,7 @@ npx stencil path/to/your/file.py --start <start_line> --end <end_line>
 If you prefer to install **Stencil** globally, run the following command in your terminal:
 
 ```bash
-npm install -g stencil
+npm install -g @scurrlin/stencil
 ```
 
 Once installed, you can run it with the following command:
