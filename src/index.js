@@ -17,7 +17,7 @@ async function transformFile(filePath, options = {}) {
     throw new Error(`Unable to read file: ${err.message}`);
   });
 
-  // Create an interface for reading the file line by line
+  // Create interface for reading the file line by line
   const rl = readline.createInterface({
     input: fileStream,
     crlfDelay: Infinity
@@ -44,11 +44,11 @@ async function transformFile(filePath, options = {}) {
 }
 
 function transformLine(line) {
-  // Regular expression to match sequences of letters and numbers
+  // Regex to match sequences of letters and numbers
   // \p{L} matches any kind of letter from any language
   // \p{N} matches any kind of numeric character
-  // The 'u' flag enables Unicode support
-  // The 'g' flag enables global matching
+  // 'u' flag enables Unicode support
+  // 'g' flag enables global matching
   return line.replace(/[\p{L}\p{N}]+/gu, (match) => {
     return match[0]; // Retain only the first character
   });
