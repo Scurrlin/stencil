@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 217 "Contains Duplicate":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 11 "Container With Most Water":
 
 ## Example
 
@@ -22,26 +22,38 @@ Solution
 
 ```python
 class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        nums.sort()
-        n = len(nums)
-        for i in range(1, n):
-            if nums[i] == nums[i - 1]:
-                return True
-        return False
+    def maxArea(self, height: List[int]) -> int:
+        l, r = 0, len(height) - 1
+        max_area = 0
+        h = height
+
+        while l < r:
+            area = min(h[l], h[r]) * (r - l)
+            max_area = max(max_area, area)
+            if h[l] < h[r]:
+                l += 1
+            else:
+                r -= 1
+        return max_area
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: L[i]) -> b:
-        n.s()
-        n = l(n)
-        f i i r(1, n):
-            i n[i] == n[i - 1]:
-                r T
-        r F
+    d m(s, h: L[i]) -> i:
+        l, r = 0, l(h) - 1
+        m_a = 0
+        h = h
+
+        w l < r:
+            a = m(h[l], h[r]) * (r - l)
+            m_a = m(m_a, a)
+            i h[l] < h[r]:
+                l += 1
+            e:
+                r -= 1
+        r m_a
 ```
 
 ## Local Installation
