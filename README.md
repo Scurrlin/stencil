@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 11 "Container With Most Water":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 704 "Binary Search":
 
 ## Example
 
@@ -22,38 +22,36 @@ Solution
 
 ```python
 class Solution:
-    def maxArea(self, height: List[int]) -> int:
-        l, r = 0, len(height) - 1
-        max_area = 0
-        h = height
+    def search(self, nums: List[int], target: int) -> int:
+        l, r = 0, len(nums) - 1
 
-        while l < r:
-            area = min(h[l], h[r]) * (r - l)
-            max_area = max(max_area, area)
-            if h[l] < h[r]:
-                l += 1
+        while l <= r:
+            m = l + ((r - l)//2)
+            if nums[m] > target:
+                r = m - 1
+            elif nums[m] < target:
+                l = m + 1
             else:
-                r -= 1
-        return max_area
+                return m
+        return -1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, h: L[i]) -> i:
-        l, r = 0, l(h) - 1
-        m_a = 0
-        h = h
+    d s(s, n: L[i], t: i) -> i:
+        l, r = 0, l(n) - 1
 
-        w l < r:
-            a = m(h[l], h[r]) * (r - l)
-            m_a = m(m_a, a)
-            i h[l] < h[r]:
-                l += 1
+        w l <= r:
+            m = l + ((r - l)//2)
+            i n[m] > t:
+                r = m - 1
+            e n[m] < t:
+                l = m + 1
             e:
-                r -= 1
-        r m_a
+                r m
+        r -1
 ```
 
 ## Local Installation
