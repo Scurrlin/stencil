@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 128 "Longest Consecutive Sequence":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 153 "Find Minimum in Rotated Sorted Array":
 
 ## Example
 
@@ -22,34 +22,36 @@ Solution
 
 ```python
 class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:
-        n_set = set(nums)
-        longest = 0
-
-        for n in n_set:
-            if (n - 1) not in n_set:
-                length = 1
-                while (n + length) in n_set:
-                    length += 1
-                longest = max(length, longest)
-        return longest
+    def findMin(self, nums: List[int]) -> int:
+        start, end = 0, len(nums) - 1 
+        curr_min = float("inf")
+        
+        while start < end :
+            mid = start + (end - start)//2
+            curr_min = min(curr_min, nums[mid])
+            if nums[mid] > nums[end]:
+                start = mid + 1
+            else:
+                end = mid - 1
+        return min(curr_min, nums[start])
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, n: L[i]) -> i:
-        n_s = s(n)
-        l = 0
-
-        f n i n_s:
-            i (n - 1) n i n_s:
-                l = 1
-                w (n + l) i n_s:
-                    l += 1
-                l = m(l, l)
-        r l
+    d f(s, n: L[i]) -> i:
+        s, e = 0, l(n) - 1 
+        c_m = f("i")
+        
+        w s < e :
+            m = s + (e - s)//2
+            c_m = m(c_m, n[m])
+            i n[m] > n[e]:
+                s = m + 1
+            e:
+                e = m - 1
+        r m(c_m, n[s])
 ```
 
 ## Local Installation
