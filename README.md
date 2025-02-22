@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 739 "Daily Temperatures":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 143 "Reorder List":
 
 ## Example
 
@@ -22,34 +22,54 @@ Solution
 
 ```python
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        T = temperatures
-        res = [0] * len(T)
-        stack = []
-
-        for i, t in enumerate(T):
-            while stack and t > T[stack[-1]]:
-                index = stack.pop()
-                res[index] = i - index
-            stack.append(i)
-        return res
+    def reorderList(self, head: ListNode) -> None:
+        if not head or not head.next:
+            return
+        slow, fast = head, head.next
+        
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        second = slow.next
+        prev = slow.next = None
+        while second:
+            temp = second.next
+            second.next = prev
+            prev = second
+            second = temp
+        first, second = head, prev
+        while second:
+            temp1, temp2 = first.next, second.next
+            first.next = second
+            second.next = temp1
+            first, second = temp1, temp2
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d d(s, t: L[i]) -> L[i]:
-        T = t
-        r = [0] * l(T)
-        s = []
-
-        f i, t i e(T):
-            w s a t > T[s[-1]]:
-                i = s.p()
-                r[i] = i - i
-            s.a(i)
-        r r
+    d r(s, h: L) -> N:
+        i n h o n h.n:
+            r
+        s, f = h, h.n
+        
+        w f a f.n:
+            s = s.n
+            f = f.n.n
+        s = s.n
+        p = s.n = N
+        w s:
+            t = s.n
+            s.n = p
+            p = s
+            s = t
+        f, s = h, p
+        w s:
+            t, t = f.n, s.n
+            f.n = s
+            s.n = t
+            f, s = t, t
 ```
 
 ## Local Installation
