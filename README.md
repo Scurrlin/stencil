@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 21 "Merge Two Sorted Lists":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 98 "Validate Binary Search Tree":
 
 ## Example
 
@@ -22,42 +22,38 @@ Solution
 
 ```python
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        l1, l2 = list1, list2
-        temp = ListNode(0)
-        current = temp
-        
-        while l1 and l2:
-            if l1.val <= l2.val:
-                current.next = l1
-                l1 = l1.next
-            else:
-                current.next = l2
-                l2 = l2.next
-            current = current.next
-        current.next = l1 if l1 else l2
-        return temp.next
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        stack, prev = [], float("-inf")
+
+        while root or stack:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if root.val <= prev:
+                return False
+            prev = root.val
+            root = root.right
+        return True
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, l: O[L], l: O[L]) -> O[L]:
-        l, l = l, l
-        t = L(0)
-        c = t
-        
-        w l a l:
-            i l.v <= l.v:
-                c.n = l
-                l = l.n
-            e:
-                c.n = l
-                l = l.n
-            c = c.n
-        c.n = l i l e l
-        r t.n
+    d i(s, r: O[T]) -> b:
+        s, p = [], f("-i")
+
+        w r o s:
+            w r:
+                s.a(r)
+                r = r.l
+            r = s.p()
+            i r.v <= p:
+                r F
+            p = r.v
+            r = r.r
+        r T
 ```
 
 ## Local Installation
