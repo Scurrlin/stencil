@@ -22,38 +22,26 @@ Solution
 
 ```python
 class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        stack, prev = [], float("-inf")
-
-        while root or stack:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if root.val <= prev:
-                return False
-            prev = root.val
-            root = root.right
-        return True
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if not p and not q:
+            return True
+        if p and q and p.val == q.val:
+            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        else:
+            return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, r: O[T]) -> b:
-        s, p = [], f("-i")
-
-        w r o s:
-            w r:
-                s.a(r)
-                r = r.l
-            r = s.p()
-            i r.v <= p:
-                r F
-            p = r.v
-            r = r.r
-        r T
+    d i(s, p: T, q: T) -> b:
+        i n p a n q:
+            r T
+        i p a q a p.v == q.v:
+            r s.i(p.l, q.l) a s.i(p.r, q.r)
+        e:
+            r F
 ```
 
 ## Local Installation
