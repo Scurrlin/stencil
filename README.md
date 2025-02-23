@@ -22,26 +22,30 @@ Solution
 
 ```python
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if not root:
-            return 0
-        
-        left_depth = self.maxDepth(root.left)
-        right_depth = self.maxDepth(root.right)
-        return max(left_depth, right_depth) + 1
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def dfs(root):
+            if not root:
+                return [True, 0]
+
+            left, right = dfs(root.left), dfs(root.right)
+            balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+            return [balanced, 1 + max(left[1], right[1])]
+        return dfs(root)[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, r: T) -> i:
-        i n r:
-            r 0
-        
-        l_d = s.m(r.l)
-        r_d = s.m(r.r)
-        r m(l_d, r_d) + 1
+    d i(s, r: O[T]) -> b:
+        d d(r):
+            i n r:
+                r [T, 0]
+
+            l, r = d(r.l), d(r.r)
+            b = l[0] a r[0] a a(l[1] - r[1]) <= 1
+            r [b, 1 + m(l[1], r[1])]
+        r d(r)[0]
 ```
 
 ## Local Installation
