@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 33 "Search in Rotated Sorted Array":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 20 "Valid Parentheses":
 
 ## Example
 
@@ -22,48 +22,34 @@ Solution
 
 ```python
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
-        l, r = 0, len(nums) - 1
+    def isValid(self, s: str) -> bool:
+        stack = []
+        b_map = {")":"(", "}":"{", "]":"["}
 
-        while l <= r:
-            mid = (l + r) // 2
-            if target == nums[mid]:
-                return mid
-            if nums[l] <= nums[mid]:
-                if target > nums[mid] or target < nums[l]:
-                    l = mid + 1
-                else:
-                    r = mid - 1
-            else:
-                if target < nums[mid] or target > nums[r]:
-                    r = mid - 1
-                else:
-                    l = mid + 1
-        return -1
+        for char in s:
+            if char in b_map.values():
+                stack.append(char)
+            elif char in b_map.keys():
+                if not stack or b_map[char] != stack.pop():
+                    return False
+        return not stack
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n: L[i], t: i) -> i:
-        l, r = 0, l(n) - 1
+    d i(s, s: s) -> b:
+        s = []
+        b_m = {")":"(", "}":"{", "]":"["}
 
-        w l <= r:
-            m = (l + r) // 2
-            i t == n[m]:
-                r m
-            i n[l] <= n[m]:
-                i t > n[m] o t < n[l]:
-                    l = m + 1
-                e:
-                    r = m - 1
-            e:
-                i t < n[m] o t > n[r]:
-                    r = m - 1
-                e:
-                    l = m + 1
-        r -1
+        f c i s:
+            i c i b_m.v():
+                s.a(c)
+            e c i b_m.k():
+                i n s o b_m[c] != s.p():
+                    r F
+        r n s
 ```
 
 ## Local Installation
