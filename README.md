@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 20 "Valid Parentheses":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 1046 "Last Stone Weight":
 
 ## Example
 
@@ -22,34 +22,34 @@ Solution
 
 ```python
 class Solution:
-    def isValid(self, s: str) -> bool:
-        stack = []
-        b_map = {")":"(", "}":"{", "]":"["}
-
-        for char in s:
-            if char in b_map.values():
-                stack.append(char)
-            elif char in b_map.keys():
-                if not stack or b_map[char] != stack.pop():
-                    return False
-        return not stack
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        stones = [-s for s in stones]
+        
+        heapq.heapify(stones)
+        while len(stones) > 1:
+            first = heapq.heappop(stones)
+            second = heapq.heappop(stones)
+            if second > first:
+                heapq.heappush(stones, first - second)
+        stones.append(0)
+        return abs(stones[0])
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, s: s) -> b:
-        s = []
-        b_m = {")":"(", "}":"{", "]":"["}
-
-        f c i s:
-            i c i b_m.v():
-                s.a(c)
-            e c i b_m.k():
-                i n s o b_m[c] != s.p():
-                    r F
-        r n s
+    d l(s, s: L[i]) -> i:
+        s = [-s f s i s]
+        
+        h.h(s)
+        w l(s) > 1:
+            f = h.h(s)
+            s = h.h(s)
+            i s > f:
+                h.h(s, f - s)
+        s.a(0)
+        r a(s[0])
 ```
 
 ## Local Installation
