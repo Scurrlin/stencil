@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 424 "Longest Repeating Character Replacement":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 19 "Remove Nth Node From End of List":
 
 ## Example
 
@@ -22,36 +22,38 @@ Solution
 
 ```python
 class Solution:
-    def characterReplacement(self, s: str, k: int) -> int:
-        count = {}
-        l = 0
-        maxfreq = 0
-
-        for r in range(len(s)):
-            count[s[r]] = 1 + count.get(s[r], 0)
-            maxfreq = max(maxfreq, count[s[r]])
-            if (r - l + 1) - maxfreq > k:
-                count[s[l]] -= 1
-                l += 1
-        return (r - l + 1)
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = head
+        first = dummy
+        second = dummy
+        
+        for _ in range(n + 1):
+            first = first.next
+        while first is not None:
+            first = first.next
+            second = second.next
+        second.next = second.next.next
+        return dummy.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, s: s, k: i) -> i:
-        c = {}
-        l = 0
-        m = 0
-
-        f r i r(l(s)):
-            c[s[r]] = 1 + c.g(s[r], 0)
-            m = m(m, c[s[r]])
-            i (r - l + 1) - m > k:
-                c[s[l]] -= 1
-                l += 1
-        r (r - l + 1)
+    d r(s, h: O[L], n: i) -> O[L]:
+        d = L(0)
+        d.n = h
+        f = d
+        s = d
+        
+        f _ i r(n + 1):
+            f = f.n
+        w f i n N:
+            f = f.n
+            s = s.n
+        s.n = s.n.n
+        r d.n
 ```
 
 ## Local Installation
