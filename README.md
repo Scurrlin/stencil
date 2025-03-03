@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 19 "Remove Nth Node From End of List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 141 "Linked List Cycle":
 
 ## Example
 
@@ -22,38 +22,30 @@ Solution
 
 ```python
 class Solution:
-    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        dummy = ListNode(0)
-        dummy.next = head
-        first = dummy
-        second = dummy
-        
-        for _ in range(n + 1):
-            first = first.next
-        while first is not None:
-            first = first.next
-            second = second.next
-        second.next = second.next.next
-        return dummy.next
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow, fast = head, head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, h: O[L], n: i) -> O[L]:
-        d = L(0)
-        d.n = h
-        f = d
-        s = d
-        
-        f _ i r(n + 1):
-            f = f.n
-        w f i n N:
-            f = f.n
+    d h(s, h: O[L]) -> b:
+        s, f = h, h
+
+        w f a f.n:
             s = s.n
-        s.n = s.n.n
-        r d.n
+            f = f.n.n
+            i s == f:
+                r T
+        r F
 ```
 
 ## Local Installation
