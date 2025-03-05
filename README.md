@@ -14,56 +14,42 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 155 "Min Stack":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 134 "Gas Station":
 
 ## Example
 
 Solution
 
 ```python
-class MinStack:
-    def __init__(self):
-        self.stack = []
-        self.minStack = []
-
-    def push(self, val: int) -> None:
-        self.stack.append(val)
-        val = min(val, self.minStack[-1] if self.minStack else val)
-        self.minStack.append(val)
-
-    def pop(self) -> None:
-        self.stack.pop()
-        self.minStack.pop()
-
-    def top(self) -> int:
-        return self.stack[-1]
-
-    def getMin(self) -> int:
-        return self.minStack[-1]
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        if sum(gas) < sum(cost):
+            return -1
+        
+        start, tank = 0, 0
+        for i in range(len(gas)):
+            tank += gas[i] - cost[i]
+            if tank < 0:
+                start = i + 1
+                tank = 0
+        return start
 ```
 
 Solution with Stencil
 
 ```python
-c M:
-    d __i__(s):
-        s.s = []
-        s.m = []
-
-    d p(s, v: i) -> N:
-        s.s.a(v)
-        v = m(v, s.m[-1] i s.m e v)
-        s.m.a(v)
-
-    d p(s) -> N:
-        s.s.p()
-        s.m.p()
-
-    d t(s) -> i:
-        r s.s[-1]
-
-    d g(s) -> i:
-        r s.m[-1]
+c S:
+    d c(s, g: L[i], c: L[i]) -> i:
+        i s(g) < s(c):
+            r -1
+        
+        s, t = 0, 0
+        f i i r(l(g)):
+            t += g[i] - c[i]
+            i t < 0:
+                s = i + 1
+                t = 0
+        r s
 ```
 
 ## Local Installation
