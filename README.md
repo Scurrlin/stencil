@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 139 "Word Break":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 875 "Koko Eating Bananas":
 
 ## Example
 
@@ -22,36 +22,42 @@ Solution
 
 ```python
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        n = len(s)
-        dp = [False] * (n + 1)
-        dp[0] = True
-        max_len = max(map(len, wordDict))
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        l, r = 1, max(piles)
+        res = r
 
-        for i in range(1, n + 1):
-            for j in range(i - 1, max(i - max_len - 1, -1), -1):
-                if dp[j] and s[j:i] in wordDict:
-                    dp[i] = True
-                    break
-        return dp[n]
+        while l <= r:
+            k = (l + r) // 2
+            totalTime = 0
+            for p in piles:
+                totalTime += math.ceil(float(p) / k)
+            if totalTime <= h:
+                res = k
+                r = k - 1
+            else:
+                l = k + 1
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d w(s, s: s, w: L[s]) -> b:
-        n = l(s)
-        d = [F] * (n + 1)
-        d[0] = T
-        m_l = m(m(l, w))
+    d m(s, p: L[i], h: i) -> i:
+        l, r = 1, m(p)
+        r = r
 
-        f i i r(1, n + 1):
-            f j i r(i - 1, m(i - m_l - 1, -1), -1):
-                i d[j] a s[j:i] i w:
-                    d[i] = T
-                    b
-        r d[n]
+        w l <= r:
+            k = (l + r) // 2
+            t = 0
+            f p i p:
+                t += m.c(f(p) / k)
+            i t <= h:
+                r = k
+                r = k - 1
+            e:
+                l = k + 1
+        r r
 ```
 
 ## Local Installation
