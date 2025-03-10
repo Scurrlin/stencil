@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 543 "Diameter of Binary Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 2 "Add Two Numbers":
 
 ## Example
 
@@ -22,38 +22,44 @@ Solution
 
 ```python
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        res = 0
-
-        def dfs(root):
-            nonlocal res
-            if not root:
-                return 0
-            left = dfs(root.left)
-            right = dfs(root.right)
-            res = max(res, left + right)
-            return 1 + max(left, right)
-        dfs(root)
-        return res
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode()
+        current = dummy
+        carry = 0
+        
+        while l1 or l2 or carry:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            val = v1 + v2 + carry
+            carry = val // 10
+            val = val % 10
+            current.next = ListNode(val)
+            current = current.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummy.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d d(s, r: O[T]) -> i:
-        r = 0
-
-        d d(r):
-            n r
-            i n r:
-                r 0
-            l = d(r.l)
-            r = d(r.r)
-            r = m(r, l + r)
-            r 1 + m(l, r)
-        d(r)
-        r r
+    d a(s, l: L, l: L) -> L:
+        d = L()
+        c = d
+        c = 0
+        
+        w l o l o c:
+            v = l.v i l e 0
+            v = l.v i l e 0
+            v = v + v + c
+            c = v // 1
+            v = v % 1
+            c.n = L(v)
+            c = c.n
+            l = l.n i l e N
+            l = l.n i l e N
+        r d.n
 ```
 
 ## Local Installation
