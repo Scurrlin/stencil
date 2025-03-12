@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 2 "Add Two Numbers":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 4 "Median of Two Sorted Arrays":
 
 ## Example
 
@@ -22,44 +22,34 @@ Solution
 
 ```python
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        dummy = ListNode()
-        current = dummy
-        carry = 0
-        
-        while l1 or l2 or carry:
-            v1 = l1.val if l1 else 0
-            v2 = l2.val if l2 else 0
-            val = v1 + v2 + carry
-            carry = val // 10
-            val = val % 10
-            current.next = ListNode(val)
-            current = current.next
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
-        return dummy.next
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        totalArray = nums1 + nums2
+        totalArray.sort()
+        size = len(totalArray)
+        if(size % 2 == 0):
+            size1 = size // 2
+            size2 = (size // 2) - 1
+            return (float((totalArray[size1] + totalArray[size2]) / 2 ))
+        else:
+            size1 = size // 2
+            return float(totalArray[size1])
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d a(s, l: L, l: L) -> L:
-        d = L()
-        c = d
-        c = 0
-        
-        w l o l o c:
-            v = l.v i l e 0
-            v = l.v i l e 0
-            v = v + v + c
-            c = v // 1
-            v = v % 1
-            c.n = L(v)
-            c = c.n
-            l = l.n i l e N
-            l = l.n i l e N
-        r d.n
+    d f(s, n: L[i], n: L[i]) -> f:
+        t = n + n
+        t.s()
+        s = l(t)
+        i(s % 2 == 0):
+            s = s // 2
+            s = (s // 2) - 1
+            r (f((t[s] + t[s]) / 2 ))
+        e:
+            s = s // 2
+            r f(t[s])
 ```
 
 ## Local Installation
