@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 5 "Longest Palindromic Substring":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 6 "Zigzag Conversion":
 
 ## Example
 
@@ -22,44 +22,40 @@ Solution
 
 ```python
 class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        if s == s[::-1]:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
             return s
-        start, length = 0, 1
-        for i in range(1, len(s)):
-            L, R = i - length, i + 1
-            s1 = s[L-1 : R]
-            if L >= 1 and s1 == s1[::-1]:
-                length += 2
-                start = L - 1
-            else:
-                s2 = s[L:R]
-                if s2 == s2[::-1]:
-                    length += 1
-                    start = L
-        return s[start:start + length]
+        res = [''] * numRows
+        index, step = 0, 1
+
+        for c in s:
+            res[index] += c
+            if index == 0:
+                step = 1
+            elif index == numRows - 1:
+                step = -1
+            index += step
+        return ''.join(res)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, s: s) -> s:
-        i s == s[::-1]:
+    d c(s, s: s, n: i) -> s:
+        i n == 1 o n >= l(s):
             r s
-        s, l = 0, 1
-        f i i r(1, l(s)):
-            L, R = i - l, i + 1
-            s = s[L-1 : R]
-            i L >= 1 a s == s[::-1]:
-                l += 2
-                s = L - 1
-            e:
-                s = s[L:R]
-                i s == s[::-1]:
-                    l += 1
-                    s = L
-        r s[s:s + l]
+        r = [''] * n
+        i, s = 0, 1
+
+        f c i s:
+            r[i] += c
+            i i == 0:
+                s = 1
+            e i == n - 1:
+                s = -1
+            i += s
+        r ''.j(r)
 ```
 
 ## Local Installation
