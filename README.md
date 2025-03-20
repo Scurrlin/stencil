@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 15 "3Sum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 3 "Longest Substring Without Repeating Characters":
 
 ## Example
 
@@ -22,27 +22,17 @@ Solution
 
 ```python
 class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        res = []
-        n = nums
-        n.sort()
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        charSet = set()
+        l = 0
+        res = 0
 
-        for i in range(len(n)):
-            if i > 0 and n[i] == n[i - 1]:
-                continue
-            j = i + 1
-            k = len(n) - 1
-            while j < k:
-                total = n[i] + n[j] + n[k]
-                if total < 0:
-                    j += 1
-                elif total > 0:
-                    k -= 1
-                else:
-                    res.append([n[i], n[j], n[k]])
-                    j += 1
-                    while j < k and n[j] == n[j - 1]:
-                        j += 1
+        for r in range(len(s)):
+            while s[r] in charSet:
+                charSet.remove(s[l])
+                l += 1
+            charSet.add(s[r])
+            res = max(res, r - l + 1)
         return res
 ```
 
@@ -50,27 +40,17 @@ Solution with Stencil
 
 ```python
 c S:
-    d t(s, n: L[i]) -> L[L[i]]:
-        r = []
-        n = n
-        n.s()
+    d l(s, s: s) -> i:
+        c = s()
+        l = 0
+        r = 0
 
-        f i i r(l(n)):
-            i i > 0 a n[i] == n[i - 1]:
-                c
-            j = i + 1
-            k = l(n) - 1
-            w j < k:
-                t = n[i] + n[j] + n[k]
-                i t < 0:
-                    j += 1
-                e t > 0:
-                    k -= 1
-                e:
-                    r.a([n[i], n[j], n[k]])
-                    j += 1
-                    w j < k a n[j] == n[j - 1]:
-                        j += 1
+        f r i r(l(s)):
+            w s[r] i c:
+                c.r(s[l])
+                l += 1
+            c.a(s[r])
+            r = m(r, r - l + 1)
         r r
 ```
 
