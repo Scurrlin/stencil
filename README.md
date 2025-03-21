@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 3 "Longest Substring Without Repeating Characters":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 17 "Letter Combinations of a Phone Number":
 
 ## Example
 
@@ -22,17 +22,29 @@ Solution
 
 ```python
 class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        charSet = set()
-        l = 0
-        res = 0
+    def letterCombinations(self, digits: str) -> List[str]:
+        res = []
+        d = digits
+        digitToChar = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "qprs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
 
-        for r in range(len(s)):
-            while s[r] in charSet:
-                charSet.remove(s[l])
-                l += 1
-            charSet.add(s[r])
-            res = max(res, r - l + 1)
+        def backtrack(i, curStr):
+            if len(curStr) == len(d):
+                res.append(curStr)
+                return
+            for c in digitToChar[d[i]]:
+                backtrack(i + 1, curStr + c)
+        
+        if d:
+            backtrack(0, "")
         return res
 ```
 
@@ -40,17 +52,29 @@ Solution with Stencil
 
 ```python
 c S:
-    d l(s, s: s) -> i:
-        c = s()
-        l = 0
-        r = 0
+    d l(s, d: s) -> L[s]:
+        r = []
+        d = d
+        d = {
+            "2": "a",
+            "3": "d",
+            "4": "g",
+            "5": "j",
+            "6": "m",
+            "7": "q",
+            "8": "t",
+            "9": "w",
+        }
 
-        f r i r(l(s)):
-            w s[r] i c:
-                c.r(s[l])
-                l += 1
-            c.a(s[r])
-            r = m(r, r - l + 1)
+        d b(i, c):
+            i l(c) == l(d):
+                r.a(c)
+                r
+            f c i d[d[i]]:
+                b(i + 1, c + c)
+        
+        i d:
+            b(0, "")
         r r
 ```
 
