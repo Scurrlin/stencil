@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 17 "Letter Combinations of a Phone Number":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 18 "4Sum":
 
 ## Example
 
@@ -22,59 +22,61 @@ Solution
 
 ```python
 class Solution:
-    def letterCombinations(self, digits: str) -> List[str]:
-        res = []
-        d = digits
-        digitToChar = {
-            "2": "abc",
-            "3": "def",
-            "4": "ghi",
-            "5": "jkl",
-            "6": "mno",
-            "7": "qprs",
-            "8": "tuv",
-            "9": "wxyz",
-        }
-
-        def backtrack(i, curStr):
-            if len(curStr) == len(d):
-                res.append(curStr)
+    def fourSum(self, nums, target):
+        def findNsum(l, r, target, N, result, results):
+            if r - l + 1 < N or N < 2 or target < nums[l] * N or target > nums[r] * N:  
                 return
-            for c in digitToChar[d[i]]:
-                backtrack(i + 1, curStr + c)
-        
-        if d:
-            backtrack(0, "")
-        return res
+            if N == 2: 
+                while l < r:
+                    s = nums[l] + nums[r]
+                    if s == target:
+                        results.append(result + [nums[l], nums[r]])
+                        l += 1
+                        while l < r and nums[l] == nums[l - 1]:
+                            l += 1
+                    elif s < target:
+                        l += 1
+                    else:
+                        r -= 1
+            else:
+                for i in range(l, r + 1):
+                    if i == l or (i > l and nums[i - 1] != nums[i]):
+                        findNsum(i + 1, r, target - nums[i], N - 1, result + [nums[i]], results)
+
+        nums.sort()
+        results = []
+        findNsum(0, len(nums) - 1, target, 4, [], results)
+        return results
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, d: s) -> L[s]:
-        r = []
-        d = d
-        d = {
-            "2": "a",
-            "3": "d",
-            "4": "g",
-            "5": "j",
-            "6": "m",
-            "7": "q",
-            "8": "t",
-            "9": "w",
-        }
-
-        d b(i, c):
-            i l(c) == l(d):
-                r.a(c)
+    d f(s, n, t):
+        d f(l, r, t, N, r, r):
+            i r - l + 1 < N o N < 2 o t < n[l] * N o t > n[r] * N:  
                 r
-            f c i d[d[i]]:
-                b(i + 1, c + c)
-        
-        i d:
-            b(0, "")
+            i N == 2: 
+                w l < r:
+                    s = n[l] + n[r]
+                    i s == t:
+                        r.a(r + [n[l], n[r]])
+                        l += 1
+                        w l < r a n[l] == n[l - 1]:
+                            l += 1
+                    e s < t:
+                        l += 1
+                    e:
+                        r -= 1
+            e:
+                f i i r(l, r + 1):
+                    i i == l o (i > l a n[i - 1] != n[i]):
+                        f(i + 1, r, t - n[i], N - 1, r + [n[i]], r)
+
+        n.s()
+        r = []
+        f(0, l(n) - 1, t, 4, [], r)
         r r
 ```
 
