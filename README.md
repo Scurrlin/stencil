@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 18 "4Sum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 21 "Merge Two Sorted Lists":
 
 ## Example
 
@@ -22,62 +22,42 @@ Solution
 
 ```python
 class Solution:
-    def fourSum(self, nums, target):
-        def findNsum(l, r, target, N, result, results):
-            if r - l + 1 < N or N < 2 or target < nums[l] * N or target > nums[r] * N:  
-                return
-            if N == 2: 
-                while l < r:
-                    s = nums[l] + nums[r]
-                    if s == target:
-                        results.append(result + [nums[l], nums[r]])
-                        l += 1
-                        while l < r and nums[l] == nums[l - 1]:
-                            l += 1
-                    elif s < target:
-                        l += 1
-                    else:
-                        r -= 1
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        l1, l2 = list1, list2
+        temp = ListNode(0)
+        current = temp
+        
+        while l1 and l2:
+            if l1.val <= l2.val:
+                current.next = l1
+                l1 = l1.next
             else:
-                for i in range(l, r + 1):
-                    if i == l or (i > l and nums[i - 1] != nums[i]):
-                        findNsum(i + 1, r, target - nums[i], N - 1, result + [nums[i]], results)
-
-        nums.sort()
-        results = []
-        findNsum(0, len(nums) - 1, target, 4, [], results)
-        return results
+                current.next = l2
+                l2 = l2.next
+            current = current.next
+        current.next = l1 if l1 else l2
+        return temp.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, n, t):
-        d f(l, r, t, N, r, r):
-            i r - l + 1 < N o N < 2 o t < n[l] * N o t > n[r] * N:  
-                r
-            i N == 2: 
-                w l < r:
-                    s = n[l] + n[r]
-                    i s == t:
-                        r.a(r + [n[l], n[r]])
-                        l += 1
-                        w l < r a n[l] == n[l - 1]:
-                            l += 1
-                    e s < t:
-                        l += 1
-                    e:
-                        r -= 1
+    d m(s, l: O[L], l: O[L]) -> O[L]:
+        l, l = l, l
+        t = L(0)
+        c = t
+        
+        w l a l:
+            i l.v <= l.v:
+                c.n = l
+                l = l.n
             e:
-                f i i r(l, r + 1):
-                    i i == l o (i > l a n[i - 1] != n[i]):
-                        f(i + 1, r, t - n[i], N - 1, r + [n[i]], r)
-
-        n.s()
-        r = []
-        f(0, l(n) - 1, t, 4, [], r)
-        r r
+                c.n = l
+                l = l.n
+            c = c.n
+        c.n = l i l e l
+        r t.n
 ```
 
 ## Local Installation
