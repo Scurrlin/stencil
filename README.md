@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 21 "Merge Two Sorted Lists":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 22 "Generate Parentheses":
 
 ## Example
 
@@ -22,42 +22,48 @@ Solution
 
 ```python
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        l1, l2 = list1, list2
-        temp = ListNode(0)
-        current = temp
-        
-        while l1 and l2:
-            if l1.val <= l2.val:
-                current.next = l1
-                l1 = l1.next
-            else:
-                current.next = l2
-                l2 = l2.next
-            current = current.next
-        current.next = l1 if l1 else l2
-        return temp.next
+    def generateParenthesis(self, n: int) -> List[str]:
+        stack = []
+        res = []
+
+        def backtrack(openN, closedN):
+            if openN == closedN == n:
+                res.append("".join(stack))
+                return
+            if openN < n:
+                stack.append("(")
+                backtrack(openN + 1, closedN)
+                stack.pop()
+            if closedN < openN:
+                stack.append(")")
+                backtrack(openN, closedN + 1)
+                stack.pop()
+        backtrack(0, 0)
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, l: O[L], l: O[L]) -> O[L]:
-        l, l = l, l
-        t = L(0)
-        c = t
-        
-        w l a l:
-            i l.v <= l.v:
-                c.n = l
-                l = l.n
-            e:
-                c.n = l
-                l = l.n
-            c = c.n
-        c.n = l i l e l
-        r t.n
+    d g(s, n: i) -> L[s]:
+        s = []
+        r = []
+
+        d b(o, c):
+            i o == c == n:
+                r.a("".j(s))
+                r
+            i o < n:
+                s.a("(")
+                b(o + 1, c)
+                s.p()
+            i c < o:
+                s.a(")")
+                b(o, c + 1)
+                s.p()
+        b(0, 0)
+        r r
 ```
 
 ## Local Installation
