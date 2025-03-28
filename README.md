@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 25 "Reverse Nodes in K-Group":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 26 "Remove Duplicates from Sorted Array":
 
 ## Example
 
@@ -22,62 +22,30 @@ Solution
 
 ```python
 class Solution:
-    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
-        dummy = ListNode (0, head)
-        groupPrev = dummy
-
-        while True:
-            kth = self.getKth(groupPrev, k)
-            if not kth:
-                break
-            groupNext = kth.next
-            prev, curr = kth.next, groupPrev.next
-            while curr != groupNext:
-                temp = curr.next
-                curr.next = prev
-                prev = curr
-                curr = temp
-            temp = groupPrev.next
-            groupPrev.next = kth
-            groupPrev = temp
-        return dummy.next
-
-    def getKth(self, curr, k):
-        while curr and k > 0:
-            curr = curr.next
-            k -= 1
-        return curr
+    def removeDuplicates(self, nums):
+        if not nums:
+            return 0
+        i = 0
+        for j in range(1, len(nums)):
+            if nums[j] != nums[i]:
+                i += 1
+                nums[i] = nums[j]
+        return i + 1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, h: L, k: i) -> L:
-        d = L (0, h)
-        g = d
-
-        w T:
-            k = s.g(g, k)
-            i n k:
-                b
-            g = k.n
-            p, c = k.n, g.n
-            w c != g:
-                t = c.n
-                c.n = p
-                p = c
-                c = t
-            t = g.n
-            g.n = k
-            g = t
-        r d.n
-
-    d g(s, c, k):
-        w c a k > 0:
-            c = c.n
-            k -= 1
-        r c
+    d r(s, n):
+        i n n:
+            r 0
+        i = 0
+        f j i r(1, l(n)):
+            i n[j] != n[i]:
+                i += 1
+                n[i] = n[j]
+        r i + 1
 ```
 
 ## Local Installation
