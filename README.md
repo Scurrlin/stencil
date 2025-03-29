@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 26 "Remove Duplicates from Sorted Array":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 29 "Divide Two Integers":
 
 ## Example
 
@@ -22,30 +22,38 @@ Solution
 
 ```python
 class Solution:
-    def removeDuplicates(self, nums):
-        if not nums:
-            return 0
-        i = 0
-        for j in range(1, len(nums)):
-            if nums[j] != nums[i]:
-                i += 1
-                nums[i] = nums[j]
-        return i + 1
+    def divide(self, dividend: int, divisor: int) -> int:
+        if dividend == -2 ** 31 and divisor == -1:
+            return 2 ** 31 - 1
+
+        sign = -1 if (dividend < 0)^(divisor < 0) else 1
+        quotient = 0
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+        for i in range(31, -1, -1):
+            if (divisor << i) <= dividend:
+                dividend -= (divisor << i)
+                quotient |= (1 << i)
+        return sign * quotient
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, n):
-        i n n:
-            r 0
-        i = 0
-        f j i r(1, l(n)):
-            i n[j] != n[i]:
-                i += 1
-                n[i] = n[j]
-        r i + 1
+    d d(s, d: i, d: i) -> i:
+        i d == -2 ** 3 a d == -1:
+            r 2 ** 3 - 1
+
+        s = -1 i (d < 0)^(d < 0) e 1
+        q = 0
+        d = a(d)
+        d = a(d)
+        f i i r(3, -1, -1):
+            i (d << i) <= d:
+                d -= (d << i)
+                q |= (1 << i)
+        r s * q
 ```
 
 ## Local Installation
