@@ -14,7 +14,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 31 "Next Permutation":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 32 "Longest Valid Parentheses":
 
 ## Example
 
@@ -22,38 +22,40 @@ Solution
 
 ```python
 class Solution:
-    def nextPermutation(self, nums: List[int]) -> None:
-        i = len(nums) - 1
+    def longestValidParentheses(self, s: str) -> int:
+        max_len = 0
+        stack = [-1]
         
-        while i > 0 and nums[i-1] >= nums[i]:
-            i -= 1
-        if i == 0:
-            nums.reverse()
-            return
-        j = len(nums) - 1
-        while j >= i and nums[j] <= nums[i-1]:
-            j -= 1
-        nums[i-1], nums[j] = nums[j], nums[i-1]
-        nums[i:] = reversed(nums[i:])
+        for i, char in enumerate(s):
+            if char == '(':
+                stack.append(i)
+            else:
+                stack.pop()
+                if not stack:
+                    stack.append(i)
+                else:
+                    max_len = max(max_len, i - stack[-1])
+        return max_len
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d n(s, n: L[i]) -> N:
-        i = l(n) - 1
+    d l(s, s: s) -> i:
+        m_l = 0
+        s = [-1]
         
-        w i > 0 a n[i-1] >= n[i]:
-            i -= 1
-        i i == 0:
-            n.r()
-            r
-        j = l(n) - 1
-        w j >= i a n[j] <= n[i-1]:
-            j -= 1
-        n[i-1], n[j] = n[j], n[i-1]
-        n[i:] = r(n[i:])
+        f i, c i e(s):
+            i c == '(':
+                s.a(i)
+            e:
+                s.p()
+                i n s:
+                    s.a(i)
+                e:
+                    m_l = m(m_l, i - s[-1])
+        r m_l
 ```
 
 ## Local Installation
