@@ -8,6 +8,8 @@
 
 ```
 
+[![npm](https://img.shields.io/npm/dt/%40scurrlin%2Fstencil?style=flat)](https://www.npmjs.com/package/@scurrlin/stencil)
+
 ## Overview
 
 Whether you are studying for technical interviews, or just starting your coding journey, pattern recognition and memorization are absolutely necessary. It doesn't take a valedictorian to figure that out, but how exactly are you supposed to do that? Between data structures, algorithms, and design patterns, the task of incrementally committing enough of that information to memory can feel impossible. You could spend hours studying fully implemented algorithms only to draw a blank when staring at an empty code editor.
