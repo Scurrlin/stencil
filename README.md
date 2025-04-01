@@ -8,7 +8,7 @@
 
 ```
 
-[![npm](https://img.shields.io/npm/dt/%40scurrlin%2Fstencil?style=flat)](https://www.npmjs.com/package/@scurrlin/stencil)
+[![npm](https://img.shields.io/npm/dt/%40scurrlin%2Fstencil?style=flat&color=blue)](https://www.npmjs.com/package/@scurrlin/stencil)
 
 ## Overview
 
