@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 32 "Longest Valid Parentheses":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 1 "Two Sum":
 
 ## Example
 
@@ -24,40 +24,26 @@ Solution
 
 ```python
 class Solution:
-    def longestValidParentheses(self, s: str) -> int:
-        max_len = 0
-        stack = [-1]
-        
-        for i, char in enumerate(s):
-            if char == '(':
-                stack.append(i)
-            else:
-                stack.pop()
-                if not stack:
-                    stack.append(i)
-                else:
-                    max_len = max(max_len, i - stack[-1])
-        return max_len
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        hash_map = {}
+        for i, num in enumerate(nums):
+            x = target - num
+            if x in hash_map:
+                return [hash_map[x], i]
+            hash_map[num] = i
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, s: s) -> i:
-        m_l = 0
-        s = [-1]
-        
-        f i, c i e(s):
-            i c == '(':
-                s.a(i)
-            e:
-                s.p()
-                i n s:
-                    s.a(i)
-                e:
-                    m_l = m(m_l, i - s[-1])
-        r m_l
+    d t(s, n: L[i], t: i) -> L[i]:
+        h_m = {}
+        f i, n i e(n):
+            x = t - n
+            i x i h_m:
+                r [h_m[x], i]
+            h_m[n] = i
 ```
 
 ## Local Installation
