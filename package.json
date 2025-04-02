@@ -1,6 +1,6 @@
 {
   "name": "@scurrlin/stencil",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "A memorization tool that strips code down to first letters and punctuation only.",
   "main": "src/index.js",
   "bin": {
