@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 14 "Longest Common Prefix":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 9 "Palindrome Number":
 
 ## Example
 
@@ -24,30 +24,22 @@ Solution
 
 ```python
 class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -> str:
-        res = ""
-        
-        for i in range(len(strs[0])):
-            for s in strs:
-                if i == len(s) or s[i] != strs[0][i]:
-                    return res
-            res += strs[0][i]
-        return res
+    def isPalindrome(self, x):
+        if x < 0:
+            return False
+        str_x = str(x)
+        return str_x == str_x[::-1]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, s: L[s]) -> s:
-        r = ""
-        
-        f i i r(l(s[0])):
-            f s i s:
-                i i == l(s) o s[i] != s[0][i]:
-                    r r
-            r += s[0][i]
-        r r
+    d i(s, x):
+        i x < 0:
+            r F
+        s_x = s(x)
+        r s_x == s_x[::-1]
 ```
 
 ## Local Installation
