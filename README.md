@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 20 "Valid Parentheses":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 25 "Reverse Nodes in K-Group":
 
 ## Example
 
@@ -24,34 +24,62 @@ Solution
 
 ```python
 class Solution:
-    def isValid(self, s: str) -> bool:
-        stack = []
-        b_map = {")":"(", "}":"{", "]":"["}
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = ListNode (0, head)
+        groupPrev = dummy
 
-        for char in s:
-            if char in b_map.values():
-                stack.append(char)
-            elif char in b_map.keys():
-                if not stack or b_map[char] != stack.pop():
-                    return False
-        return not stack
+        while True:
+            kth = self.getKth(groupPrev, k)
+            if not kth:
+                break
+            groupNext = kth.next
+            prev, curr = kth.next, groupPrev.next
+            while curr != groupNext:
+                temp = curr.next
+                curr.next = prev
+                prev = curr
+                curr = temp
+            temp = groupPrev.next
+            groupPrev.next = kth
+            groupPrev = temp
+        return dummy.next
+
+    def getKth(self, curr, k):
+        while curr and k > 0:
+            curr = curr.next
+            k -= 1
+        return curr
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, s: s) -> b:
-        s = []
-        b_m = {")":"(", "}":"{", "]":"["}
+    d r(s, h: L, k: i) -> L:
+        d = L (0, h)
+        g = d
 
-        f c i s:
-            i c i b_m.v():
-                s.a(c)
-            e c i b_m.k():
-                i n s o b_m[c] != s.p():
-                    r F
-        r n s
+        w T:
+            k = s.g(g, k)
+            i n k:
+                b
+            g = k.n
+            p, c = k.n, g.n
+            w c != g:
+                t = c.n
+                c.n = p
+                p = c
+                c = t
+            t = g.n
+            g.n = k
+            g = t
+        r d.n
+
+    d g(s, c, k):
+        w c a k > 0:
+            c = c.n
+            k -= 1
+        r c
 ```
 
 ## Local Installation
