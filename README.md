@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 34 "Find First and Last Position of Element in Sorted Array":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 35 "Search Insert Position":
 
 ## Example
 
@@ -24,22 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def searchRange(self, s: List[int], target: int) -> List[int]:
-        try:
-            return [s.index(target), len(s) - 1 - s[::-1].index(target)]
-        except ValueError:
-            return [-1, -1]
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, s: L[i], t: i) -> L[i]:
-        t:
-            r [s.i(t), l(s) - 1 - s[::-1].i(t)]
-        e V:
-            r [-1, -1]
+    d s(s, n: L[i], t: i) -> i:
+        l = 0
+        r = l(n) - 1
+
+        w l <= r:
+            m = (l + r) // 2
+            i n[m] == t:
+                r m
+            e n[m] > t:
+                r = m - 1
+            e:
+                l = m + 1
+        r l
 ```
 
 ## Local Installation
