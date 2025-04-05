@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 28 "Find the Index of the First Occurrence in a String":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 34 "Find First and Last Position of Element in Sorted Array":
 
 ## Example
 
@@ -24,22 +24,22 @@ Solution
 
 ```python
 class Solution:
-    def strStr(self, haystack, needle):
-        for i in range(len(haystack) - len(needle) + 1):
-            if haystack[i:i+len(needle)] == needle:
-                return i
-        return -1
+    def searchRange(self, s: List[int], target: int) -> List[int]:
+        try:
+            return [s.index(target), len(s) - 1 - s[::-1].index(target)]
+        except ValueError:
+            return [-1, -1]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, h, n):
-        f i i r(l(h) - l(n) + 1):
-            i h[i:i+l(n)] == n:
-                r i
-        r -1
+    d s(s, s: L[i], t: i) -> L[i]:
+        t:
+            r [s.i(t), l(s) - 1 - s[::-1].i(t)]
+        e V:
+            r [-1, -1]
 ```
 
 ## Local Installation
