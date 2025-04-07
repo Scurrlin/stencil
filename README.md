@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 39 "Combination Sum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 40 "Combination Sum II":
 
 ## Example
 
@@ -24,22 +24,24 @@ Solution
 
 ```python
 class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        result = []
-        
-        def backtrack(remaining, start, combination):
-            if remaining == 0:
-                result.append(combination[:])
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        res = []
+
+        def dfs(target, start, comb):
+            if target < 0:
                 return
-            
+            if target == 0:
+                res.append(comb)
+                return
             for i in range(start, len(candidates)):
-                if candidates[i] > remaining:
+                if i > start and candidates[i] == candidates[i - 1]:
                     continue
-                combination.append(candidates[i])
-                backtrack(remaining - candidates[i], i, combination)
-                combination.pop()  
-        backtrack(target, 0, [])    
-        return result
+                if candidates[i] > target:
+                    break
+                dfs(target-candidates[i], i + 1, comb+[candidates[i]])
+        dfs(target, 0, [])
+        return res
 ```
 
 Solution with Stencil
@@ -47,20 +49,22 @@ Solution with Stencil
 ```python
 c S:
     d c(s, c: L[i], t: i) -> L[L[i]]:
+        c.s()
         r = []
-        
-        d b(r, s, c):
-            i r == 0:
-                r.a(c[:])
+
+        d d(t, s, c):
+            i t < 0:
                 r
-            
+            i t == 0:
+                r.a(c)
+                r
             f i i r(s, l(c)):
-                i c[i] > r:
+                i i > s a c[i] == c[i - 1]:
                     c
-                c.a(c[i])
-                b(r - c[i], i, c)
-                c.p()  
-        b(t, 0, [])    
+                i c[i] > t:
+                    b
+                d(t-c[i], i + 1, c+[c[i]])
+        d(t, 0, [])
         r r
 ```
 
