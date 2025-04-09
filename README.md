@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 12 "Integer to Roman":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 13 "Roman to Integer":
 
 ## Example
 
@@ -24,60 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def intToRoman(self, num: int) -> str:
-        symList = [
-            ["I", 1],
-            ["IV", 4],
-            ["V", 5],
-            ["IX", 9],
-            ["X", 10],
-            ["XL", 40],
-            ["L", 50],
-            ["XC", 90],
-            ["C", 100],
-            ["CD", 400],
-            ["D", 500],
-            ["CM", 900],
-            ["M", 1000],
-        ]
-        res = ""
+    def romanToInt(self, s: str) -> int:
+        romanToIntMap = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        total, prev_value = 0, 0
         
-        for sym, val in reversed(symList):
-            if num // val:
-                count = num // val
-                res += sym * count
-                num = num % val
-        return res
+        for c in reversed(s):
+            current_value = romanToIntMap[c]
+            if current_value >= prev_value:
+                total += current_value
+            else:
+                total -= current_value
+            prev_value = current_value
+        return total
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, n: i) -> s:
-        s = [
-            ["I", 1],
-            ["I", 4],
-            ["V", 5],
-            ["I", 9],
-            ["X", 1],
-            ["X", 4],
-            ["L", 5],
-            ["X", 9],
-            ["C", 1],
-            ["C", 4],
-            ["D", 5],
-            ["C", 9],
-            ["M", 1],
-        ]
-        r = ""
+    d r(s, s: s) -> i:
+        r = {'I': 1, 'V': 5, 'X': 1, 'L': 5, 'C': 1, 'D': 5, 'M': 1}
+        t, p_v = 0, 0
         
-        f s, v i r(s):
-            i n // v:
-                c = n // v
-                r += s * c
-                n = n % v
-        r r
+        f c i r(s):
+            c_v = r[c]
+            i c_v >= p_v:
+                t += c_v
+            e:
+                t -= c_v
+            p_v = c_v
+        r t
 ```
 
 ## Local Installation
