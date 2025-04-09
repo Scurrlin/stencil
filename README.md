@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 13 "Roman to Integer":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 46 "Permutations":
 
 ## Example
 
@@ -24,36 +24,40 @@ Solution
 
 ```python
 class Solution:
-    def romanToInt(self, s: str) -> int:
-        romanToIntMap = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-        total, prev_value = 0, 0
-        
-        for c in reversed(s):
-            current_value = romanToIntMap[c]
-            if current_value >= prev_value:
-                total += current_value
-            else:
-                total -= current_value
-            prev_value = current_value
-        return total
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        if len(nums) == 1:
+            return [nums[:]]
+        for i in range(len(nums)):
+            n = nums.pop(0)
+            perms = self.permute(nums)
+            
+            for perm in perms:
+                perm.append(n)
+            res.extend(perms)
+            nums.append(n)
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, s: s) -> i:
-        r = {'I': 1, 'V': 5, 'X': 1, 'L': 5, 'C': 1, 'D': 5, 'M': 1}
-        t, p_v = 0, 0
-        
-        f c i r(s):
-            c_v = r[c]
-            i c_v >= p_v:
-                t += c_v
-            e:
-                t -= c_v
-            p_v = c_v
-        r t
+    d p(s, n: L[i]) -> L[L[i]]:
+        r = []
+
+        i l(n) == 1:
+            r [n[:]]
+        f i i r(l(n)):
+            n = n.p(0)
+            p = s.p(n)
+            
+            f p i p:
+                p.a(n)
+            r.e(p)
+            n.a(n)
+        r r
 ```
 
 ## Local Installation
