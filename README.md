@@ -16,62 +16,46 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 47 "Permutations II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 48 "Rotate Image":
 
 ## Example
 
 Solution
 
 ```python
-import collections
-
 class Solution:
-    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        result = []
-        counter = collections.Counter(nums)
-
-        def backtrack(perm, counter):
-            if len(perm) == len(nums):
-                result.append(perm.copy())
-
-            for n in counter:
-                if counter[n] == 0:
-                    continue
-                perm.append(n)
-                counter[n] -= 1
-                backtrack(perm, counter)
-                perm.pop()
-                counter[n] += 1
-
-        backtrack([], counter)
-        return result
+    def rotate(self, matrix: List[List[int]]) -> None:
+        l, r = 0, len(matrix) - 1
+        
+        while l < r:
+            for i in range(r - l):
+                top, bottom = l, r
+                topLeft = matrix[top][l + i]
+                matrix[top][l + i] = matrix[bottom - i][l]
+                matrix[bottom - i][l] = matrix[bottom][r - i]
+                matrix[bottom][r - i] = matrix[top + i][r]
+                matrix[top + i][r] = topLeft
+            r -= 1
+            l += 1
 ```
 
 Solution with Stencil
 
 ```python
-i c
-
 c S:
-    d p(s, n: L[i]) -> L[L[i]]:
-        r = []
-        c = c.C(n)
-
-        d b(p, c):
-            i l(p) == l(n):
-                r.a(p.c())
-
-            f n i c:
-                i c[n] == 0:
-                    c
-                p.a(n)
-                c[n] -= 1
-                b(p, c)
-                p.p()
-                c[n] += 1
-
-        b([], c)
-        r r
+    d r(s, m: L[L[i]]) -> N:
+        l, r = 0, l(m) - 1
+        
+        w l < r:
+            f i i r(r - l):
+                t, b = l, r
+                t = m[t][l + i]
+                m[t][l + i] = m[b - i][l]
+                m[b - i][l] = m[b][r - i]
+                m[b][r - i] = m[t + i][r]
+                m[t + i][r] = t
+            r -= 1
+            l += 1
 ```
 
 ## Local Installation
