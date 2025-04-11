@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 49 "Group Anagrams":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 50 "Pow(x, n)":
 
 ## Example
 
@@ -24,26 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        a_map = defaultdict(list)
-
-        for w in strs:
-            sorted_w = ''.join(sorted(w))
-            a_map[sorted_w].append(w)
-        return list(a_map.values())
+    def myPow(self, x: float, n: int) -> float:
+        def helper(x, n):
+            if x == 0:
+                return 0   
+            if n == 0:
+                return 1
+            
+            res = helper(x * x, n // 2)
+            return x * res if n % 2 else res
+        res = helper(x, abs(n))
+        return res if n >= 0 else 1 / res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, s: L[s]) -> L[L[s]]:
-        a_m = d(l)
-
-        f w i s:
-            s_w = ''.j(s(w))
-            a_m[s_w].a(w)
-        r l(a_m.v())
+    d m(s, x: f, n: i) -> f:
+        d h(x, n):
+            i x == 0:
+                r 0   
+            i n == 0:
+                r 1
+            
+            r = h(x * x, n // 2)
+            r x * r i n % 2 e r
+        r = h(x, a(n))
+        r r i n >= 0 e 1 / r
 ```
 
 ## Local Installation
