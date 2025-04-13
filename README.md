@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 54 "Spiral Matrix":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 56 "Merge Intervals":
 
 ## Example
 
@@ -24,54 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        res = []
-        left, right = 0, len(matrix[0])
-        top, bottom = 0, len(matrix)
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda pair: pair[0])
+        output = [intervals[0]]
 
-        while left < right and top < bottom:
-            for i in range(left, right):
-                res.append(matrix[top][i])
-            top += 1
-            for i in range(top, bottom):
-                res.append(matrix[i][right - 1])
-            right -= 1
-            if not (left < right and top < bottom):
-                break
-            for i in range(right - 1, left - 1, -1):
-                res.append(matrix[bottom - 1][i])
-            bottom -= 1
-            for i in range(bottom - 1, top - 1, -1):
-                res.append(matrix[i][left])
-            left += 1
-        return res
+        for start, end in intervals:
+            lastEnd = output[-1][1]
+            if start <= lastEnd:
+                output[-1][1] = max(lastEnd, end)
+            else:
+                output.append([start, end])
+        return output
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, m: L[L[i]]) -> L[i]:
-        r = []
-        l, r = 0, l(m[0])
-        t, b = 0, l(m)
+    d m(s, i: L[L[i]]) -> L[L[i]]:
+        i.s(k=l p: p[0])
+        o = [i[0]]
 
-        w l < r a t < b:
-            f i i r(l, r):
-                r.a(m[t][i])
-            t += 1
-            f i i r(t, b):
-                r.a(m[i][r - 1])
-            r -= 1
-            i n (l < r a t < b):
-                b
-            f i i r(r - 1, l - 1, -1):
-                r.a(m[b - 1][i])
-            b -= 1
-            f i i r(b - 1, t - 1, -1):
-                r.a(m[i][l])
-            l += 1
-        r r
+        f s, e i i:
+            l = o[-1][1]
+            i s <= l:
+                o[-1][1] = m(l, e)
+            e:
+                o.a([s, e])
+        r o
 ```
 
 ## Local Installation
