@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 56 "Merge Intervals":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 57 "Insert Interval":
 
 ## Example
 
@@ -24,34 +24,44 @@ Solution
 
 ```python
 class Solution:
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda pair: pair[0])
-        output = [intervals[0]]
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        res = []
 
-        for start, end in intervals:
-            lastEnd = output[-1][1]
-            if start <= lastEnd:
-                output[-1][1] = max(lastEnd, end)
+        for i in range(len(intervals)):
+            if newInterval[1] < intervals[i][0]:
+                res.append(newInterval)
+                return res + intervals[i:]
+            elif newInterval[0] > intervals[i][1]:
+                res.append(intervals[i])
             else:
-                output.append([start, end])
-        return output
+                newInterval = [
+                    min(newInterval[0], intervals[i][0]),
+                    max(newInterval[1], intervals[i][1]),
+                ]
+        res.append(newInterval)
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, i: L[L[i]]) -> L[L[i]]:
-        i.s(k=l p: p[0])
-        o = [i[0]]
+    d i(s, i: L[L[i]], n: L[i]) -> L[L[i]]:
+        r = []
 
-        f s, e i i:
-            l = o[-1][1]
-            i s <= l:
-                o[-1][1] = m(l, e)
+        f i i r(l(i)):
+            i n[1] < i[i][0]:
+                r.a(n)
+                r r + i[i:]
+            e n[0] > i[i][1]:
+                r.a(i[i])
             e:
-                o.a([s, e])
-        r o
+                n = [
+                    m(n[0], i[i][0]),
+                    m(n[1], i[i][1]),
+                ]
+        r.a(n)
+        r r
 ```
 
 ## Local Installation
