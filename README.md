@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 59 "Spiral Matrix II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 60 "Permutation Sequence":
 
 ## Example
 
@@ -24,38 +24,44 @@ Solution
 
 ```python
 class Solution:
-    def generateMatrix(self, n: int) -> List[List[int]]:
-        ans = [[0] * n for _ in range(n)]
-        DIR = [0, 1, 0, -1, 0]
-        r, c = 0, 0
-        d = 0
-        for num in range(1, n * n + 1):
-            nr, nc = r + DIR[d], c + DIR[d + 1]
-            if not 0 <= nr < n or not 0 <= nc < n or ans[nr][nc] != 0:
-                d = (d + 1) % 4
-                nr, nc = r + DIR[d], c + DIR[d + 1]                
-            ans[r][c] = num
-            r, c = nr, nc
-        return ans
+    def getPermutation(self, n: int, k: int) -> str:
+        factorials = [1] * (n + 1)
+
+        for i in range(1, n + 1):
+            factorials[i] = factorials[i - 1] * i
+        digits = [str(i) for i in range(1, n + 1)]
+        k -= 1
+        result = []
+        
+        for i in range(n, 0, -1):
+            block_size = factorials[i - 1]
+            index = k // block_size
+            result.append(digits[index])
+            digits.pop(index)
+            k %= block_size
+        return "".join(result)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, n: i) -> L[L[i]]:
-        a = [[0] * n f _ i r(n)]
-        D = [0, 1, 0, -1, 0]
-        r, c = 0, 0
-        d = 0
-        f n i r(1, n * n + 1):
-            n, n = r + D[d], c + D[d + 1]
-            i n 0 <= n < n o n 0 <= n < n o a[n][n] != 0:
-                d = (d + 1) % 4
-                n, n = r + D[d], c + D[d + 1]                
-            a[r][c] = n
-            r, c = n, n
-        r a
+    d g(s, n: i, k: i) -> s:
+        f = [1] * (n + 1)
+
+        f i i r(1, n + 1):
+            f[i] = f[i - 1] * i
+        d = [s(i) f i i r(1, n + 1)]
+        k -= 1
+        r = []
+        
+        f i i r(n, 0, -1):
+            b_s = f[i - 1]
+            i = k // b_s
+            r.a(d[i])
+            d.p(i)
+            k %= b_s
+        r "".j(r)
 ```
 
 ## Local Installation
