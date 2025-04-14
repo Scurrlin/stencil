@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 58 "Length of Last Word":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 59 "Spiral Matrix II":
 
 ## Example
 
@@ -24,24 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def lengthOfLastWord(self, s: str) -> int:
-        words = s.strip().split()
-        
-        if not words:
-            return 0 
-        return len(words[-1])
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        ans = [[0] * n for _ in range(n)]
+        DIR = [0, 1, 0, -1, 0]
+        r, c = 0, 0
+        d = 0
+        for num in range(1, n * n + 1):
+            nr, nc = r + DIR[d], c + DIR[d + 1]
+            if not 0 <= nr < n or not 0 <= nc < n or ans[nr][nc] != 0:
+                d = (d + 1) % 4
+                nr, nc = r + DIR[d], c + DIR[d + 1]                
+            ans[r][c] = num
+            r, c = nr, nc
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, s: s) -> i:
-        w = s.s().s()
-        
-        i n w:
-            r 0 
-        r l(w[-1])
+    d g(s, n: i) -> L[L[i]]:
+        a = [[0] * n f _ i r(n)]
+        D = [0, 1, 0, -1, 0]
+        r, c = 0, 0
+        d = 0
+        f n i r(1, n * n + 1):
+            n, n = r + D[d], c + D[d + 1]
+            i n 0 <= n < n o n 0 <= n < n o a[n][n] != 0:
+                d = (d + 1) % 4
+                n, n = r + D[d], c + D[d + 1]                
+            a[r][c] = n
+            r, c = n, n
+        r a
 ```
 
 ## Local Installation
