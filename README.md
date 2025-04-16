@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 66 "Plus One":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 67 "Add Binary":
 
 ## Example
 
@@ -24,30 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def plusOne(self, digits: List[int]) -> List[int]:
-        n = len(digits)
-        
-        for i in range(n-1, -1, -1):
-            if digits[i] < 9:
-                digits[i] += 1
-                return digits
-            digits[i] = 0 
-        return [1] + [0] * n
+  def addBinary(self, a: str, b: str) -> str:
+    s, carry = [], 0
+    i = len(a) - 1
+    j = len(b) - 1
+
+    while i >= 0 or j >= 0 or carry:
+      if i >= 0:
+        carry += int(a[i])
+        i -= 1
+      if j >= 0:
+        carry += int(b[j])
+        j -= 1
+      s.append(str(carry % 2))
+      carry //= 2
+    return ''.join(reversed(s))
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d p(s, d: L[i]) -> L[i]:
-        n = l(d)
-        
-        f i i r(n-1, -1, -1):
-            i d[i] < 9:
-                d[i] += 1
-                r d
-            d[i] = 0 
-        r [1] + [0] * n
+  d a(s, a: s, b: s) -> s:
+    s, c = [], 0
+    i = l(a) - 1
+    j = l(b) - 1
+
+    w i >= 0 o j >= 0 o c:
+      i i >= 0:
+        c += i(a[i])
+        i -= 1
+      i j >= 0:
+        c += i(b[j])
+        j -= 1
+      s.a(s(c % 2))
+      c //= 2
+    r ''.j(r(s))
 ```
 
 ## Local Installation
