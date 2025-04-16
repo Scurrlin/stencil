@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 61 "Rotate List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 62 "Unique Paths":
 
 ## Example
 
@@ -24,48 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def rotateRight(self, head: ListNode, k: int) -> ListNode:
-        if not head:
-            return None    
-        lastElement = head
-        length = 1
+    def uniquePaths(self, m: int, n: int) -> int:
+        row = [1] * n
 
-        while ( lastElement.next ):
-            lastElement = lastElement.next
-            length += 1
-        k = k % length
-        lastElement.next = head
-        tempNode = head
-
-        for _ in range( length - k - 1 ):
-            tempNode = tempNode.next
-        answer = tempNode.next
-        tempNode.next = None       
-        return answer
+        for i in range(m - 1):
+            newRow = [1] * n
+            for j in range(n - 2, -1, -1):
+                newRow[j] = newRow[j + 1] + row[j]
+            row = newRow
+        return row[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, h: L, k: i) -> L:
-        i n h:
-            r N    
-        l = h
-        l = 1
+    d u(s, m: i, n: i) -> i:
+        r = [1] * n
 
-        w ( l.n ):
-            l = l.n
-            l += 1
-        k = k % l
-        l.n = h
-        t = h
-
-        f _ i r( l - k - 1 ):
-            t = t.n
-        a = t.n
-        t.n = N       
-        r a
+        f i i r(m - 1):
+            n = [1] * n
+            f j i r(n - 2, -1, -1):
+                n[j] = n[j + 1] + r[j]
+            r = n
+        r r[0]
 ```
 
 ## Local Installation
