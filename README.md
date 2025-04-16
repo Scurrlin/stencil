@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 65 "Valid Number":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 66 "Plus One":
 
 ## Example
 
@@ -24,20 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def isNumber(self, s: str) -> bool:
-        s = s.strip()
-        pattern = re.compile(r'^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$')
-        return bool(pattern.match(s))
+    def plusOne(self, digits: List[int]) -> List[int]:
+        n = len(digits)
+        
+        for i in range(n-1, -1, -1):
+            if digits[i] < 9:
+                digits[i] += 1
+                return digits
+            digits[i] = 0 
+        return [1] + [0] * n
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, s: s) -> b:
-        s = s.s()
-        p = r.c(r'^[+-]?(\d+(\.\d*)?|\.\d+)([e][+-]?\d+)?$')
-        r b(p.m(s))
+    d p(s, d: L[i]) -> L[i]:
+        n = l(d)
+        
+        f i i r(n-1, -1, -1):
+            i d[i] < 9:
+                d[i] += 1
+                r d
+            d[i] = 0 
+        r [1] + [0] * n
 ```
 
 ## Local Installation
