@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 70 "Climbing Stairs":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 71 "Simplify Path":
 
 ## Example
 
@@ -24,26 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def climbStairs(self, n: int) -> int:
-        dp = [0] * (n + 1)
-        dp[0], dp[1] = 1, 1
+    def simplifyPath(self, path: str) -> str:
+        components = path.split("/")
+        st = []
 
-        for i in range(2, n + 1):
-            dp[i] = dp[i-1] + dp[i-2]
-        return dp[-1]
+        for comp in components:
+            if comp == "" or comp == ".":
+                continue
+            if comp == "..":
+                if st:
+                    st.pop()
+            else:
+                st.append(comp)
+        return "/" + "/".join(st)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: i) -> i:
-        d = [0] * (n + 1)
-        d[0], d[1] = 1, 1
+    d s(s, p: s) -> s:
+        c = p.s("/")
+        s = []
 
-        f i i r(2, n + 1):
-            d[i] = d[i-1] + d[i-2]
-        r d[-1]
+        f c i c:
+            i c == "" o c == ".":
+                c
+            i c == "..":
+                i s:
+                    s.p()
+            e:
+                s.a(c)
+        r "/" + "/".j(s)
 ```
 
 ## Local Installation
