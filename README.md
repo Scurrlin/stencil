@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 74 "Search a 2D Matrix":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 75 "Sort Colors":
 
 ## Example
 
@@ -24,58 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        top, bot = 0, len(matrix) - 1
-        while top <= bot:
-            mid = (top + bot) // 2
-            if matrix[mid][0] < target and matrix[mid][-1] > target:
-                break
-            elif matrix[mid][0] > target:
-                bot = mid - 1
-            else:
-                top = mid + 1
+    def sortColors(self, nums: List[int]) -> None:
+        count = {}
+        for i in range(len(nums)):
+            count[nums[i]] = count.get(nums[i], 0) + 1
         
-        row = (top + bot) // 2
+        idx = 0
 
-        left, right = 0, len(matrix[row]) - 1
-        while left <= right:
-            mid = (left + right) // 2
-            if matrix[row][mid] == target:
-                return True
-            elif matrix[row][mid] > target:
-                right = mid - 1
-            else:
-                left = mid + 1
-        return False
+        for color in range(3):
+            freq = count.get(color, 0)
+            nums[idx : idx + freq] = [color] * freq
+            idx += freq
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, m: L[L[i]], t: i) -> b:
-        t, b = 0, l(m) - 1
-        w t <= b:
-            m = (t + b) // 2
-            i m[m][0] < t a m[m][-1] > t:
-                b
-            e m[m][0] > t:
-                b = m - 1
-            e:
-                t = m + 1
+    d s(s, n: L[i]) -> N:
+        c = {}
+        f i i r(l(n)):
+            c[n[i]] = c.g(n[i], 0) + 1
         
-        r = (t + b) // 2
+        i = 0
 
-        l, r = 0, l(m[r]) - 1
-        w l <= r:
-            m = (l + r) // 2
-            i m[r][m] == t:
-                r T
-            e m[r][m] > t:
-                r = m - 1
-            e:
-                l = m + 1
-        r F
+        f c i r(3):
+            f = c.g(c, 0)
+            n[i : i + f] = [c] * f
+            i += f
 ```
 
 ## Local Installation
