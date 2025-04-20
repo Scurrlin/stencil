@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 85 "Maximal Rectangle":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 86 "Partition List":
 
 ## Example
 
@@ -24,38 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def maximalRectangle(self, matrix: list[list[str]], ans = 0) -> int:
-        m, n = len(matrix), len(matrix[0])
-        dp = [0] * (n + 1)
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        before, after = ListNode(0), ListNode(0)
+        before_curr, after_curr = before, after
         
-        for i in range(m):
-            stack = deque([-1])
-            for j in range(n + 1):
-                if j < n and matrix[i][j] == '1': dp[j] += 1
-                else: dp[j] = 0
-                while (dp[stack[0]] > dp[j]):
-                    ans = max(ans, dp[stack.popleft()] * (j - stack[0] - 1))
-                stack.appendleft(j)
-        return ans
+        while head:
+            if head.val < x:
+                before_curr.next, before_curr = head, head
+            else:
+                after_curr.next, after_curr = head, head
+            head = head.next    
+        after_curr.next = None
+        before_curr.next = after.next
+        return before.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, m: l[l[s]], a = 0) -> i:
-        m, n = l(m), l(m[0])
-        d = [0] * (n + 1)
+    d p(s, h: O[L], x: i) -> O[L]:
+        b, a = L(0), L(0)
+        b_c, a_c = b, a
         
-        f i i r(m):
-            s = d([-1])
-            f j i r(n + 1):
-                i j < n a m[i][j] == '1': d[j] += 1
-                e: d[j] = 0
-                w (d[s[0]] > d[j]):
-                    a = m(a, d[s.p()] * (j - s[0] - 1))
-                s.a(j)
-        r a
+        w h:
+            i h.v < x:
+                b_c.n, b_c = h, h
+            e:
+                a_c.n, a_c = h, h
+            h = h.n    
+        a_c.n = N
+        b_c.n = a.n
+        r b.n
 ```
 
 ## Local Installation
