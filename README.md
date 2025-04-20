@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 78 "Subsets":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 79 "Word Search":
 
 ## Example
 
@@ -24,38 +24,78 @@ Solution
 
 ```python
 class Solution:
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        res, subset = [], []
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        ROWS, COLS = len(board), len(board[0])
+        path = set()
 
-        def dfs(i):
-            if i >= len(nums):
-                res.append(subset.copy())
-                return
-            subset.append(nums[i])
-            dfs(i + 1)
-            subset.pop()
-            dfs(i + 1)
-        dfs(0)
-        return res
+        def dfs(r, c, i):
+            if i == len(word):
+                return True
+            if (
+                min(r, c) < 0
+                or r >= ROWS
+                or c >= COLS
+                or word[i] != board[r][c]
+                or (r, c) in path
+            ):
+                return False
+            path.add((r, c))
+            res = (
+                dfs(r + 1, c, i + 1)
+                or dfs(r - 1, c, i + 1)
+                or dfs(r, c + 1, i + 1)
+                or dfs(r, c - 1, i + 1)
+            )
+            path.remove((r, c))
+            return res
+        
+        count = defaultdict(int, sum(map(Counter, board), Counter()))
+        if count[word[0]] > count[word[-1]]:
+            word = word[::-1]            
+        for r in range(ROWS):
+            for c in range(COLS):
+                if dfs(r, c, 0):
+                    return True
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n: L[i]) -> L[L[i]]:
-        r, s = [], []
+    d e(s, b: L[L[s]], w: s) -> b:
+        R, C = l(b), l(b[0])
+        p = s()
 
-        d d(i):
-            i i >= l(n):
-                r.a(s.c())
-                r
-            s.a(n[i])
-            d(i + 1)
-            s.p()
-            d(i + 1)
-        d(0)
-        r r
+        d d(r, c, i):
+            i i == l(w):
+                r T
+            i (
+                m(r, c) < 0
+                o r >= R
+                o c >= C
+                o w[i] != b[r][c]
+                o (r, c) i p
+            ):
+                r F
+            p.a((r, c))
+            r = (
+                d(r + 1, c, i + 1)
+                o d(r - 1, c, i + 1)
+                o d(r, c + 1, i + 1)
+                o d(r, c - 1, i + 1)
+            )
+            p.r((r, c))
+            r r
+        
+        c = d(i, s(m(C, b), C()))
+        i c[w[0]] > c[w[-1]]:
+            w = w[::-1]            
+        f r i r(R):
+            f c i r(C):
+                i d(r, c, 0):
+                    r T
+        r F
 ```
 
 ## Local Installation
