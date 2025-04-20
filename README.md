@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 83 "Remove Duplicates from Sorted List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 84 "Largest Rectangle in Histogram":
 
 ## Example
 
@@ -24,28 +24,40 @@ Solution
 
 ```python
 class Solution:
-    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        current = head
-        while current and current.next:
-            if current.val == current.next.val:
-                current.next = current.next.next
-            else:
-                current = current.next
-        return head
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        maxArea, stack = 0, []
+
+        for i, h in enumerate(heights):
+            start = i
+            while stack and stack[-1][1] > h:
+                index, height = stack.pop()
+                maxArea = max(maxArea, height * (i - index))
+                start = index
+            stack.append((start, h))
+
+        for i, h in stack:
+            maxArea = max(maxArea, h * (len(heights) - i))
+        return maxArea
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d d(s, h: O[L]) -> O[L]:
-        c = h
-        w c a c.n:
-            i c.v == c.n.v:
-                c.n = c.n.n
-            e:
-                c = c.n
-        r h
+    d l(s, h: L[i]) -> i:
+        m, s = 0, []
+
+        f i, h i e(h):
+            s = i
+            w s a s[-1][1] > h:
+                i, h = s.p()
+                m = m(m, h * (i - i))
+                s = i
+            s.a((s, h))
+
+        f i, h i s:
+            m = m(m, h * (l(h) - i))
+        r m
 ```
 
 ## Local Installation
