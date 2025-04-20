@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 82 "Remove Duplicates from Sorted List II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 83 "Remove Duplicates from Sorted List":
 
 ## Example
 
@@ -25,15 +25,13 @@ Solution
 ```python
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head or not head.next:
-            return head
-        if head.val == head.next.val:
-            while head.next and head.val == head.next.val:
-                head = head.next
-            return self.deleteDuplicates(head.next)
-        else:
-            head.next = self.deleteDuplicates(head.next)
-            return head
+        current = head
+        while current and current.next:
+            if current.val == current.next.val:
+                current.next = current.next.next
+            else:
+                current = current.next
+        return head
 ```
 
 Solution with Stencil
@@ -41,15 +39,13 @@ Solution with Stencil
 ```python
 c S:
     d d(s, h: O[L]) -> O[L]:
-        i n h o n h.n:
-            r h
-        i h.v == h.n.v:
-            w h.n a h.v == h.n.v:
-                h = h.n
-            r s.d(h.n)
-        e:
-            h.n = s.d(h.n)
-            r h
+        c = h
+        w c a c.n:
+            i c.v == c.n.v:
+                c.n = c.n.n
+            e:
+                c = c.n
+        r h
 ```
 
 ## Local Installation
