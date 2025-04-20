@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 90 "Subsets II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 91 "Decode Ways":
 
 ## Example
 
@@ -24,42 +24,44 @@ Solution
 
 ```python
 class Solution:
-    def subsetsWithDup(self, nums):
-        def f(index, t):
-            ans.append(list(t))
-            
-            for i in range(index, len(nums)):
-                if i != index and nums[i] == nums[i - 1]:
-                    continue
-                t.append(nums[i])
-                f(i + 1, t)
-                t.pop()
+    def numDecodings(self, s: str) -> int:
+        if s[0] == '0':
+            return 0
+        
+        n = len(s)
+        dp = [0] * (n + 1)
+        dp[0], dp[1] = 1, 1
 
-        ans = []
-        nums.sort()
-        f(0, [])
-        return ans
+        for i in range(2, n + 1):
+            one = int(s[i - 1])
+            two = int(s[i - 2:i])
+            if 1 <= one <= 9:
+                dp[i] += dp[i - 1]
+            if 10 <= two <= 26:
+                dp[i] += dp[i - 2]
+        return dp[n]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n):
-        d f(i, t):
-            a.a(l(t))
-            
-            f i i r(i, l(n)):
-                i i != i a n[i] == n[i - 1]:
-                    c
-                t.a(n[i])
-                f(i + 1, t)
-                t.p()
+    d n(s, s: s) -> i:
+        i s[0] == '0':
+            r 0
+        
+        n = l(s)
+        d = [0] * (n + 1)
+        d[0], d[1] = 1, 1
 
-        a = []
-        n.s()
-        f(0, [])
-        r a
+        f i i r(2, n + 1):
+            o = i(s[i - 1])
+            t = i(s[i - 2:i])
+            i 1 <= o <= 9:
+                d[i] += d[i - 1]
+            i 1 <= t <= 2:
+                d[i] += d[i - 2]
+        r d[n]
 ```
 
 ## Local Installation
