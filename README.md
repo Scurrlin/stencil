@@ -16,52 +16,54 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 87 "Scramble String":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 88 "Merge Sorted Array":
 
 ## Example
 
 Solution
 
 ```python
-from collections import Counter
-
 class Solution:
-    def isScramble(self, first: str, second: str) -> bool:
-        @cache
-        def dp(a: str, b: str) -> bool:
-            if a == b:
-                return True
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        if n == 0: return
+        len1 = len(nums1)
+        end_idx = len1 - 1
 
-            if Counter(a) != Counter(b):
-                return False
-            return any (
-                dp(a[:i], b[:i]) and dp(a[i:], b[i:]) or
-                dp(a[:i], b[-i:]) and dp(a[i:], b[:-i])
-                for i in range(1, len(a))
-            )
-
-        return dp(first, second)
+        while n > 0 and m > 0:
+            if nums2[n - 1] >= nums1[m - 1]:
+                nums1[end_idx] = nums2[n - 1]
+                n -= 1
+            else:
+                nums1[end_idx] = nums1[m - 1]
+                m -= 1
+            end_idx -= 1
+        while n > 0:
+            nums1[end_idx] = nums2[n - 1]
+            n -= 1
+            end_idx -= 1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, f: s, s: s) -> b:
-        @c
-        d d(a: s, b: s) -> b:
-            i a == b:
-                r T
+    d m(s, n: L[i], m: i, n: L[i], n: i) -> N:
+        i n == 0: r
+        l = l(n)
+        e_i = l - 1
 
-            i C(a) != C(b):
-                r F
-            r a (
-                d(a[:i], b[:i]) a d(a[i:], b[i:]) o
-                d(a[:i], b[-i:]) a d(a[i:], b[:-i])
-                f i i r(1, l(a))
-            )
-        
-        r d(f, s)
+        w n > 0 a m > 0:
+            i n[n - 1] >= n[m - 1]:
+                n[e_i] = n[n - 1]
+                n -= 1
+            e:
+                n[e_i] = n[m - 1]
+                m -= 1
+            e_i -= 1
+        w n > 0:
+            n[e_i] = n[n - 1]
+            n -= 1
+            e_i -= 1
 ```
 
 ## Local Installation
