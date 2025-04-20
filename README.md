@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 80 "Remove Duplicates from Sorted Array II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 81 "Search in Rotated Sorted Array II":
 
 ## Example
 
@@ -24,28 +24,54 @@ Solution
 
 ```python
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
-        k = 2
-
-        for i in range(2, len(nums)):
-            if nums[i] != nums[k - 2]:
-                nums[k] = nums[i]
-                k += 1
-        return k
+    def search(self, nums: List[int], target: int) -> bool:
+        left, right = 0, len(nums) - 1
+        
+        while left <= right:
+            mid = (left + right) // 2            
+            if nums[mid] == target:
+                return True
+            if nums[mid] == nums[left]:
+                left += 1
+                continue
+            if nums[left] <= nums[mid]:
+                if nums[left] <= target < nums[mid]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            else:
+                if nums[mid] < target <= nums[right]:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, n: L[i]) -> i:
-        k = 2
-
-        f i i r(2, l(n)):
-            i n[i] != n[k - 2]:
-                n[k] = n[i]
-                k += 1
-        r k
+    d s(s, n: L[i], t: i) -> b:
+        l, r = 0, l(n) - 1
+        
+        w l <= r:
+            m = (l + r) // 2            
+            i n[m] == t:
+                r T
+            i n[m] == n[l]:
+                l += 1
+                c
+            i n[l] <= n[m]:
+                i n[l] <= t < n[m]:
+                    r = m - 1
+                e:
+                    l = m + 1
+            e:
+                i n[m] < t <= n[r]:
+                    l = m + 1
+                e:
+                    r = m - 1
+        r F
 ```
 
 ## Local Installation
