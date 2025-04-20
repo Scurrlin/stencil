@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 89 "Gray Code":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 90 "Subsets II":
 
 ## Example
 
@@ -24,16 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def grayCode(self, n: int) -> List[int]:
-      return [i^(i >> 1) for i in range(2 ** n)]
+    def subsetsWithDup(self, nums):
+        def f(index, t):
+            ans.append(list(t))
+            
+            for i in range(index, len(nums)):
+                if i != index and nums[i] == nums[i - 1]:
+                    continue
+                t.append(nums[i])
+                f(i + 1, t)
+                t.pop()
+
+        ans = []
+        nums.sort()
+        f(0, [])
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, n: i) -> L[i]:
-      r [i^(i >> 1) f i i r(2 ** n)]
+    d s(s, n):
+        d f(i, t):
+            a.a(l(t))
+            
+            f i i r(i, l(n)):
+                i i != i a n[i] == n[i - 1]:
+                    c
+                t.a(n[i])
+                f(i + 1, t)
+                t.p()
+
+        a = []
+        n.s()
+        f(0, [])
+        r a
 ```
 
 ## Local Installation
