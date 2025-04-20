@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 75 "Sort Colors":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 76 "Minimum Window Substring":
 
 ## Example
 
@@ -24,34 +24,64 @@ Solution
 
 ```python
 class Solution:
-    def sortColors(self, nums: List[int]) -> None:
-        count = {}
-        for i in range(len(nums)):
-            count[nums[i]] = count.get(nums[i], 0) + 1
-        
-        idx = 0
+    def minWindow(self, s: str, t: str) -> str:
+        if len(s) < len(t):
+            return ""
+        countT, window = {}, {}
+        for c in t:
+            countT[c] = 1 + countT.get(c, 0)
 
-        for color in range(3):
-            freq = count.get(color, 0)
-            nums[idx : idx + freq] = [color] * freq
-            idx += freq
+        have, need = 0, len(countT)
+        res, resLen = [-1, -1], float("infinity")
+        l = 0
+
+        for r in range(len(s)):
+            c = s[r]
+            window[c] = 1 + window.get(c, 0)
+            if c in countT and window[c] == countT[c]:
+                have += 1
+            while have == need:
+                if (r - l + 1) < resLen:
+                    res = [l, r]
+                    resLen = r - l + 1
+                window[s[l]] -= 1
+                if s[l] in countT and window[s[l]] < countT[s[l]]:
+                    have -= 1
+                l += 1
+        l, r = res
+        return s[l : r + 1] if resLen != float("infinity") else ""
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n: L[i]) -> N:
-        c = {}
-        f i i r(l(n)):
-            c[n[i]] = c.g(n[i], 0) + 1
-        
-        i = 0
+    d m(s, s: s, t: s) -> s:
+        i l(s) < l(t):
+            r ""
+        c, w = {}, {}
+        f c i t:
+            c[c] = 1 + c.g(c, 0)
 
-        f c i r(3):
-            f = c.g(c, 0)
-            n[i : i + f] = [c] * f
-            i += f
+        h, n = 0, l(c)
+        r, r = [-1, -1], f("i")
+        l = 0
+
+        f r i r(l(s)):
+            c = s[r]
+            w[c] = 1 + w.g(c, 0)
+            i c i c a w[c] == c[c]:
+                h += 1
+            w h == n:
+                i (r - l + 1) < r:
+                    r = [l, r]
+                    r = r - l + 1
+                w[s[l]] -= 1
+                i s[l] i c a w[s[l]] < c[s[l]]:
+                    h -= 1
+                l += 1
+        l, r = r
+        r s[l : r + 1] i r != f("i") e ""
 ```
 
 ## Local Installation
