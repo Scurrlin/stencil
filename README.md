@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 77 "Combinations":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 78 "Subsets":
 
 ## Example
 
@@ -24,18 +24,18 @@ Solution
 
 ```python
 class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        res,comb = [], []
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res, subset = [], []
 
-        def backtrack(start):
-            if len(comb) == k:
-                res.append(comb[:])
+        def dfs(i):
+            if i >= len(nums):
+                res.append(subset.copy())
                 return
-            for num in range(start, n + 1):
-                comb.append(num)
-                backtrack(num + 1)
-                comb.pop()
-        backtrack(1)
+            subset.append(nums[i])
+            dfs(i + 1)
+            subset.pop()
+            dfs(i + 1)
+        dfs(0)
         return res
 ```
 
@@ -43,18 +43,18 @@ Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: i, k: i) -> L[L[i]]:
-        r,c = [], []
+    d s(s, n: L[i]) -> L[L[i]]:
+        r, s = [], []
 
-        d b(s):
-            i l(c) == k:
-                r.a(c[:])
+        d d(i):
+            i i >= l(n):
+                r.a(s.c())
                 r
-            f n i r(s, n + 1):
-                c.a(n)
-                b(n + 1)
-                c.p()
-        b(1)
+            s.a(n[i])
+            d(i + 1)
+            s.p()
+            d(i + 1)
+        d(0)
         r r
 ```
 
