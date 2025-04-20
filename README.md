@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 79 "Word Search":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 80 "Remove Duplicates from Sorted Array II":
 
 ## Example
 
@@ -24,78 +24,28 @@ Solution
 
 ```python
 class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
-        ROWS, COLS = len(board), len(board[0])
-        path = set()
+    def removeDuplicates(self, nums: List[int]) -> int:
+        k = 2
 
-        def dfs(r, c, i):
-            if i == len(word):
-                return True
-            if (
-                min(r, c) < 0
-                or r >= ROWS
-                or c >= COLS
-                or word[i] != board[r][c]
-                or (r, c) in path
-            ):
-                return False
-            path.add((r, c))
-            res = (
-                dfs(r + 1, c, i + 1)
-                or dfs(r - 1, c, i + 1)
-                or dfs(r, c + 1, i + 1)
-                or dfs(r, c - 1, i + 1)
-            )
-            path.remove((r, c))
-            return res
-        
-        count = defaultdict(int, sum(map(Counter, board), Counter()))
-        if count[word[0]] > count[word[-1]]:
-            word = word[::-1]            
-        for r in range(ROWS):
-            for c in range(COLS):
-                if dfs(r, c, 0):
-                    return True
-        return False
+        for i in range(2, len(nums)):
+            if nums[i] != nums[k - 2]:
+                nums[k] = nums[i]
+                k += 1
+        return k
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d e(s, b: L[L[s]], w: s) -> b:
-        R, C = l(b), l(b[0])
-        p = s()
+    d r(s, n: L[i]) -> i:
+        k = 2
 
-        d d(r, c, i):
-            i i == l(w):
-                r T
-            i (
-                m(r, c) < 0
-                o r >= R
-                o c >= C
-                o w[i] != b[r][c]
-                o (r, c) i p
-            ):
-                r F
-            p.a((r, c))
-            r = (
-                d(r + 1, c, i + 1)
-                o d(r - 1, c, i + 1)
-                o d(r, c + 1, i + 1)
-                o d(r, c - 1, i + 1)
-            )
-            p.r((r, c))
-            r r
-        
-        c = d(i, s(m(C, b), C()))
-        i c[w[0]] > c[w[-1]]:
-            w = w[::-1]            
-        f r i r(R):
-            f c i r(C):
-                i d(r, c, 0):
-                    r T
-        r F
+        f i i r(2, l(n)):
+            i n[i] != n[k - 2]:
+                n[k] = n[i]
+                k += 1
+        r k
 ```
 
 ## Local Installation
