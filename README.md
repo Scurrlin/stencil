@@ -16,46 +16,52 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 86 "Partition List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 87 "Scramble String":
 
 ## Example
 
 Solution
 
 ```python
+from collections import Counter
+
 class Solution:
-    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
-        before, after = ListNode(0), ListNode(0)
-        before_curr, after_curr = before, after
-        
-        while head:
-            if head.val < x:
-                before_curr.next, before_curr = head, head
-            else:
-                after_curr.next, after_curr = head, head
-            head = head.next    
-        after_curr.next = None
-        before_curr.next = after.next
-        return before.next
+    def isScramble(self, first: str, second: str) -> bool:
+        @cache
+        def dp(a: str, b: str) -> bool:
+            if a == b:
+                return True
+
+            if Counter(a) != Counter(b):
+                return False
+            return any (
+                dp(a[:i], b[:i]) and dp(a[i:], b[i:]) or
+                dp(a[:i], b[-i:]) and dp(a[i:], b[:-i])
+                for i in range(1, len(a))
+            )
+
+        return dp(first, second)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d p(s, h: O[L], x: i) -> O[L]:
-        b, a = L(0), L(0)
-        b_c, a_c = b, a
+    d i(s, f: s, s: s) -> b:
+        @c
+        d d(a: s, b: s) -> b:
+            i a == b:
+                r T
+
+            i C(a) != C(b):
+                r F
+            r a (
+                d(a[:i], b[:i]) a d(a[i:], b[i:]) o
+                d(a[:i], b[-i:]) a d(a[i:], b[:-i])
+                f i i r(1, l(a))
+            )
         
-        w h:
-            i h.v < x:
-                b_c.n, b_c = h, h
-            e:
-                a_c.n, a_c = h, h
-            h = h.n    
-        a_c.n = N
-        b_c.n = a.n
-        r b.n
+        r d(f, s)
 ```
 
 ## Local Installation
