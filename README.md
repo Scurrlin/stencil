@@ -16,46 +16,56 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 98 "Validate Binary Search Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 99 "Recover Binary Search Tree":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        stack, prev = [], float("-inf")
-
-        while root or stack:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            if root.val <= prev:
-                return False
-            prev = root.val
-            root = root.right
-        return True
+def recoverTree(self, root: Optional[TreeNode]) -> None:
+        res, prev = [], None     
+        startnode, lastnode = None, None
+        
+        def dfs(root):
+            nonlocal res, startnode, prev, lastnode
+            if not root:
+                return  
+            dfs(root.left)
+            if prev and prev.val > root.val:
+                if not startnode:
+                    startnode = prev
+                lastnode = root     
+            prev = root   
+            dfs(root.right)
+        
+        dfs(root)
+        if startnode and lastnode:
+            startnode.val, lastnode.val = lastnode.val, startnode.val
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d i(s, r: O[T]) -> b:
-        s, p = [], f("-i")
-
-        w r o s:
-            w r:
-                s.a(r)
-                r = r.l
-            r = s.p()
-            i r.v <= p:
-                r F
-            p = r.v
-            r = r.r
-        r T
+d r(s, r: O[T]) -> N:
+        r, p = [], N     
+        s, l = N, N
+        
+        d d(r):
+            n r, s, p, l
+            i n r:
+                r  
+            d(r.l)
+            i p a p.v > r.v:
+                i n s:
+                    s = p
+                l = r     
+            p = r   
+            d(r.r)
+        
+        d(r)
+        i s a l:
+            s.v, l.v = l.v, s.v
 ```
 
 ## Local Installation
