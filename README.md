@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 100 "Same Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 101 "Symmetric Tree":
 
 ## Example
 
@@ -24,26 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-        if not p and not q:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def isSame(left, right):
+            if left is None and right is None:
+                return True
+            if left is None or right is None:
+                return False
+            if left.val != right.val:
+                return False
+            return isSame(left.left, right.right) and isSame(left.right, right.left)
+        
+        if not root:
             return True
-        if p and q and p.val == q.val:
-            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-        else:
-            return False
+        return isSame(root.left, root.right)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, p: T, q: T) -> b:
-        i n p a n q:
+    d i(s, r: O[T]) -> b:
+        d i(l, r):
+            i l i N a r i N:
+                r T
+            i l i N o r i N:
+                r F
+            i l.v != r.v:
+                r F
+            r i(l.l, r.r) a i(l.r, r.l)
+        
+        i n r:
             r T
-        i p a q a p.v == q.v:
-            r s.i(p.l, q.l) a s.i(p.r, q.r)
-        e:
-            r F
+        r i(r.l, r.r)
 ```
 
 ## Local Installation
