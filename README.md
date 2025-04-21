@@ -16,54 +16,42 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 107 "Binary Tree Level Order Traversal II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 108 "Convert Sorted Array to Binary Search Tree":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-        res = []
-        q = collections.deque()
-        q.append(root)
+from typing import List, Optional
 
-        while q:
-            q_len = len(q)
-            level = []
-            for i in range(q_len):
-                node = q.popleft()
-                if node is not None:
-                    level.append(node.val)
-                    q.append(node.left)
-                    q.append(node.right)
-            if level:
-                res.append(level)
-        return res[::-1]
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional['TreeNode']:
+        if not nums:
+            return None
+        
+        mid = len(nums) // 2
+        root = TreeNode(nums[mid])
+        root.left = self.sortedArrayToBST(nums[:mid])
+        root.right = self.sortedArrayToBST(nums[mid + 1:])
+        return root
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d l(s, r: O[T]) -> L[L[i]]:
-        r = []
-        q = c.d()
-        q.a(r)
+f t i L, O
 
-        w q:
-            q_l = l(q)
-            l = []
-            f i i r(q_l):
-                n = q.p()
-                i n i n N:
-                    l.a(n.v)
-                    q.a(n.l)
-                    q.a(n.r)
-            i l:
-                r.a(l)
-        r r[::-1]
+c S:
+    d s(s, n: L[i]) -> O['T']:
+        i n n:
+            r N
+        
+        m = l(n) // 2
+        r = T(n[m])
+        r.l = s.s(n[:m])
+        r.r = s.s(n[m + 1:])
+        r r
 ```
 
 ## Local Installation
