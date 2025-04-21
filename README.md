@@ -16,56 +16,34 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 99 "Recover Binary Search Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 100 "Same Tree":
 
 ## Example
 
 Solution
 
 ```python
-def recoverTree(self, root: Optional[TreeNode]) -> None:
-        res, prev = [], None     
-        startnode, lastnode = None, None
-        
-        def dfs(root):
-            nonlocal res, startnode, prev, lastnode
-            if not root:
-                return  
-            dfs(root.left)
-            if prev and prev.val > root.val:
-                if not startnode:
-                    startnode = prev
-                lastnode = root     
-            prev = root   
-            dfs(root.right)
-        
-        dfs(root)
-        if startnode and lastnode:
-            startnode.val, lastnode.val = lastnode.val, startnode.val
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if not p and not q:
+            return True
+        if p and q and p.val == q.val:
+            return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        else:
+            return False
 ```
 
 Solution with Stencil
 
 ```python
-d r(s, r: O[T]) -> N:
-        r, p = [], N     
-        s, l = N, N
-        
-        d d(r):
-            n r, s, p, l
-            i n r:
-                r  
-            d(r.l)
-            i p a p.v > r.v:
-                i n s:
-                    s = p
-                l = r     
-            p = r   
-            d(r.r)
-        
-        d(r)
-        i s a l:
-            s.v, l.v = l.v, s.v
+c S:
+    d i(s, p: T, q: T) -> b:
+        i n p a n q:
+            r T
+        i p a q a p.v == q.v:
+            r s.i(p.l, q.l) a s.i(p.r, q.r)
+        e:
+            r F
 ```
 
 ## Local Installation
