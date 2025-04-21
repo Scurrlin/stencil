@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 101 "Symmetric Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 102 "Binary Tree Level Order Traversal":
 
 ## Example
 
@@ -24,38 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        def isSame(left, right):
-            if left is None and right is None:
-                return True
-            if left is None or right is None:
-                return False
-            if left.val != right.val:
-                return False
-            return isSame(left.left, right.right) and isSame(left.right, right.left)
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
         
-        if not root:
-            return True
-        return isSame(root.left, root.right)
+        def dfs(node, level):
+            if not node:
+                return
+            if len(res) <= level:
+                res.append([])
+            res[level].append(node.val)
+            dfs(node.left, level + 1)
+            dfs(node.right, level + 1)
+        dfs(root, 0)
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, r: O[T]) -> b:
-        d i(l, r):
-            i l i N a r i N:
-                r T
-            i l i N o r i N:
-                r F
-            i l.v != r.v:
-                r F
-            r i(l.l, r.r) a i(l.r, r.l)
+    d l(s, r: O[T]) -> L[L[i]]:
+        r = []
         
-        i n r:
-            r T
-        r i(r.l, r.r)
+        d d(n, l):
+            i n n:
+                r
+            i l(r) <= l:
+                r.a([])
+            r[l].a(n.v)
+            d(n.l, l + 1)
+            d(n.r, l + 1)
+        d(r, 0)
+        r r
 ```
 
 ## Local Installation
