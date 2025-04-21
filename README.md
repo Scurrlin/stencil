@@ -16,41 +16,57 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 108 "Convert Sorted Array to Binary Search Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 109 "Convert Sorted List to Binary Search Tree":
 
 ## Example
 
 Solution
 
 ```python
-from typing import List, Optional
-
 class Solution:
-    def sortedArrayToBST(self, nums: List[int]) -> Optional['TreeNode']:
-        if not nums:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        if not head:
             return None
-        
-        mid = len(nums) // 2
-        root = TreeNode(nums[mid])
-        root.left = self.sortedArrayToBST(nums[:mid])
-        root.right = self.sortedArrayToBST(nums[mid + 1:])
+        if not head.next:
+            return TreeNode(head.val)
+
+        slow, fast = head, head
+        prev = None
+
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+        root = TreeNode(slow.val)
+        if prev:
+            prev.next = None
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(slow.next)
         return root
 ```
 
 Solution with Stencil
 
 ```python
-f t i L, O
-
 c S:
-    d s(s, n: L[i]) -> O['T']:
-        i n n:
+    d s(s, h: O[L]) -> O[T]:
+        i n h:
             r N
-        
-        m = l(n) // 2
-        r = T(n[m])
-        r.l = s.s(n[:m])
-        r.r = s.s(n[m + 1:])
+        i n h.n:
+            r T(h.v)
+
+        s, f = h, h
+        p = N
+
+        w f a f.n:
+            p = s
+            s = s.n
+            f = f.n.n
+        r = T(s.v)
+        i p:
+            p.n = N
+        r.l = s.s(h)
+        r.r = s.s(s.n)
         r r
 ```
 
