@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 91 "Decode Ways":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 92 "Reverse Linked List II":
 
 ## Example
 
@@ -24,44 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def numDecodings(self, s: str) -> int:
-        if s[0] == '0':
-            return 0
-        
-        n = len(s)
-        dp = [0] * (n + 1)
-        dp[0], dp[1] = 1, 1
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if not head or left == right:
+            return head
+        dummy = ListNode(0, head)
+        prev = dummy
 
-        for i in range(2, n + 1):
-            one = int(s[i - 1])
-            two = int(s[i - 2:i])
-            if 1 <= one <= 9:
-                dp[i] += dp[i - 1]
-            if 10 <= two <= 26:
-                dp[i] += dp[i - 2]
-        return dp[n]
+        for _ in range(left - 1):
+            prev = prev.next
+        cur = prev.next
+        for _ in range(right - left):
+            temp = cur.next
+            cur.next = temp.next
+            temp.next = prev.next
+            prev.next = temp
+        return dummy.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d n(s, s: s) -> i:
-        i s[0] == '0':
-            r 0
-        
-        n = l(s)
-        d = [0] * (n + 1)
-        d[0], d[1] = 1, 1
+    d r(s, h: O[L], l: i, r: i) -> O[L]:
+        i n h o l == r:
+            r h
+        d = L(0, h)
+        p = d
 
-        f i i r(2, n + 1):
-            o = i(s[i - 1])
-            t = i(s[i - 2:i])
-            i 1 <= o <= 9:
-                d[i] += d[i - 1]
-            i 1 <= t <= 2:
-                d[i] += d[i - 2]
-        r d[n]
+        f _ i r(l - 1):
+            p = p.n
+        c = p.n
+        f _ i r(r - l):
+            t = c.n
+            c.n = t.n
+            t.n = p.n
+            p.n = t
+        r d.n
 ```
 
 ## Local Installation
