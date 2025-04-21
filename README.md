@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 106 "Construct Binary Tree from Inorder and Postorder Traversal":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 107 "Binary Tree Level Order Traversal II":
 
 ## Example
 
@@ -24,28 +24,46 @@ Solution
 
 ```python
 class Solution:
-    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        if not inorder or not postorder:
-            return None
-        root = TreeNode(postorder[-1])
-        index = inorder.index(postorder[-1])
-        root.left = self.buildTree(inorder[:index], postorder[:index])
-        root.right = self.buildTree(inorder[index + 1:], postorder[index:-1])
-        return root
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res = []
+        q = collections.deque()
+        q.append(root)
+
+        while q:
+            q_len = len(q)
+            level = []
+            for i in range(q_len):
+                node = q.popleft()
+                if node is not None:
+                    level.append(node.val)
+                    q.append(node.left)
+                    q.append(node.right)
+            if level:
+                res.append(level)
+        return res[::-1]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d b(s, i: L[i], p: L[i]) -> O[T]:
-        i n i o n p:
-            r N
-        r = T(p[-1])
-        i = i.i(p[-1])
-        r.l = s.b(i[:i], p[:i])
-        r.r = s.b(i[i + 1:], p[i:-1])
-        r r
+    d l(s, r: O[T]) -> L[L[i]]:
+        r = []
+        q = c.d()
+        q.a(r)
+
+        w q:
+            q_l = l(q)
+            l = []
+            f i i r(q_l):
+                n = q.p()
+                i n i n N:
+                    l.a(n.v)
+                    q.a(n.l)
+                    q.a(n.r)
+            i l:
+                r.a(l)
+        r r[::-1]
 ```
 
 ## Local Installation
