@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 109 "Convert Sorted List to Binary Search Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 110 "Balanced Binary Tree":
 
 ## Example
 
@@ -24,50 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
-        if not head:
-            return None
-        if not head.next:
-            return TreeNode(head.val)
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def dfs(root):
+            if not root:
+                return [True, 0]
 
-        slow, fast = head, head
-        prev = None
-
-        while fast and fast.next:
-            prev = slow
-            slow = slow.next
-            fast = fast.next.next
-        root = TreeNode(slow.val)
-        if prev:
-            prev.next = None
-        root.left = self.sortedListToBST(head)
-        root.right = self.sortedListToBST(slow.next)
-        return root
+            left, right = dfs(root.left), dfs(root.right)
+            balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+            return [balanced, 1 + max(left[1], right[1])]
+        return dfs(root)[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, h: O[L]) -> O[T]:
-        i n h:
-            r N
-        i n h.n:
-            r T(h.v)
+    d i(s, r: O[T]) -> b:
+        d d(r):
+            i n r:
+                r [T, 0]
 
-        s, f = h, h
-        p = N
-
-        w f a f.n:
-            p = s
-            s = s.n
-            f = f.n.n
-        r = T(s.v)
-        i p:
-            p.n = N
-        r.l = s.s(h)
-        r.r = s.s(s.n)
-        r r
+            l, r = d(r.l), d(r.r)
+            b = l[0] a r[0] a a(l[1] - r[1]) <= 1
+            r [b, 1 + m(l[1], r[1])]
+        r d(r)[0]
 ```
 
 ## Local Installation
