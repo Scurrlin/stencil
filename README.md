@@ -16,38 +16,46 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 110 "Balanced Binary Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 111 "Minimum Depth of Binary Tree":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        def dfs(root):
-            if not root:
-                return [True, 0]
+class Solution(object):
+    def minDepth(self, root):
+        if root is None:
+            return 0
+        leftDepth = self.minDepth(root.left)
+        rightDepth = self.minDepth(root.right)
 
-            left, right = dfs(root.left), dfs(root.right)
-            balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
-            return [balanced, 1 + max(left[1], right[1])]
-        return dfs(root)[0]
+        if root.left is None and root.right is None:
+            return 1
+        if root.left is None:
+            return 1 + rightDepth
+        if root.right is None:
+            return 1 + leftDepth
+        return min(leftDepth, rightDepth) + 1
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d i(s, r: O[T]) -> b:
-        d d(r):
-            i n r:
-                r [T, 0]
+c S(o):
+    d m(s, r):
+        i r i N:
+            r 0
+        l = s.m(r.l)
+        r = s.m(r.r)
 
-            l, r = d(r.l), d(r.r)
-            b = l[0] a r[0] a a(l[1] - r[1]) <= 1
-            r [b, 1 + m(l[1], r[1])]
-        r d(r)[0]
+        i r.l i N a r.r i N:
+            r 1
+        i r.l i N:
+            r 1 + r
+        i r.r i N:
+            r 1 + l
+        r m(l, r) + 1
 ```
 
 ## Local Installation
