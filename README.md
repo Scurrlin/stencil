@@ -16,44 +16,52 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 114 "Flatten Binary Tree to Linked List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 114 "Distinct Subsequences":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def __init__(self):
-        self.prev = None
+from functools import cache
 
-    def flatten(self, root: TreeNode) -> None:
-        if not root:
-            return
-        
-        self.flatten(root.right)
-        self.flatten(root.left)
-        root.right = self.prev
-        root.left = None
-        self.prev = root
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        @cache
+
+        def dfs(i, j):
+            if j == len(t):
+                return 1
+
+            if len(s) - i < len(t) - j:
+                return 0
+            res = dfs(i + 1, j)
+            if s[i] == t[j]:
+                res += dfs(i + 1, j + 1)
+            return res
+        return dfs(0, 0)
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d __i__(s):
-        s.p = N
+f f i c
 
-    d f(s, r: T) -> N:
-        i n r:
-            r
-        
-        s.f(r.r)
-        s.f(r.l)
-        r.r = s.p
-        r.l = N
-        s.p = r
+c S:
+    d n(s, s: s, t: s) -> i:
+        @c
+
+        d d(i, j):
+            i j == l(t):
+                r 1
+
+            i l(s) - i < l(t) - j:
+                r 0
+            r = d(i + 1, j)
+            i s[i] == t[j]:
+                r += d(i + 1, j + 1)
+            r r
+        r d(0, 0)
 ```
 
 ## Local Installation
