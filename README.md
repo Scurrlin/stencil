@@ -16,52 +16,46 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 115 "Distinct Subsequences":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 116 "Populating Next Right Pointers in Each Node":
 
 ## Example
 
 Solution
 
 ```python
-from functools import cache
-
 class Solution:
-    def numDistinct(self, s: str, t: str) -> int:
-        @cache
-
-        def dfs(i, j):
-            if j == len(t):
-                return 1
-
-            if len(s) - i < len(t) - j:
-                return 0
-            res = dfs(i + 1, j)
-            if s[i] == t[j]:
-                res += dfs(i + 1, j + 1)
-            return res
-        return dfs(0, 0)
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return None
+        
+        q = deque([root])
+        while q:
+            rightNode = None
+            for _ in range(len(q)):
+                curr = q.popleft()
+                curr.next, rightNode = rightNode, curr
+                if curr.right:
+                    q.extend([curr.right, curr.left])
+        return root
 ```
 
 Solution with Stencil
 
 ```python
-f f i c
-
 c S:
-    d n(s, s: s, t: s) -> i:
-        @c
-
-        d d(i, j):
-            i j == l(t):
-                r 1
-
-            i l(s) - i < l(t) - j:
-                r 0
-            r = d(i + 1, j)
-            i s[i] == t[j]:
-                r += d(i + 1, j + 1)
-            r r
-        r d(0, 0)
+    d c(s, r: 'O[N]') -> 'O[N]':
+        i n r:
+            r N
+        
+        q = d([r])
+        w q:
+            r = N
+            f _ i r(l(q)):
+                c = q.p()
+                c.n, r = r, c
+                i c.r:
+                    q.e([c.r, c.l])
+        r r
 ```
 
 ## Local Installation
