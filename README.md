@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 116 "Populating Next Right Pointers in Each Node":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 117 "Populating Next Right Pointers in Each Node II":
 
 ## Example
 
@@ -24,18 +24,22 @@ Solution
 
 ```python
 class Solution:
-    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+    def connect(self, root: 'Node') -> 'Node':
         if not root:
             return None
-        
         q = deque([root])
+        
         while q:
-            rightNode = None
+            last = None
             for _ in range(len(q)):
-                curr = q.popleft()
-                curr.next, rightNode = rightNode, curr
-                if curr.right:
-                    q.extend([curr.right, curr.left])
+                node = q.popleft()
+                if last:
+                    last.next = node
+                last = node
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
         return root
 ```
 
@@ -43,18 +47,22 @@ Solution with Stencil
 
 ```python
 c S:
-    d c(s, r: 'O[N]') -> 'O[N]':
+    d c(s, r: 'N') -> 'N':
         i n r:
             r N
-        
         q = d([r])
+        
         w q:
-            r = N
+            l = N
             f _ i r(l(q)):
-                c = q.p()
-                c.n, r = r, c
-                i c.r:
-                    q.e([c.r, c.l])
+                n = q.p()
+                i l:
+                    l.n = n
+                l = n
+                i n.l:
+                    q.a(n.l)
+                i n.r:
+                    q.a(n.r)
         r r
 ```
 
