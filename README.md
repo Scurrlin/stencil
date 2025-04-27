@@ -16,39 +16,31 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 118 "Pascal's Triangle":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 119 "Pascal's Triangle II":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
-        res = [[1]]
+class Solution(object):
+    def getRow(self, rowIndex):
+        row = [1]
 
-        for _ in range(numRows - 1):
-            dummy_row = [0] + res[-1] + [0]
-            row = []
-            for i in range(len(res[-1]) + 1):
-                row.append(dummy_row[i] + dummy_row[i + 1])
-            res.append(row)
-        return res
+        for _ in range(rowIndex):
+            row = [left + right for left, right in zip([0] + row, row + [0])]            
+        return row
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d g(s, n: i) -> L[L[i]]:
-        r = [[1]]
+c S(o):
+    d g(s, r):
+        r = [1]
 
-        f _ i r(n - 1):
-            d_r = [0] + r[-1] + [0]
-            r = []
-            f i i r(l(r[-1]) + 1):
-                r.a(d_r[i] + d_r[i + 1])
-            r.a(r)
+        f _ i r(r):
+            r = [l + r f l, r i z([0] + r, r + [0])]            
         r r
 ```
 
