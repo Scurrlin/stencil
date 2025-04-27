@@ -31,7 +31,7 @@ class Solution:
             dummy_row = [0] + res[-1] + [0]
             row = []
             for i in range(len(res[-1]) + 1):
-                row.append(dummy_row[i] + dummy_row[i+1])
+                row.append(dummy_row[i] + dummy_row[i + 1])
             res.append(row)
         return res
 ```
@@ -47,7 +47,7 @@ c S:
             d_r = [0] + r[-1] + [0]
             r = []
             f i i r(l(r[-1]) + 1):
-                r.a(d_r[i] + d_r[i+1])
+                r.a(d_r[i] + d_r[i + 1])
             r.a(r)
         r r
 ```
