@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 121 "Best Time to Buy and Sell Stock":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 122 "Best Time to Buy and Sell Stock II":
 
 ## Example
 
@@ -25,14 +25,12 @@ Solution
 ```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        res = 0
-        lowest = prices[0]
-
-        for p in prices:
-            if p < lowest:
-                lowest = p
-            res = max(res, p - lowest)
-        return res
+        profit = 0
+        
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]    
+        return profit
 ```
 
 Solution with Stencil
@@ -40,14 +38,12 @@ Solution with Stencil
 ```python
 c S:
     d m(s, p: L[i]) -> i:
-        r = 0
-        l = p[0]
-
-        f p i p:
-            i p < l:
-                l = p
-            r = m(r, p - l)
-        r r
+        p = 0
+        
+        f i i r(1, l(p)):
+            i p[i] > p[i - 1]:
+                p += p[i] - p[i - 1]    
+        r p
 ```
 
 ## Local Installation
