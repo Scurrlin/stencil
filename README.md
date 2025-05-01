@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 122 "Best Time to Buy and Sell Stock II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 123 "Best Time to Buy and Sell Stock III":
 
 ## Example
 
@@ -24,26 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        profit = 0
-        
-        for i in range(1, len(prices)):
-            if prices[i] > prices[i - 1]:
-                profit += prices[i] - prices[i - 1]    
-        return profit
+  def maxProfit(self, prices: List[int]) -> int:
+    if not prices:
+        return 0
+    buy1, buy2 = float('inf'), float('inf')
+    sell1, sell2 = 0, 0
+
+    for price in prices:
+        buy1 = min(buy1, price)
+        sell1 = max(sell1, price - buy1)
+        buy2 = min(buy2, price - sell1)
+        sell2 = max(sell2, price - buy2)
+    return sell2
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, p: L[i]) -> i:
-        p = 0
-        
-        f i i r(1, l(p)):
-            i p[i] > p[i - 1]:
-                p += p[i] - p[i - 1]    
-        r p
+  d m(s, p: L[i]) -> i:
+    i n p:
+        r 0
+    b, b = f('i'), f('i')
+    s, s = 0, 0
+
+    f p i p:
+        b = m(b, p)
+        s = m(s, p - b)
+        b = m(b, p - s)
+        s = m(s, p - b)
+    r s
 ```
 
 ## Local Installation
