@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 123 "Best Time to Buy and Sell Stock III":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 124 "Binary Tree Maximum Path Sum":
 
 ## Example
 
@@ -24,36 +24,42 @@ Solution
 
 ```python
 class Solution:
-  def maxProfit(self, prices: List[int]) -> int:
-    if not prices:
-        return 0
-    buy1, buy2 = float('inf'), float('inf')
-    sell1, sell2 = 0, 0
+    def maxPathSum(self, root: TreeNode) -> int:
+        res = [root.val]
 
-    for price in prices:
-        buy1 = min(buy1, price)
-        sell1 = max(sell1, price - buy1)
-        buy2 = min(buy2, price - sell1)
-        sell2 = max(sell2, price - buy2)
-    return sell2
+        def dfs(root):
+            if not root:
+                return 0
+
+            leftMax = dfs(root.left)
+            rightMax = dfs(root.right)
+            leftMax = max(leftMax, 0)
+            rightMax = max(rightMax, 0)
+            res[0] = max(res[0], root.val + leftMax + rightMax)
+            return root.val + max(leftMax, rightMax)
+        dfs(root)
+        return res[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-  d m(s, p: L[i]) -> i:
-    i n p:
-        r 0
-    b, b = f('i'), f('i')
-    s, s = 0, 0
+    d m(s, r: T) -> i:
+        r = [r.v]
 
-    f p i p:
-        b = m(b, p)
-        s = m(s, p - b)
-        b = m(b, p - s)
-        s = m(s, p - b)
-    r s
+        d d(r):
+            i n r:
+                r 0
+
+            l = d(r.l)
+            r = d(r.r)
+            l = m(l, 0)
+            r = m(r, 0)
+            r[0] = m(r[0], r.v + l + r)
+            r r.v + m(l, r)
+        d(r)
+        r r[0]
 ```
 
 ## Local Installation
