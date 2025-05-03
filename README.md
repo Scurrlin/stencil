@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 126 "Word Ladder II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 127 "Word Ladder":
 
 ## Example
 
@@ -24,96 +24,66 @@ Solution
 
 ```python
 class Solution:
-    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
-        depthMap = {}
-        ans = []
-        
-        def dfs(word, seq):
-            if word == beginWord:
-                ans.append(seq[::-1])
-                return            
-            steps = depthMap[word]
-            for i in range(len(word)):
-                original = word[i]
-                for ch in 'abcdefghijklmnopqrstuvwxyz':
-                    word = word[:i] + ch + word[i + 1:]
-                    if word in depthMap and depthMap[word] + 1 == steps:
-                        seq.append(word)
-                        dfs(word, seq)
-                        seq.pop()
-                word = word[:i] + original + word[i + 1:]
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        if endWord not in wordList:
+            return 0
 
-        wordSet = set(wordList)
+        nei = collections.defaultdict(list)
+        wordList.append(beginWord)
+        for word in wordList:
+            for j in range(len(word)):
+                pattern = word[:j] + "*" + word[j + 1 :]
+                nei[pattern].append(word)
+
+        visit = set([beginWord])
         q = deque([beginWord])
-        depthMap[beginWord] = 1
-        wordSet.discard(beginWord) 
-        
+        res = 1
         while q:
-            word = q.popleft()
-            steps = depthMap[word]
-            if word == endWord:
-                break
-            for i in range(len(word)):
-                original = word[i]
-                for ch in 'abcdefghijklmnopqrstuvwxyz':
-                    word = word[:i] + ch + word[i + 1:]
-                    if word in wordSet:
-                        q.append(word)
-                        wordSet.discard(word)
-                        depthMap[word] = steps + 1  
-                word = word[:i] + original + word[i + 1:] 
-        if endWord in depthMap:
-            seq = [endWord]
-            dfs(endWord, seq)
-        return ans
+            for i in range(len(q)):
+                word = q.popleft()
+                if word == endWord:
+                    return res
+                for j in range(len(word)):
+                    pattern = word[:j] + "*" + word[j + 1 :]
+                    for neiWord in nei[pattern]:
+                        if neiWord not in visit:
+                            visit.add(neiWord)
+                            q.append(neiWord)
+            res += 1
+        return 0
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, b: s, e: s, w: L[s]) -> L[L[s]]:
-        d = {}
-        a = []
-        
-        d d(w, s):
-            i w == b:
-                a.a(s[::-1])
-                r            
-            s = d[w]
-            f i i r(l(w)):
-                o = w[i]
-                f c i 'a':
-                    w = w[:i] + c + w[i + 1:]
-                    i w i d a d[w] + 1 == s:
-                        s.a(w)
-                        d(w, s)
-                        s.p()
-                w = w[:i] + o + w[i + 1:]
+    d l(s, b: s, e: s, w: L[s]) -> i:
+        i e n i w:
+            r 0
 
-        w = s(w)
+        n = c.d(l)
+        w.a(b)
+        f w i w:
+            f j i r(l(w)):
+                p = w[:j] + "*" + w[j + 1 :]
+                n[p].a(w)
+
+        v = s([b])
         q = d([b])
-        d[b] = 1
-        w.d(b) 
-        
+        r = 1
         w q:
-            w = q.p()
-            s = d[w]
-            i w == e:
-                b
-            f i i r(l(w)):
-                o = w[i]
-                f c i 'a':
-                    w = w[:i] + c + w[i + 1:]
-                    i w i w:
-                        q.a(w)
-                        w.d(w)
-                        d[w] = s + 1  
-                w = w[:i] + o + w[i + 1:] 
-        i e i d:
-            s = [e]
-            d(e, s)
-        r a
+            f i i r(l(q)):
+                w = q.p()
+                i w == e:
+                    r r
+                f j i r(l(w)):
+                    p = w[:j] + "*" + w[j + 1 :]
+                    f n i n[p]:
+                        i n n i v:
+                            v.a(n)
+                            q.a(n)
+            r += 1
+        r 0
 ```
 
 ## Local Installation
