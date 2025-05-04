@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 137 "Single Number II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 138 "Copy List with Random Pointer":
 
 ## Example
 
@@ -24,30 +24,40 @@ Solution
 
 ```python
 class Solution:
-    def singleNumber(self, nums):
-        count = defaultdict(int)
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':    
+        hash = {None:None}
+        cur = head
         
-        for x in nums:
-            count[x] += 1
-        for x, freq in count.items():
-            if freq == 1:
-                return x
-        return -1
+        while cur:
+            hash[cur] = Node(cur.val)
+            cur = cur.next    
+        cur = head
+        while cur:
+            copy = hash[cur]
+            copy.next = hash[cur.next]
+            copy.random = hash[cur.random]
+            cur = cur.next
+        return hash[head]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n):
-        c = d(i)
+    d c(s, h: 'O[N]') -> 'O[N]':    
+        h = {N:N}
+        c = h
         
-        f x i n:
-            c[x] += 1
-        f x, f i c.i():
-            i f == 1:
-                r x
-        r -1
+        w c:
+            h[c] = N(c.v)
+            c = c.n    
+        c = h
+        w c:
+            c = h[c]
+            c.n = h[c.n]
+            c.r = h[c.r]
+            c = c.n
+        r h[h]
 ```
 
 ## Local Installation
