@@ -16,68 +16,50 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 132 "Palindrome Partitioning II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 133 "Clone Graph":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def minCut(self, s: str) -> int:
-        n = len(s)
-        dp = [[False] * n for _ in range(n)]
+from typing import Optional
 
-        for i in range(n):
-            dp[i][i] = True
-        for i in range(n - 1):
-            if s[i] == s[i + 1]:
-                dp[i][i + 1] = True
-        for l in range(3, n + 1):
-            for i in range(n - l + 1):
-                j = i + l - 1
-                if s[i] == s[j] and dp[i + 1][j - 1]:
-                    dp[i][j] = True
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node: return node
+        q, clones = deque([node]), {node.val: Node(node.val, [])}
         
-        cuts = list(range(n))
-        for i in range(1, n):
-            if dp[0][i]:
-                cuts[i] = 0
-            else:
-                for j in range(i):
-                    if dp[j + 1][i]:
-                        cuts[i] = min(cuts[i], cuts[j] + 1)
-        return cuts[-1]
+        while q:
+            cur = q.popleft() 
+            cur_clone = clones[cur.val]            
+            for ngbr in cur.neighbors:
+                if ngbr.val not in clones:
+                    clones[ngbr.val] = Node(ngbr.val, [])
+                    q.append(ngbr)
+                cur_clone.neighbors.append(clones[ngbr.val])
+        return clones[node.val]
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d m(s, s: s) -> i:
-        n = l(s)
-        d = [[F] * n f _ i r(n)]
+f t i O
 
-        f i i r(n):
-            d[i][i] = T
-        f i i r(n - 1):
-            i s[i] == s[i + 1]:
-                d[i][i + 1] = T
-        f l i r(3, n + 1):
-            f i i r(n - l + 1):
-                j = i + l - 1
-                i s[i] == s[j] a d[i + 1][j - 1]:
-                    d[i][j] = T
+c S:
+    d c(s, n: 'N') -> 'N':
+        i n n: r n
+        q, c = d([n]), {n.v: N(n.v, [])}
         
-        c = l(r(n))
-        f i i r(1, n):
-            i d[0][i]:
-                c[i] = 0
-            e:
-                f j i r(i):
-                    i d[j + 1][i]:
-                        c[i] = m(c[i], c[j] + 1)
-        r c[-1]
+        w q:
+            c = q.p() 
+            c_c = c[c.v]            
+            f n i c.n:
+                i n.v n i c:
+                    c[n.v] = N(n.v, [])
+                    q.a(n)
+                c_c.n.a(c[n.v])
+        r c[n.v]
 ```
 
 ## Local Installation
