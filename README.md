@@ -16,34 +16,38 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 136 "Single Number":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 137 "Single Number II":
 
 ## Example
 
 Solution
 
 ```python
-from typing import List
-
 class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
-        result = 0
-        for num in nums:
-            result ^= num
-        return result
+    def singleNumber(self, nums):
+        count = defaultdict(int)
+        
+        for x in nums:
+            count[x] += 1
+        for x, freq in count.items():
+            if freq == 1:
+                return x
+        return -1
 ```
 
 Solution with Stencil
 
 ```python
-f t i L
-
 c S:
-    d s(s, n: L[i]) -> i:
-        r = 0
-        f n i n:
-            r ^= n
-        r r
+    d s(s, n):
+        c = d(i)
+        
+        f x i n:
+            c[x] += 1
+        f x, f i c.i():
+            i f == 1:
+                r x
+        r -1
 ```
 
 ## Local Installation
