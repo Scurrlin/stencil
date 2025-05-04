@@ -16,42 +16,34 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 135 "Candy":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 136 "Single Number":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def candy(self, ratings: List[int]) -> int:
-        n = len(ratings)
-        candies = [1] * n 
+from typing import List
 
-        for i in range(1, n):
-            if ratings[i] > ratings[i - 1]:
-                candies[i] = candies[i - 1] + 1
-        for i in range(n - 2, -1, -1):
-            if ratings[i] > ratings[i + 1]:
-                candies[i] = max(candies[i], candies[i + 1] + 1)
-        return sum(candies)
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        result = 0
+        for num in nums:
+            result ^= num
+        return result
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, r: L[i]) -> i:
-        n = l(r)
-        c = [1] * n 
+f t i L
 
-        f i i r(1, n):
-            i r[i] > r[i - 1]:
-                c[i] = c[i - 1] + 1
-        f i i r(n - 2, -1, -1):
-            i r[i] > r[i + 1]:
-                c[i] = m(c[i], c[i + 1] + 1)
-        r s(c)
+c S:
+    d s(s, n: L[i]) -> i:
+        r = 0
+        f n i n:
+            r ^= n
+        r r
 ```
 
 ## Local Installation
