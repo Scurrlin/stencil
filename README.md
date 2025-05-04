@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 127 "Word Ladder":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 128 "Longest Consecutive Subsequence":
 
 ## Example
 
@@ -24,66 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        if endWord not in wordList:
-            return 0
+    def longestConsecutive(self, nums: List[int]) -> int:
+        n_set = set(nums)
+        longest = 0
 
-        nei = collections.defaultdict(list)
-        wordList.append(beginWord)
-        for word in wordList:
-            for j in range(len(word)):
-                pattern = word[:j] + "*" + word[j + 1 :]
-                nei[pattern].append(word)
-
-        visit = set([beginWord])
-        q = deque([beginWord])
-        res = 1
-        while q:
-            for i in range(len(q)):
-                word = q.popleft()
-                if word == endWord:
-                    return res
-                for j in range(len(word)):
-                    pattern = word[:j] + "*" + word[j + 1 :]
-                    for neiWord in nei[pattern]:
-                        if neiWord not in visit:
-                            visit.add(neiWord)
-                            q.append(neiWord)
-            res += 1
-        return 0
+        for n in n_set:
+            if (n - 1) not in n_set:
+                length = 1
+                while (n + length) in n_set:
+                    length += 1
+                longest = max(length, longest)
+        return longest
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, b: s, e: s, w: L[s]) -> i:
-        i e n i w:
-            r 0
+    d l(s, n: L[i]) -> i:
+        n_s = s(n)
+        l = 0
 
-        n = c.d(l)
-        w.a(b)
-        f w i w:
-            f j i r(l(w)):
-                p = w[:j] + "*" + w[j + 1 :]
-                n[p].a(w)
-
-        v = s([b])
-        q = d([b])
-        r = 1
-        w q:
-            f i i r(l(q)):
-                w = q.p()
-                i w == e:
-                    r r
-                f j i r(l(w)):
-                    p = w[:j] + "*" + w[j + 1 :]
-                    f n i n[p]:
-                        i n n i v:
-                            v.a(n)
-                            q.a(n)
-            r += 1
-        r 0
+        f n i n_s:
+            i (n - 1) n i n_s:
+                l = 1
+                w (n + l) i n_s:
+                    l += 1
+                l = m(l, l)
+        r l
 ```
 
 ## Local Installation
