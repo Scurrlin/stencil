@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 131 "Palindrome Partitioning":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 132 "Palindrome Partitioning II":
 
 ## Example
 
@@ -24,30 +24,60 @@ Solution
 
 ```python
 class Solution:
-    @cache
-    def partition(self, s: str) -> List[List[str]]:
-        if not s: return [[]]
-        ans = []
-        for i in range(1, len(s) + 1):
-            if s[:i] == s[:i][::-1]:
-                for suf in self.partition(s[i:]):
-                    ans.append([s[:i]] + suf)
-        return ans
+    def minCut(self, s: str) -> int:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+
+        for i in range(n):
+            dp[i][i] = True
+        for i in range(n - 1):
+            if s[i] == s[i + 1]:
+                dp[i][i + 1] = True
+        for l in range(3, n + 1):
+            for i in range(n - l + 1):
+                j = i + l - 1
+                if s[i] == s[j] and dp[i + 1][j - 1]:
+                    dp[i][j] = True
+        
+        cuts = list(range(n))
+        for i in range(1, n):
+            if dp[0][i]:
+                cuts[i] = 0
+            else:
+                for j in range(i):
+                    if dp[j + 1][i]:
+                        cuts[i] = min(cuts[i], cuts[j] + 1)
+        return cuts[-1]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    @c
-    d p(s, s: s) -> L[L[s]]:
-        i n s: r [[]]
-        a = []
-        f i i r(1, l(s) + 1):
-            i s[:i] == s[:i][::-1]:
-                f s i s.p(s[i:]):
-                    a.a([s[:i]] + s)
-        r a
+    d m(s, s: s) -> i:
+        n = l(s)
+        d = [[F] * n f _ i r(n)]
+
+        f i i r(n):
+            d[i][i] = T
+        f i i r(n - 1):
+            i s[i] == s[i + 1]:
+                d[i][i + 1] = T
+        f l i r(3, n + 1):
+            f i i r(n - l + 1):
+                j = i + l - 1
+                i s[i] == s[j] a d[i + 1][j - 1]:
+                    d[i][j] = T
+        
+        c = l(r(n))
+        f i i r(1, n):
+            i d[0][i]:
+                c[i] = 0
+            e:
+                f j i r(i):
+                    i d[j + 1][i]:
+                        c[i] = m(c[i], c[j] + 1)
+        r c[-1]
 ```
 
 ## Local Installation
