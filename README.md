@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 138 "Copy List with Random Pointer":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 139 "Word Break":
 
 ## Example
 
@@ -24,40 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':    
-        hash = {None:None}
-        cur = head
-        
-        while cur:
-            hash[cur] = Node(cur.val)
-            cur = cur.next    
-        cur = head
-        while cur:
-            copy = hash[cur]
-            copy.next = hash[cur.next]
-            copy.random = hash[cur.random]
-            cur = cur.next
-        return hash[head]
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True
+        max_len = max(map(len, wordDict))
+
+        for i in range(1, n + 1):
+            for j in range(i - 1, max(i - max_len - 1, -1), -1):
+                if dp[j] and s[j:i] in wordDict:
+                    dp[i] = True
+                    break
+        return dp[n]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, h: 'O[N]') -> 'O[N]':    
-        h = {N:N}
-        c = h
-        
-        w c:
-            h[c] = N(c.v)
-            c = c.n    
-        c = h
-        w c:
-            c = h[c]
-            c.n = h[c.n]
-            c.r = h[c.r]
-            c = c.n
-        r h[h]
+    d w(s, s: s, w: L[s]) -> b:
+        n = l(s)
+        d = [F] * (n + 1)
+        d[0] = T
+        m_l = m(m(l, w))
+
+        f i i r(1, n + 1):
+            f j i r(i - 1, m(i - m_l - 1, -1), -1):
+                i d[j] a s[j:i] i w:
+                    d[i] = T
+                    b
+        r d[n]
 ```
 
 ## Local Installation
