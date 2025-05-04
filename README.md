@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 128 "Longest Consecutive Subsequence":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 129 "Sum Root to Leaf Numbers":
 
 ## Example
 
@@ -24,34 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:
-        n_set = set(nums)
-        longest = 0
-
-        for n in n_set:
-            if (n - 1) not in n_set:
-                length = 1
-                while (n + length) in n_set:
-                    length += 1
-                longest = max(length, longest)
-        return longest
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        
+        def dfs(node, num):
+            if not node:
+                return 0
+            
+            num = num * 10 + node.val
+            if not node.left and not node.right:
+                return num
+            return dfs(node.left, num) + dfs(node.right, num)
+        return dfs(root, 0)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, n: L[i]) -> i:
-        n_s = s(n)
-        l = 0
-
-        f n i n_s:
-            i (n - 1) n i n_s:
-                l = 1
-                w (n + l) i n_s:
-                    l += 1
-                l = m(l, l)
-        r l
+    d s(s, r: O[T]) -> i:
+        
+        d d(n, n):
+            i n n:
+                r 0
+            
+            n = n * 1 + n.v
+            i n n.l a n n.r:
+                r n
+            r d(n.l, n) + d(n.r, n)
+        r d(r, 0)
 ```
 
 ## Local Installation
