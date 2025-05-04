@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 134 "Gas Station":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 135 "Candy":
 
 ## Example
 
@@ -24,34 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        if sum(gas) < sum(cost):
-            return -1
-        
-        start, tank = 0, 0
-        for i in range(len(gas)):
-            tank += gas[i] - cost[i]
-            if tank < 0:
-                start = i + 1
-                tank = 0
-        return start
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        candies = [1] * n 
+
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                candies[i] = candies[i - 1] + 1
+        for i in range(n - 2, -1, -1):
+            if ratings[i] > ratings[i + 1]:
+                candies[i] = max(candies[i], candies[i + 1] + 1)
+        return sum(candies)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, g: L[i], c: L[i]) -> i:
-        i s(g) < s(c):
-            r -1
-        
-        s, t = 0, 0
-        f i i r(l(g)):
-            t += g[i] - c[i]
-            i t < 0:
-                s = i + 1
-                t = 0
-        r s
+    d c(s, r: L[i]) -> i:
+        n = l(r)
+        c = [1] * n 
+
+        f i i r(1, n):
+            i r[i] > r[i - 1]:
+                c[i] = c[i - 1] + 1
+        f i i r(n - 2, -1, -1):
+            i r[i] > r[i + 1]:
+                c[i] = m(c[i], c[i + 1] + 1)
+        r s(c)
 ```
 
 ## Local Installation
