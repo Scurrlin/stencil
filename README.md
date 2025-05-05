@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 139 "Word Break":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 140 "Word Break II":
 
 ## Example
 
@@ -24,36 +24,44 @@ Solution
 
 ```python
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        n = len(s)
-        dp = [False] * (n + 1)
-        dp[0] = True
-        max_len = max(map(len, wordDict))
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        word_set = set(wordDict)
+        return self.wordBreakHelper(s, 0, word_set)
+    
+    def wordBreakHelper(self, s: str, start: int, word_set: set) -> List[str]:
+        valid_substr = []    
+        if start == len(s):
+            valid_substr.append("")
 
-        for i in range(1, n + 1):
-            for j in range(i - 1, max(i - max_len - 1, -1), -1):
-                if dp[j] and s[j:i] in wordDict:
-                    dp[i] = True
-                    break
-        return dp[n]
+        for end in range(start + 1, len(s) + 1):
+            prefix = s[start:end]
+            if prefix in word_set:
+                suffixes = self.wordBreakHelper(s, end, word_set)
+                for suffix in suffixes:
+                    valid_substr.append(prefix + ("" if suffix == "" else " ") + suffix)
+        return valid_substr
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d w(s, s: s, w: L[s]) -> b:
-        n = l(s)
-        d = [F] * (n + 1)
-        d[0] = T
-        m_l = m(m(l, w))
+    d w(s, s: s, w: L[s]) -> L[s]:
+        w_s = s(w)
+        r s.w(s, 0, w_s)
+    
+    d w(s, s: s, s: i, w_s: s) -> L[s]:
+        v_s = []    
+        i s == l(s):
+            v_s.a("")
 
-        f i i r(1, n + 1):
-            f j i r(i - 1, m(i - m_l - 1, -1), -1):
-                i d[j] a s[j:i] i w:
-                    d[i] = T
-                    b
-        r d[n]
+        f e i r(s + 1, l(s) + 1):
+            p = s[s:e]
+            i p i w_s:
+                s = s.w(s, e, w_s)
+                f s i s:
+                    v_s.a(p + ("" i s == "" e " ") + s)
+        r v_s
 ```
 
 ## Local Installation
