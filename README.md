@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 140 "Word Break II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 141 "Linked List Cycle":
 
 ## Example
 
@@ -24,44 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        word_set = set(wordDict)
-        return self.wordBreakHelper(s, 0, word_set)
-    
-    def wordBreakHelper(self, s: str, start: int, word_set: set) -> List[str]:
-        valid_substr = []    
-        if start == len(s):
-            valid_substr.append("")
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        slow, fast = head, head
 
-        for end in range(start + 1, len(s) + 1):
-            prefix = s[start:end]
-            if prefix in word_set:
-                suffixes = self.wordBreakHelper(s, end, word_set)
-                for suffix in suffixes:
-                    valid_substr.append(prefix + ("" if suffix == "" else " ") + suffix)
-        return valid_substr
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d w(s, s: s, w: L[s]) -> L[s]:
-        w_s = s(w)
-        r s.w(s, 0, w_s)
-    
-    d w(s, s: s, s: i, w_s: s) -> L[s]:
-        v_s = []    
-        i s == l(s):
-            v_s.a("")
+    d h(s, h: O[L]) -> b:
+        s, f = h, h
 
-        f e i r(s + 1, l(s) + 1):
-            p = s[s:e]
-            i p i w_s:
-                s = s.w(s, e, w_s)
-                f s i s:
-                    v_s.a(p + ("" i s == "" e " ") + s)
-        r v_s
+        w f a f.n:
+            s = s.n
+            f = f.n.n
+            i s == f:
+                r T
+        r F
 ```
 
 ## Local Installation
