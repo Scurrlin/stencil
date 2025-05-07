@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 141 "Linked List Cycle":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 142 "Linked List Cycle II":
 
 ## Example
 
@@ -24,30 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
-        slow, fast = head, head
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = fast = head
 
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
-                return True
-        return False
+                break
+        else: return None
+
+        fast = head
+        while fast != slow:
+            fast = fast.next
+            slow = slow.next
+        return slow
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d h(s, h: O[L]) -> b:
-        s, f = h, h
+    d d(s, h: O[L]) -> O[L]:
+        s = f = h
 
         w f a f.n:
             s = s.n
             f = f.n.n
             i s == f:
-                r T
-        r F
+                b
+        e: r N
+
+        f = h
+        w f != s:
+            f = f.n
+            s = s.n
+        r s
 ```
 
 ## Local Installation
