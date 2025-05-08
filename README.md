@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 143 "Reorder List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 144 "Binary Tree Preorder Traversal":
 
 ## Example
 
@@ -24,54 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def reorderList(self, head: Optional[ListNode]) -> None:
-        if not head or not head.next:
-            return
-        slow, fast = head, head.next
-
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        second = slow.next
-        prev = slow.next = None
-        while second:
-            temp = second.next
-            second.next = prev
-            prev = second
-            second = temp
-        first, second = head, prev
-        while second:
-            temp1, temp2 = first.next, second.next
-            first.next = second
-            second.next = temp1
-            first, second = temp1, temp2
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        curr, stack = root, []
+        res = []
+        
+        while curr or stack:
+            if curr:
+                res.append(curr.val)
+                stack.append(curr.right)
+                curr = curr.left
+            else:
+                curr = stack.pop()
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, h: O[L]) -> N:
-        i n h o n h.n:
-            r
-        s, f = h, h.n
-
-        w f a f.n:
-            s = s.n
-            f = f.n.n
-        s = s.n
-        p = s.n = N
-        w s:
-            t = s.n
-            s.n = p
-            p = s
-            s = t
-        f, s = h, p
-        w s:
-            t, t = f.n, s.n
-            f.n = s
-            s.n = t
-            f, s = t, t
+    d p(s, r: O[T]) -> L[i]:
+        c, s = r, []
+        r = []
+        
+        w c o s:
+            i c:
+                r.a(c.v)
+                s.a(c.r)
+                c = c.l
+            e:
+                c = s.p()
+        r r
 ```
 
 ## Local Installation
