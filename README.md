@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 147 "Insertion Sort List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 148 "Sort List":
 
 ## Example
 
@@ -24,38 +24,62 @@ Solution
 
 ```python
 class Solution:
-    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        res = []
-        while head:
-            res.append(head.val)
-            head = head.next
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
         
-        res = sorted(res, reverse = True)
-        dummy = None        
-        for node in res:
-            head = ListNode(node)
-            head.next = dummy
-            dummy = head
-        return dummy
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        mid = slow.next
+        slow.next = None
+        left = self.sortList(head)
+        right = self.sortList(mid)
+        dummy = ListNode(0)
+        curr = dummy
+
+        while left and right:
+            if left.val < right.val:
+                curr.next = left
+                left = left.next
+            else:
+                curr.next = right
+                right = right.next
+            curr = curr.next
+        curr.next = left or right
+        return dummy.next
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, h: O[L]) -> O[L]:
-        r = []
-        w h:
-            r.a(h.v)
-            h = h.n
+    d s(s, h: O[L]) -> O[L]:
+        i n h o n h.n:
+            r h
         
-        r = s(r, r = T)
-        d = N        
-        f n i r:
-            h = L(n)
-            h.n = d
-            d = h
-        r d
+        s, f = h, h.n
+        w f a f.n:
+            s = s.n
+            f = f.n.n
+        m = s.n
+        s.n = N
+        l = s.s(h)
+        r = s.s(m)
+        d = L(0)
+        c = d
+
+        w l a r:
+            i l.v < r.v:
+                c.n = l
+                l = l.n
+            e:
+                c.n = r
+                r = r.n
+            c = c.n
+        c.n = l o r
+        r d.n
 ```
 
 ## Local Installation
