@@ -16,48 +16,58 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 145 "Binary Tree Postorder Traversal":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 146 "LRU Cache":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        if root is None:
-            return []
-        
-        stack, result = [root], []       
-        while stack:                
-            node = stack.pop()      
-            result.append(node.val)
-            if node.left:          
-                stack.append(node.left)
-            if node.right:          
-                stack.append(node.right)
-        result.reverse()
-        return result
+import collections
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.dic = collections.OrderedDict()
+
+    def get(self, key: int) -> int:
+        if key not in self.dic:
+            return -1
+        self.dic.move_to_end(key)
+        return self.dic[key]
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.dic:
+            self.dic.move_to_end(key)
+        self.dic[key] = value
+        if len(self.dic) > self.capacity:
+            self.dic.popitem(False)
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d p(s, r: O[T]) -> L[i]:
-        i r i N:
-            r []
-        
-        s, r = [r], []       
-        w s:                
-            n = s.p()      
-            r.a(n.v)
-            i n.l:          
-                s.a(n.l)
-            i n.r:          
-                s.a(n.r)
-        r.r()
-        r r
+i c
+
+c L:
+
+    d __i__(s, c: i):
+        s.c = c
+        s.d = c.O()
+
+    d g(s, k: i) -> i:
+        i k n i s.d:
+            r -1
+        s.d.m_t_e(k)
+        r s.d[k]
+
+    d p(s, k: i, v: i) -> N:
+        i k i s.d:
+            s.d.m_t_e(k)
+        s.d[k] = v
+        i l(s.d) > s.c:
+            s.d.p(F)
 ```
 
 ## Local Installation
