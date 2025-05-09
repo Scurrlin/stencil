@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 149 "Max Points on a Line":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 150 "Evaluate Reverse Polish Notation":
 
 ## Example
 
@@ -24,40 +24,46 @@ Solution
 
 ```python
 class Solution:
-    def maxPoints(self, points: List[List[int]]) -> int:
-        res = 1
-        for i in range(len(points)):
-            p1 = points[i]
-            count = collections.defaultdict(int)
-            for j in range(i + 1, len(points)):
-                p2 = points[j]
-                if p2[0] == p1[0]:
-                    slope = float("inf")
-                else:
-                    slope = (p2[1] - p1[1]) / (p2[0] - p1[0])
-                count[slope] += 1
-                res = max(res, count[slope] + 1)
-        return res
+    def evalRPN(self, tokens: List[str]) -> int:
+        st = []
+
+        for c in tokens:
+            if c == "+":
+                st.append(st.pop() + st.pop())
+            elif c == "-":
+                second, first = st.pop(), st.pop()
+                st.append(first - second)
+            elif c == "*":
+                st.append(st.pop() * st.pop())
+            elif c == "/":
+                second, first = st.pop(), st.pop()
+                st.append(int(first / second))                
+            else:
+                st.append(int(c))        
+        return st[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, p: L[L[i]]) -> i:
-        r = 1
-        f i i r(l(p)):
-            p = p[i]
-            c = c.d(i)
-            f j i r(i + 1, l(p)):
-                p = p[j]
-                i p[0] == p[0]:
-                    s = f("i")
-                e:
-                    s = (p[1] - p[1]) / (p[0] - p[0])
-                c[s] += 1
-                r = m(r, c[s] + 1)
-        r r
+    d e(s, t: L[s]) -> i:
+        s = []
+
+        f c i t:
+            i c == "+":
+                s.a(s.p() + s.p())
+            e c == "-":
+                s, f = s.p(), s.p()
+                s.a(f - s)
+            e c == "*":
+                s.a(s.p() * s.p())
+            e c == "/":
+                s, f = s.p(), s.p()
+                s.a(i(f / s))                
+            e:
+                s.a(i(c))        
+        r s[0]
 ```
 
 ## Local Installation
