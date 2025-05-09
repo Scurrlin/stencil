@@ -16,58 +16,46 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 146 "LRU Cache":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 147 "Insertion Sort List":
 
 ## Example
 
 Solution
 
 ```python
-import collections
-
-class LRUCache:
-
-    def __init__(self, capacity: int):
-        self.capacity = capacity
-        self.dic = collections.OrderedDict()
-
-    def get(self, key: int) -> int:
-        if key not in self.dic:
-            return -1
-        self.dic.move_to_end(key)
-        return self.dic[key]
-
-    def put(self, key: int, value: int) -> None:
-        if key in self.dic:
-            self.dic.move_to_end(key)
-        self.dic[key] = value
-        if len(self.dic) > self.capacity:
-            self.dic.popitem(False)
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        res = []
+        while head:
+            res.append(head.val)
+            head = head.next
+        
+        res = sorted(res, reverse = True)
+        dummy = None        
+        for node in res:
+            head = ListNode(node)
+            head.next = dummy
+            dummy = head
+        return dummy
 ```
 
 Solution with Stencil
 
 ```python
-i c
-
-c L:
-
-    d __i__(s, c: i):
-        s.c = c
-        s.d = c.O()
-
-    d g(s, k: i) -> i:
-        i k n i s.d:
-            r -1
-        s.d.m_t_e(k)
-        r s.d[k]
-
-    d p(s, k: i, v: i) -> N:
-        i k i s.d:
-            s.d.m_t_e(k)
-        s.d[k] = v
-        i l(s.d) > s.c:
-            s.d.p(F)
+c S:
+    d i(s, h: O[L]) -> O[L]:
+        r = []
+        w h:
+            r.a(h.v)
+            h = h.n
+        
+        r = s(r, r = T)
+        d = N        
+        f n i r:
+            h = L(n)
+            h.n = d
+            d = h
+        r d
 ```
 
 ## Local Installation
