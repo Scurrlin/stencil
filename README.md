@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 153 "Find Minimum in Rotated Sorted Array":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 154 "Find Minimum in Rotated Sorted Array II":
 
 ## Example
 
@@ -25,18 +25,17 @@ Solution
 ```python
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        start, end = 0, len(nums) - 1 
-        curr_min = float("inf")
-        n = nums
+        start, end = 0, len(nums) - 1
 
-        while start < end :
-            m = start + (end - start)//2
-            curr_min = min(curr_min, n[m])
-            if n[m] > n[end]:
-                start = m + 1
+        while start < end:
+            mid = (start + end) // 2
+            if nums[mid] > nums[end]:
+                start = mid + 1
+            elif nums[mid] < nums[start]:
+                end = mid
             else:
-                end = m - 1
-        return min(curr_min, n[start])
+                end -= 1
+        return nums[start]
 ```
 
 Solution with Stencil
@@ -44,18 +43,17 @@ Solution with Stencil
 ```python
 c S:
     d f(s, n: L[i]) -> i:
-        s, e = 0, l(n) - 1 
-        c_m = f("i")
-        n = n
+        s, e = 0, l(n) - 1
 
-        w s < e :
-            m = s + (e - s)//2
-            c_m = m(c_m, n[m])
+        w s < e:
+            m = (s + e) // 2
             i n[m] > n[e]:
                 s = m + 1
+            e n[m] < n[s]:
+                e = m
             e:
-                e = m - 1
-        r m(c_m, n[s])
+                e -= 1
+        r n[s]
 ```
 
 ## Local Installation
