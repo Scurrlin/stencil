@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 150 "Evaluate Reverse Polish Notation":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 151 "Reverse Words in a String":
 
 ## Example
 
@@ -24,46 +24,18 @@ Solution
 
 ```python
 class Solution:
-    def evalRPN(self, tokens: List[str]) -> int:
-        st = []
-
-        for c in tokens:
-            if c == "+":
-                st.append(st.pop() + st.pop())
-            elif c == "-":
-                second, first = st.pop(), st.pop()
-                st.append(first - second)
-            elif c == "*":
-                st.append(st.pop() * st.pop())
-            elif c == "/":
-                second, first = st.pop(), st.pop()
-                st.append(int(first / second))                
-            else:
-                st.append(int(c))        
-        return st[0]
+    def reverseWords(self, s: str) -> str:
+        words = s.split()
+        return ' '.join(words[::-1])
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d e(s, t: L[s]) -> i:
-        s = []
-
-        f c i t:
-            i c == "+":
-                s.a(s.p() + s.p())
-            e c == "-":
-                s, f = s.p(), s.p()
-                s.a(f - s)
-            e c == "*":
-                s.a(s.p() * s.p())
-            e c == "/":
-                s, f = s.p(), s.p()
-                s.a(i(f / s))                
-            e:
-                s.a(i(c))        
-        r s[0]
+    d r(s, s: s) -> s:
+        w = s.s()
+        r ' '.j(w[::-1])
 ```
 
 ## Local Installation
