@@ -16,56 +16,34 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 155 "Min Stack":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 160 "Intersection of Two Linked Lists":
 
 ## Example
 
 Solution
 
 ```python
-class MinStack:
-    def __init__(self):
-        self.stack = []
-        self.minStack = []
-        
-    def push(self, val: int) -> None:
-        self.stack.append(val)
-        val = min(val, self.minStack[-1] if self.minStack else val)
-        self.minStack.append(val)
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        lista, listb = headA, headB
 
-    def pop(self) -> None:
-        self.stack.pop()
-        self.minStack.pop()
-
-    def top(self) -> int:
-        return self.stack[-1]
-
-    def getMin(self) -> int:
-        return self.minStack[-1]
+        while lista != listb:
+            lista = lista.next if lista else headB
+            listb = listb.next if listb else headA
+        return listb
 ```
 
 Solution with Stencil
 
 ```python
-c M:
-    d __i__(s):
-        s.s = []
-        s.m = []
-        
-    d p(s, v: i) -> N:
-        s.s.a(v)
-        v = m(v, s.m[-1] i s.m e v)
-        s.m.a(v)
+c S:
+    d g(s, h: L, h: L) -> O[L]:
+        l, l = h, h
 
-    d p(s) -> N:
-        s.s.p()
-        s.m.p()
-
-    d t(s) -> i:
-        r s.s[-1]
-
-    d g(s) -> i:
-        r s.m[-1]
+        w l != l:
+            l = l.n i l e h
+            l = l.n i l e h
+        r l
 ```
 
 ## Local Installation
