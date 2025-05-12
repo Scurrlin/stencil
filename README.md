@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 160 "Intersection of Two Linked Lists":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 162 "Find Peak Element":
 
 ## Example
 
@@ -24,26 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        lista, listb = headA, headB
-
-        while lista != listb:
-            lista = lista.next if lista else headB
-            listb = listb.next if listb else headA
-        return listb
+    def findPeakElement(self, nums: List[int]) -> int:
+        l, r = 0, len(nums) - 1
+        
+        while l <= r:
+            m = (r + l) // 2
+            if m < len(nums) - 1 and nums[m] < nums[m + 1]:
+                l = m + 1
+            elif m > 0 and nums[m] < nums[m - 1]:
+                r = m - 1
+            else:
+                break
+        return m
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, h: L, h: L) -> O[L]:
-        l, l = h, h
-
-        w l != l:
-            l = l.n i l e h
-            l = l.n i l e h
-        r l
+    d f(s, n: L[i]) -> i:
+        l, r = 0, l(n) - 1
+        
+        w l <= r:
+            m = (r + l) // 2
+            i m < l(n) - 1 a n[m] < n[m + 1]:
+                l = m + 1
+            e m > 0 a n[m] < n[m - 1]:
+                r = m - 1
+            e:
+                b
+        r m
 ```
 
 ## Local Installation
