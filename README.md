@@ -24,35 +24,31 @@ Solution
 
 ```python
 class Solution:
-    def findPeakElement(self, nums: List[int]) -> int:
-        l, r = 0, len(nums) - 1
-        
-        while l <= r:
-            m = (r + l) // 2
-            if m < len(nums) - 1 and nums[m] < nums[m + 1]:
-                l = m + 1
-            elif m > 0 and nums[m] < nums[m - 1]:
-                r = m - 1
-            else:
-                break
-        return m
+    def maximumGap(self, nums: List[int]) -> int:
+        nums.sort()
+        min = float("-inf")
+        if len(nums) < 2:
+            return 0
+        for i in range(len(nums) - 1):
+            x = abs(nums[i] - nums[i + 1])
+            if min < x:
+                min = x
+        return min
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, n: L[i]) -> i:
-        l, r = 0, l(n) - 1
-        
-        w l <= r:
-            m = (r + l) // 2
-            i m < l(n) - 1 a n[m] < n[m + 1]:
-                l = m + 1
-            e m > 0 a n[m] < n[m - 1]:
-                r = m - 1
-            e:
-                b
+    d m(s, n: L[i]) -> i:
+        n.s()
+        m = f("-i")
+        i l(n) < 2:
+            r 0
+        f i i r(l(n) - 1):
+            x = a(n[i] - n[i + 1])
+            i m < x:
+                m = x
         r m
 ```
 
