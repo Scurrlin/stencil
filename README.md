@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 164 "Maximum Gap":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 165 "Compare Version Numbers":
 
 ## Example
 
@@ -24,32 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def maximumGap(self, nums: List[int]) -> int:
-        nums.sort()
-        min = float("-inf")
-        if len(nums) < 2:
-            return 0
-        for i in range(len(nums) - 1):
-            x = abs(nums[i] - nums[i + 1])
-            if min < x:
-                min = x
-        return min
+    def compareVersion(self, version1: str, version2: str) -> int:
+        v1, v2 = version1.split("."), version2.split(".")
+        n1, n2 = len(v1), len(v2)
+
+        for i in range(max(n1,n2)):
+            i1 = int(v1[i]) if i < n1 else 0
+            i2 = int(v2[i]) if i < n2 else 0
+
+            if i1 < i2:
+                return -1 
+            elif i1 > i2:
+                return 1
+            else:
+                pass
+        return 0
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, n: L[i]) -> i:
-        n.s()
-        m = f("-i")
-        i l(n) < 2:
-            r 0
-        f i i r(l(n) - 1):
-            x = a(n[i] - n[i + 1])
-            i m < x:
-                m = x
-        r m
+    d c(s, v: s, v: s) -> i:
+        v, v = v.s("."), v.s(".")
+        n, n = l(v), l(v)
+
+        f i i r(m(n,n)):
+            i = i(v[i]) i i < n e 0
+            i = i(v[i]) i i < n e 0
+
+            i i < i:
+                r -1 
+            e i > i:
+                r 1
+            e:
+                p
+        r 0
 ```
 
 ## Local Installation
