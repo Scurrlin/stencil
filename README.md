@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 165 "Compare Version Numbers":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 166 "Fraction to Recurring Decimal":
 
 ## Example
 
@@ -24,42 +24,62 @@ Solution
 
 ```python
 class Solution:
-    def compareVersion(self, version1: str, version2: str) -> int:
-        v1, v2 = version1.split("."), version2.split(".")
-        n1, n2 = len(v1), len(v2)
+    def fractionToDecimal(self, numerator: int, denominator: int) -> str:
+        if numerator == 0: return '0'
+        result = []
 
-        for i in range(max(n1,n2)):
-            i1 = int(v1[i]) if i < n1 else 0
-            i2 = int(v2[i]) if i < n2 else 0
-
-            if i1 < i2:
-                return -1 
-            elif i1 > i2:
-                return 1
-            else:
-                pass
-        return 0
+        if numerator < 0 and denominator > 0 or numerator >= 0 and denominator < 0:
+            result.append('-')
+        
+        numerator, denominator = abs(numerator), abs(denominator)
+        result.append(str(numerator // denominator))
+        remainder = numerator % denominator
+        
+        if remainder == 0: return ''.join(result)
+        result.append('.')
+        
+        d = {}
+        while remainder != 0:
+            if remainder in d:
+                result.insert(d[remainder], '(')
+                result.append(')')
+                return ''.join(result)
+            d[remainder] = len(result)
+            remainder *= 10
+            result += str(remainder // denominator)
+            remainder = remainder % denominator
+        return ''.join(result)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, v: s, v: s) -> i:
-        v, v = v.s("."), v.s(".")
-        n, n = l(v), l(v)
+    d f(s, n: i, d: i) -> s:
+        i n == 0: r '0'
+        r = []
 
-        f i i r(m(n,n)):
-            i = i(v[i]) i i < n e 0
-            i = i(v[i]) i i < n e 0
-
-            i i < i:
-                r -1 
-            e i > i:
-                r 1
-            e:
-                p
-        r 0
+        i n < 0 a d > 0 o n >= 0 a d < 0:
+            r.a('-')
+        
+        n, d = a(n), a(d)
+        r.a(s(n // d))
+        r = n % d
+        
+        i r == 0: r ''.j(r)
+        r.a('.')
+        
+        d = {}
+        w r != 0:
+            i r i d:
+                r.i(d[r], '(')
+                r.a(')')
+                r ''.j(r)
+            d[r] = l(r)
+            r *= 1
+            r += s(r // d)
+            r = r % d
+        r ''.j(r)
 ```
 
 ## Local Installation
