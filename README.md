@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 167 "Two Sum II - Input Array Is Sorted":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 168 "Excel Sheet Column Title":
 
 ## Example
 
@@ -24,36 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        n, t = numbers, target
-        l, r = 0, len(n) - 1
+    def convertToTitle(self, columnNumber: int) -> str:
+        res = ""
 
-        while l < r:
-            total = n[l] + n[r]
-            if total == t:
-                return[l + 1, r + 1]
-            elif total < t:
-                l += 1
-            else:
-                r -= 1
+        while columnNumber > 0:
+            columnNumber -= 1
+            res = chr((columnNumber % 26) + ord("A")) + res
+            columnNumber //= 26
+        
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d t(s, n: L[i], t: i) -> L[i]:
-        n, t = n, t
-        l, r = 0, l(n) - 1
+    d c(s, c: i) -> s:
+        r = ""
 
-        w l < r:
-            t = n[l] + n[r]
-            i t == t:
-                r[l + 1, r + 1]
-            e t < t:
-                l += 1
-            e:
-                r -= 1
+        w c > 0:
+            c -= 1
+            r = c((c % 2) + o("A")) + r
+            c //= 2
+        
+        r r
 ```
 
 ## Local Installation
