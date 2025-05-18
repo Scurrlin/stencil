@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 168 "Excel Sheet Column Title":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 169 "Majority Element":
 
 ## Example
 
@@ -24,14 +24,14 @@ Solution
 
 ```python
 class Solution:
-    def convertToTitle(self, columnNumber: int) -> str:
-        res = ""
+    def majorityElement(self, nums: List[int]) -> int:
+        res, count = 0, 0
 
-        while columnNumber > 0:
-            columnNumber -= 1
-            res = chr((columnNumber % 26) + ord("A")) + res
-            columnNumber //= 26
-        
+        for n in nums:
+            if count == 0:
+                res = n
+            count += (1 if n == res else -1)
+            
         return res
 ```
 
@@ -39,14 +39,14 @@ Solution with Stencil
 
 ```python
 c S:
-    d c(s, c: i) -> s:
-        r = ""
+    d m(s, n: L[i]) -> i:
+        r, c = 0, 0
 
-        w c > 0:
-            c -= 1
-            r = c((c % 2) + o("A")) + r
-            c //= 2
-        
+        f n i n:
+            i c == 0:
+                r = n
+            c += (1 i n == r e -1)
+            
         r r
 ```
 
