@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 169 "Majority Element":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 171 "Excel Sheet Column Number":
 
 ## Example
 
@@ -24,30 +24,22 @@ Solution
 
 ```python
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
-        res, count = 0, 0
-
-        for n in nums:
-            if count == 0:
-                res = n
-            count += (1 if n == res else -1)
-            
-        return res
+    def titleToNumber(self, columnTitle: str) -> int:
+        col = 0
+        for i in range(len(columnTitle)):
+            col += (col * 25) + (ord(columnTitle[i]) - 64)
+        return col
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, n: L[i]) -> i:
-        r, c = 0, 0
-
-        f n i n:
-            i c == 0:
-                r = n
-            c += (1 i n == r e -1)
-            
-        r r
+    d t(s, c: s) -> i:
+        c = 0
+        f i i r(l(c)):
+            c += (c * 2) + (o(c[i]) - 6)
+        r c
 ```
 
 ## Local Installation
