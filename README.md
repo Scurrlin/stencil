@@ -16,32 +16,56 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 172 "Factorial Trailing Zeroes":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 173 "Binary Search Tree Iterator":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def trailingZeroes(self, n: int) -> int:
-        res = 0
-        while n > 0:
-            n //= 5
-            res += n
-        return res
+class BSTIterator:
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack = []
+        self.pushAllLeft(root)
+    
+    def pushAllLeft(self,node):
+        while node:
+            self.stack.append(node)
+            node = node.left
+
+    def next(self) -> int:
+        if not self.hasNext():
+            return -1
+        top_node = self.stack.pop()
+        self.pushAllLeft(top_node.right)
+        return top_node.val
+    
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d t(s, n: i) -> i:
-        r = 0
-        w n > 0:
-            n //= 5
-            r += n
-        r r
+c B:
+    d __i__(s, r: O[T]):
+        s.s = []
+        s.p(r)
+    
+    d p(s,n):
+        w n:
+            s.s.a(n)
+            n = n.l
+
+    d n(s) -> i:
+        i n s.h():
+            r -1
+        t_n = s.s.p()
+        s.p(t_n.r)
+        r t_n.v
+    
+    d h(s) -> b:
+        r l(s.s) > 0
 ```
 
 ## Local Installation
