@@ -16,56 +16,40 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 173 "Binary Search Tree Iterator":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 174 "Dungeon Game":
 
 ## Example
 
 Solution
 
 ```python
-class BSTIterator:
-    def __init__(self, root: Optional[TreeNode]):
-        self.stack = []
-        self.pushAllLeft(root)
-    
-    def pushAllLeft(self,node):
-        while node:
-            self.stack.append(node)
-            node = node.left
+class Solution:
+    def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
+        m, n = len(dungeon), len(dungeon[0])
+        dp = [[inf] * (n + 1) for _ in range(m + 1)]
+        dp[m][n - 1] = dp[m - 1][n] = 1
 
-    def next(self) -> int:
-        if not self.hasNext():
-            return -1
-        top_node = self.stack.pop()
-        self.pushAllLeft(top_node.right)
-        return top_node.val
-    
-    def hasNext(self) -> bool:
-        return len(self.stack) > 0
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                dp[i][j] = max(1, min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j])
+        
+        return dp[0][0]
 ```
 
 Solution with Stencil
 
 ```python
-c B:
-    d __i__(s, r: O[T]):
-        s.s = []
-        s.p(r)
-    
-    d p(s,n):
-        w n:
-            s.s.a(n)
-            n = n.l
+c S:
+    d c(s, d: L[L[i]]) -> i:
+        m, n = l(d), l(d[0])
+        d = [[i] * (n + 1) f _ i r(m + 1)]
+        d[m][n - 1] = d[m - 1][n] = 1
 
-    d n(s) -> i:
-        i n s.h():
-            r -1
-        t_n = s.s.p()
-        s.p(t_n.r)
-        r t_n.v
-    
-    d h(s) -> b:
-        r l(s.s) > 0
+        f i i r(m - 1, -1, -1):
+            f j i r(n - 1, -1, -1):
+                d[i][j] = m(1, m(d[i + 1][j], d[i][j + 1]) - d[i][j])
+        
+        r d[0][0]
 ```
 
 ## Local Installation
