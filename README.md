@@ -16,40 +16,36 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 174 "Dungeon Game":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 175 "Combine Two Tables":
 
 ## Example
 
 Solution
 
-```python
-class Solution:
-    def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
-        m, n = len(dungeon), len(dungeon[0])
-        dp = [[inf] * (n + 1) for _ in range(m + 1)]
-        dp[m][n - 1] = dp[m - 1][n] = 1
-
-        for i in range(m - 1, -1, -1):
-            for j in range(n - 1, -1, -1):
-                dp[i][j] = max(1, min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j])
-        
-        return dp[0][0]
+```sql
+SELECT 
+    p.firstName, 
+    p.lastName, 
+    a.city, 
+    a.state
+FROM 
+    Person p
+LEFT JOIN 
+    Address a ON p.personId = a.personId;
 ```
 
 Solution with Stencil
 
-```python
-c S:
-    d c(s, d: L[L[i]]) -> i:
-        m, n = l(d), l(d[0])
-        d = [[i] * (n + 1) f _ i r(m + 1)]
-        d[m][n - 1] = d[m - 1][n] = 1
-
-        f i i r(m - 1, -1, -1):
-            f j i r(n - 1, -1, -1):
-                d[i][j] = m(1, m(d[i + 1][j], d[i][j + 1]) - d[i][j])
-        
-        r d[0][0]
+```sql
+S 
+    p.f, 
+    p.l, 
+    a.c, 
+    a.s
+F 
+    P p
+L J 
+    A a O p.p = a.p;
 ```
 
 ## Local Installation
@@ -63,7 +59,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.py --start <start_line> --end <end_line>
+npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -77,5 +73,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.py --start <start_line> --end <end_line>
+stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
