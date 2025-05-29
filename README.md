@@ -16,40 +16,28 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 180 "Consecutive Numbers":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 181 "Employees Earning More Than Their Managers":
 
 ## Example
 
 Solution
 
 ```sql
-SELECT DISTINCT
-    l1.Num AS ConsecutiveNums
-FROM
-    Logs l1,
-    Logs l2,
-    Logs l3
-WHERE
-    l1.Id = l2.Id - 1
-    AND l2.Id = l3.Id - 1
-    AND l1.Num = l2.Num
-    AND l2.Num = l3.Num;
+SELECT e.name as Employee
+FROM Employee e
+INNER JOIN Employee m
+ON e.managerId = m.id
+WHERE e.salary > m.salary;
 ```
 
 Solution with Stencil
 
 ```sql
-S D
-    l.N A C
-F
-    L l,
-    L l,
-    L l
-W
-    l.I = l.I - 1
-    A l.I = l.I - 1
-    A l.N = l.N
-    A l.N = l.N;
+S e.n a E
+F E e
+I J E m
+O e.m = m.i
+W e.s > m.s;
 ```
 
 ## Local Installation
