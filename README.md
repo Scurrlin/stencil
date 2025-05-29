@@ -16,34 +16,40 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 179 "Largest Number":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 180 "Consecutive Numbers":
 
 ## Example
 
 Solution
 
-```python
-class Solution:
-    def largestNumber(self, nums: List[int]) -> str:
-        array = list(map(str, nums))
-        array.sort(key = lambda x: x * 10, reverse = True)
-        if array[0] == "0":
-            return "0"
-        largest = ''.join(array)
-        return largest
+```sql
+SELECT DISTINCT
+    l1.Num AS ConsecutiveNums
+FROM
+    Logs l1,
+    Logs l2,
+    Logs l3
+WHERE
+    l1.Id = l2.Id - 1
+    AND l2.Id = l3.Id - 1
+    AND l1.Num = l2.Num
+    AND l2.Num = l3.Num;
 ```
 
 Solution with Stencil
 
-```python
-c S:
-    d l(s, n: L[i]) -> s:
-        a = l(m(s, n))
-        a.s(k = l x: x * 1, r = T)
-        i a[0] == "0":
-            r "0"
-        l = ''.j(a)
-        r l
+```sql
+S D
+    l.N A C
+F
+    L l,
+    L l,
+    L l
+W
+    l.I = l.I - 1
+    A l.I = l.I - 1
+    A l.N = l.N
+    A l.N = l.N;
 ```
 
 ## Local Installation
@@ -57,7 +63,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.py --start <start_line> --end <end_line>
+npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -71,5 +77,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.py --start <start_line> --end <end_line>
+stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
