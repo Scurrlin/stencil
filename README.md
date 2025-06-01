@@ -23,20 +23,23 @@ Stencil is a language-agnostic memorization tool that strips code files down to 
 Solution
 
 ```sql
-SELECT name as Customers
-from Customers
-where id not in (
-    select customerId
-    from Orders
-);
+SELECT d.name AS Department, 
+    e.name AS Employee, 
+    e.salary AS Salary
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+WHERE e.salary = (
+    SELECT MAX(salary)
+    FROM Employee
+    WHERE departmentId = e.departmentId);
 ```
 
 Solution with Stencil
 
 ```sql
 S d.n A D, 
-       e.n A E, 
-       e.s A S
+    e.n A E, 
+    e.s A S
 F E e
 J D d O e.d = d.i
 W e.s = (
