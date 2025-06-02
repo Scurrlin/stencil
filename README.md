@@ -16,36 +16,44 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 184 "Department Highest Salary":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 185 "Department Top Three Salaries":
 
 ## Example
 
 Solution
 
 ```sql
-SELECT d.name AS Department, 
-    e.name AS Employee, 
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
     e.salary AS Salary
-FROM Employee e
-JOIN Department d ON e.departmentId = d.id
-WHERE e.salary = (
-    SELECT MAX(salary)
-    FROM Employee
-    WHERE departmentId = e.departmentId);
+FROM
+    Employee e
+    JOIN Department d ON e.departmentId = d.id
+WHERE (
+    SELECT COUNT(DISTINCT salary)
+    FROM Employee e2
+    WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
+) <= 3
+ORDER BY Department, Salary DESC;
 ```
 
 Solution with Stencil
 
 ```sql
-S d.n A D, 
-    e.n A E, 
+S
+    d.n A D,
+    e.n A E,
     e.s A S
-F E e
-J D d O e.d = d.i
-W e.s = (
-    S M(s)
-    F E
-    W d = e.d);
+F
+    E e
+    J D d O e.d = d.i
+W (
+    S C(D s)
+    F E e
+    W e.d = e.d A e.s >= e.s
+) <= 3
+O B D, S D;
 ```
 
 ## Local Installation
