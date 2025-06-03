@@ -16,44 +16,42 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 185 "Department Top Three Salaries":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 187 "Repeated DNA Sequences":
 
 ## Example
 
 Solution
 
-```sql
-SELECT
-    d.name AS Department,
-    e.name AS Employee,
-    e.salary AS Salary
-FROM
-    Employee e
-    JOIN Department d ON e.departmentId = d.id
-WHERE (
-    SELECT COUNT(DISTINCT salary)
-    FROM Employee e2
-    WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
-) <= 3
-ORDER BY Department, Salary DESC;
+```python
+class Solution:
+    def findRepeatedDnaSequences(self, s: str) -> List[str]:
+        seen = set()
+        repeated = set()
+        n = len(s)
+
+        for i in range(n - 9):
+            sub = s[i:i + 10]
+            if sub in seen:
+                repeated.add(sub)
+            seen.add(sub)
+        return list(repeated)
 ```
 
 Solution with Stencil
 
-```sql
-S
-    d.n A D,
-    e.n A E,
-    e.s A S
-F
-    E e
-    J D d O e.d = d.i
-W (
-    S C(D s)
-    F E e
-    W e.d = e.d A e.s >= e.s
-) <= 3
-O B D, S D;
+```python
+c S:
+    d f(s, s: s) -> L[s]:
+        s = s()
+        r = s()
+        n = l(s)
+
+        f i i r(n - 9):
+            s = s[i:i + 1]
+            i s i s:
+                r.a(s)
+            s.a(s)
+        r l(r)
 ```
 
 ## Local Installation
@@ -67,7 +65,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
+npx stencil path/to/your/file.py --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -81,5 +79,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.sql --start <start_line> --end <end_line>
+stencil path/to/your/file.py --start <start_line> --end <end_line>
 ```
