@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 188 "Best Time to Buy and Sell Stock IV":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 189 "Rotate Array":
 
 ## Example
 
@@ -24,36 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def maxProfit(self, k: int, prices: List[int]) -> int:
-        n = len(prices)
-        if n == 0 or k == 0:
-            return 0
-        curr = [[0] * 2 for _ in range(k + 1)]
-        next = [[0] * 2 for _ in range(k + 1)]
-        for i in range(n - 1, -1, -1):
-            for j in range(1, k + 1):
-                curr[j][1] = max(-prices[i] + next[j][0], next[j][1])
-                curr[j][0] = max(prices[i] + next[j - 1][1], next[j][0])
-            next = [row[:] for row in curr]
-        return curr[k][1]
+    def rotate(self, nums: List[int], k: int) -> None:
+        n = len(nums)
+        k = k % n
+        rotated = [0] * n
+
+        for i in range(n):
+            rotated[(i + k) % n] = nums[i]       
+        for i in range(n):
+            nums[i] = rotated[i]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, k: i, p: L[i]) -> i:
-        n = l(p)
-        i n == 0 o k == 0:
-            r 0
-        c = [[0] * 2 f _ i r(k + 1)]
-        n = [[0] * 2 f _ i r(k + 1)]
-        f i i r(n - 1, -1, -1):
-            f j i r(1, k + 1):
-                c[j][1] = m(-p[i] + n[j][0], n[j][1])
-                c[j][0] = m(p[i] + n[j - 1][1], n[j][0])
-            n = [r[:] f r i c]
-        r c[k][1]
+    d r(s, n: L[i], k: i) -> N:
+        n = l(n)
+        k = k % n
+        r = [0] * n
+
+        f i i r(n):
+            r[(i + k) % n] = n[i]       
+        f i i r(n):
+            n[i] = r[i]
 ```
 
 ## Local Installation
