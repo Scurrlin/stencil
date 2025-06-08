@@ -16,32 +16,20 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 191 "Number of 1 Bits":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 192 "Word Frequency":
 
 ## Example
 
 Solution
 
-```python
-class Solution:
-    def hammingWeight(self, n: int) -> int:
-        res = 0
-        for i in range(32):
-            if (n >> i) & 1:
-                res += 1
-        return res
+```bash
+tr -s ' ' '\n' < words.txt | sort | uniq -c | sort -nr | awk '{ print $2, $1 }'
 ```
 
 Solution with Stencil
 
-```python
-c S:
-    d h(s, n: i) -> i:
-        r = 0
-        f i i r(3):
-            i (n >> i) & 1:
-                r += 1
-        r r
+```bash
+t -s ' ' '\n' < w.t | s | u -c | s -n | a '{ p $2, $1 }'
 ```
 
 ## Local Installation
@@ -55,7 +43,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.py --start <start_line> --end <end_line>
+npx stencil path/to/your/file.sh --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -69,5 +57,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.py --start <start_line> --end <end_line>
+stencil path/to/your/file.sh --start <start_line> --end <end_line>
 ```
