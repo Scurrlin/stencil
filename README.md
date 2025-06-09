@@ -16,20 +16,26 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 192 "Word Frequency":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 193 "Valid Phone Numbers":
 
 ## Example
 
 Solution
 
 ```bash
-tr -s ' ' '\n' < words.txt | sort | uniq -c | sort -nr | awk '{ print $2, $1 }'
+grep \
+-e "^[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}$" \
+-e "^([0-9]\{3\}) [0-9]\{3\}-[0-9]\{4\}$" \
+file.txt
 ```
 
 Solution with Stencil
 
 ```bash
-t -s ' ' '\n' < w.t | s | u -c | s -n | a '{ p $2, $1 }'
+g \
+-e "^[0-9]\{3\}-[0-9]\{3\}-[0-9]\{4\}$" \
+-e "^([0-9]\{3\}) [0-9]\{3\}-[0-9]\{4\}$" \
+f.t
 ```
 
 ## Local Installation
