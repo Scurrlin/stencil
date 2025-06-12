@@ -16,48 +16,20 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 194 "Transpose File":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 195 "Tenth Line":
 
 ## Example
 
 Solution
 
 ```bash
-awk '
-{
-    for (i = 1; i <= NF; i++) {
-        if (NR == 1) {
-            a[i] = $i
-        } else {
-            a[i] = a[i] " " $i
-        }
-    }
-}
-END {
-    for (i = 1; i <= NF; i++) {
-        print a[i]
-    }
-}' file.txt
+awk 'NR == 10 {print; exit}' file.txt
 ```
 
 Solution with Stencil
 
 ```bash
-a '
-{
-    f (i = 1; i <= N; i++) {
-        i (N == 1) {
-            a[i] = $i
-        } e {
-            a[i] = a[i] " " $i
-        }
-    }
-}
-E {
-    f (i = 1; i <= N; i++) {
-        p a[i]
-    }
-}' f.t
+a 'N == 1 {p; e}' f.t
 ```
 
 ## Local Installation
