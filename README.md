@@ -16,20 +16,26 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 195 "Tenth Line":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 196 "Delete Duplicate Emails":
 
 ## Example
 
 Solution
 
-```bash
-awk 'NR == 10 {print; exit}' file.txt
+```sql
+DELETE p1
+FROM Person p1
+JOIN Person p2
+ON p1.email = p2.email AND p1.id > p2.id;
 ```
 
 Solution with Stencil
 
-```bash
-a 'N == 1 {p; e}' f.t
+```sql
+D p
+F P p
+J P p
+O p.e = p.e A p.i > p.i;
 ```
 
 ## Local Installation
@@ -43,7 +49,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.sh --start <start_line> --end <end_line>
+npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -57,5 +63,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.sh --start <start_line> --end <end_line>
+stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
