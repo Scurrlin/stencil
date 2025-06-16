@@ -16,28 +16,36 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 197 "Rising Temperature":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 198 "House Robber":
 
 ## Example
 
 Solution
 
-```sql
-SELECT w1.id
-FROM Weather w1
-JOIN Weather w2
-ON DATE_SUB(w1.recordDate, INTERVAL 1 DAY) = w2.recordDate
-WHERE w1.temperature > w2.temperature;
+```python
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        rob1, rob2 = 0, 0
+
+        for n in nums:
+            temp = max(n + rob1, rob2)
+            rob1 = rob2
+            rob2 = temp
+        return rob2
 ```
 
 Solution with Stencil
 
-```sql
-S w.i
-F W w
-J W w
-O D_S(w.r, I 1 D) = w.r
-W w.t > w.t;
+```python
+c S:
+    d r(s, n: L[i]) -> i:
+        r, r = 0, 0
+
+        f n i n:
+            t = m(n + r, r)
+            r = r
+            r = t
+        r r
 ```
 
 ## Local Installation
@@ -51,7 +59,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
+npx stencil path/to/your/file.py --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -65,5 +73,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.sql --start <start_line> --end <end_line>
+stencil path/to/your/file.py --start <start_line> --end <end_line>
 ```
