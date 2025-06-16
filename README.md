@@ -16,26 +16,28 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 196 "Delete Duplicate Emails":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 197 "Rising Temperature":
 
 ## Example
 
 Solution
 
 ```sql
-DELETE p1
-FROM Person p1
-JOIN Person p2
-ON p1.email = p2.email AND p1.id > p2.id;
+SELECT w1.id
+FROM Weather w1
+JOIN Weather w2
+ON DATE_SUB(w1.recordDate, INTERVAL 1 DAY) = w2.recordDate
+WHERE w1.temperature > w2.temperature;
 ```
 
 Solution with Stencil
 
 ```sql
-D p
-F P p
-J P p
-O p.e = p.e A p.i > p.i;
+S w.i
+F W w
+J W w
+O D_S(w.r, I 1 D) = w.r
+W w.t > w.t;
 ```
 
 ## Local Installation
