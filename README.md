@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 200 "Number of Islands":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 201 "Bitwise AND of Numbers Range":
 
 ## Example
 
@@ -24,50 +24,20 @@ Solution
 
 ```python
 class Solution:
-    def numIslands(self, grid: List[List[str]]) -> int:
-        if not grid:
-            return 0
-        
-        def dfs(i, j):
-            if i < 0 or i >= len(grid) or j < 0 or j >= len(grid[0]) or grid[i][j] != '1':
-                return
-            grid[i][j] = '0'
-            dfs(i+1, j)
-            dfs(i-1, j)
-            dfs(i, j+1)
-            dfs(i, j-1)
-        num_islands = 0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == '1':
-                    num_islands += 1
-                    dfs(i, j)
-        return num_islands
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        while left < right:
+            right = right & (right - 1)  
+        return right
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d n(s, g: L[L[s]]) -> i:
-        i n g:
-            r 0
-        
-        d d(i, j):
-            i i < 0 o i >= l(g) o j < 0 o j >= l(g[0]) o g[i][j] != '1':
-                r
-            g[i][j] = '0'
-            d(i+1, j)
-            d(i-1, j)
-            d(i, j+1)
-            d(i, j-1)        
-        n_i = 0
-        f i i r(l(g)):
-            f j i r(l(g[0])):
-                i g[i][j] == '1':
-                    n_i += 1
-                    d(i, j)
-        r n_i
+    d r(s, l: i, r: i) -> i:
+        w l < r:
+            r = r & (r - 1)  
+        r r
 ```
 
 ## Local Installation
