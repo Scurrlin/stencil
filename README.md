@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 203 "Remove Linked List Elements":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 204 "Count Primes":
 
 ## Example
 
@@ -24,32 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        ans = ListNode(0, head)
-        dummy = ans
-
-        while dummy:
-            while dummy.next and dummy.next.val == val:
-                dummy.next = dummy.next.next
-            dummy = dummy.next
+    def countPrimes(self, n: int) -> int:
+        if n<= 2:
+            return 0
         
-        return ans.next
+        is_prime = [True] * n
+        is_prime[0] = is_prime[1] = False
+
+        count = 0
+        for i in range(2, n):
+            if is_prime[i]:
+                count += 1
+                
+                for j in range(i * i, n, i):
+                    is_prime[j] = False
+        return count
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, h: O[L], v: i) -> O[L]:
-        a = L(0, h)
-        d = a
-
-        w d:
-            w d.n a d.n.v == v:
-                d.n = d.n.n
-            d = d.n
+    d c(s, n: i) -> i:
+        i n<= 2:
+            r 0
         
-        r a.n
+        i_p = [T] * n
+        i_p[0] = i_p[1] = F
+
+        c = 0
+        f i i r(2, n):
+            i i_p[i]:
+                c += 1
+                
+                f j i r(i * i, n, i):
+                    i_p[j] = F
+        r c
 ```
 
 ## Local Installation
