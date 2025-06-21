@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 204 "Count Primes":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 205 "Isomorphic Strings":
 
 ## Example
 
@@ -24,42 +24,36 @@ Solution
 
 ```python
 class Solution:
-    def countPrimes(self, n: int) -> int:
-        if n<= 2:
-            return 0
-        
-        is_prime = [True] * n
-        is_prime[0] = is_prime[1] = False
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        s_hash = {}
+        t_hash = {}
 
-        count = 0
-        for i in range(2, n):
-            if is_prime[i]:
-                count += 1
-                
-                for j in range(i * i, n, i):
-                    is_prime[j] = False
-        return count
+        for i in range(len(s)):
+            if s[i] not in s_hash:
+                s_hash[s[i]] = i    
+            if t[i] not in t_hash:
+                t_hash[t[i]] = i
+            if s_hash[s[i]] != t_hash[t[i]]:
+                return False
+        return True
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: i) -> i:
-        i n<= 2:
-            r 0
-        
-        i_p = [T] * n
-        i_p[0] = i_p[1] = F
+    d i(s, s: s, t: s) -> b:
+        s_h = {}
+        t_h = {}
 
-        c = 0
-        f i i r(2, n):
-            i i_p[i]:
-                c += 1
-                
-                f j i r(i * i, n, i):
-                    i_p[j] = F
-        r c
+        f i i r(l(s)):
+            i s[i] n i s_h:
+                s_h[s[i]] = i    
+            i t[i] n i t_h:
+                t_h[t[i]] = i
+            i s_h[s[i]] != t_h[t[i]]:
+                r F
+        r T
 ```
 
 ## Local Installation
