@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 205 "Isomorphic Strings":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 206 "Reverse Linked List":
 
 ## Example
 
@@ -24,36 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        s_hash = {}
-        t_hash = {}
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        current = head
 
-        for i in range(len(s)):
-            if s[i] not in s_hash:
-                s_hash[s[i]] = i    
-            if t[i] not in t_hash:
-                t_hash[t[i]] = i
-            if s_hash[s[i]] != t_hash[t[i]]:
-                return False
-        return True
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        return prev
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, s: s, t: s) -> b:
-        s_h = {}
-        t_h = {}
+    d r(s, h: O[L]) -> O[L]:
+        p = N
+        c = h
 
-        f i i r(l(s)):
-            i s[i] n i s_h:
-                s_h[s[i]] = i    
-            i t[i] n i t_h:
-                t_h[t[i]] = i
-            i s_h[s[i]] != t_h[t[i]]:
-                r F
-        r T
+        w c:
+            n_n = c.n
+            c.n = p
+            p = c
+            c = n_n
+        r p
 ```
 
 ## Local Installation
