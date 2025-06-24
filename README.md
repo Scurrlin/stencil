@@ -16,69 +16,87 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 207 "Course Schedule":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 208 "Implement Trie (Prefix Tree)":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        preMap = {i: [] for i in range(numCourses)}
+class Trie:
 
-        for crs, pre in prerequisites:
-            preMap[crs].append(pre)
+    def __init__(self):
+        self.root = {}
         
-        visiting = set()
-        
-        def dfs(crs):
-            if crs in visiting:
+    def insert(self, word: str) -> None:
+
+        curr = self.root
+
+        for letter in word:
+            if letter not in curr:
+                curr[letter] = {}
+            curr = curr[letter]
+
+        curr['*'] = ''
+
+    def search(self, word: str) -> bool:
+
+        curr = self.root
+        for letter in word:
+            if letter not in curr:
                 return False
-            if preMap[crs] == []:
-                return True
-            visiting.add(crs)
-            for pre in preMap[crs]:
-                if not dfs(pre):
-                    return False
-            visiting.remove(crs)
-            preMap[crs] = []
-            return True
+            curr = curr[letter]
+
+        return '*' in curr
         
-        for c in range(numCourses):
-            if not dfs(c):
+    def startsWith(self, prefix: str) -> bool:
+
+        curr = self.root
+        for letter in prefix:
+            if letter not in curr:
                 return False
+            curr = curr[letter]
+
         return True
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, n: i, p: L[L[i]]) -> b:
-        p = {i: [] f i i r(n)}
+c T:
 
-        f c, p i p:
-            p[c].a(p)
+    d __i__(s):
+        s.r = {}
         
-        v = s()
-        
-        d d(c):
-            i c i v:
+    d i(s, w: s) -> N:
+
+        c = s.r
+
+        f l i w:
+            i l n i c:
+                c[l] = {}
+            c = c[l]
+
+        c['*'] = ''
+
+    d s(s, w: s) -> b:
+
+        c = s.r
+        f l i w:
+            i l n i c:
                 r F
-            i p[c] == []:
-                r T
-            v.a(c)
-            f p i p[c]:
-                i n d(p):
-                    r F
-            v.r(c)
-            p[c] = []
-            r T
+            c = c[l]
+
+        r '*' i c
         
-        f c i r(n):
-            i n d(c):
+    d s(s, p: s) -> b:
+
+        c = s.r
+        f l i p:
+            i l n i c:
                 r F
+            c = c[l]
+
         r T
 ```
 
