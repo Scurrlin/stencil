@@ -16,74 +16,80 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 210 "Course Schedule II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 211 "Design Add and Search Words Data Structure":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        prereq = {c: [] for c in range(numCourses)}
-
-        for crs, pre in prerequisites:
-            prereq[crs].append(pre)
-
-        output = []
-        visit, cycle = set(), set()
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_word = False
         
-        def dfs(crs):
-            if crs in cycle:
-                return False
-            if crs in visit:
-                return True
-            cycle.add(crs)
-            for pre in prereq[crs]:
-                if dfs(pre) == False:
-                    return False
-            cycle.remove(crs)
-            visit.add(crs)
-            output.append(crs)
-            return True
+class WordDictionary:
+    def __init__(self):
+        self.root = TrieNode()      
+
+    def addWord(self, word):
+        current_node = self.root
+        for character in word:
+            current_node = current_node.children.setdefault(character, TrieNode())
+        current_node.is_word = True
         
-        for c in range(numCourses):
-            if dfs(c) == False:
-                return []
-        return output
+    def search(self, word):
+        def dfs(node, index):
+            if index == len(word):
+                return node.is_word
+               
+            if word[index] == ".":
+                for child in node.children.values():
+                    if dfs(child, index+1):
+                        return True
+                    
+            if word[index] in node.children:
+                return dfs(node.children[word[index]], index+1)
+            
+            return False
+    
+        return dfs(self.root, 0)
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d f(s, n: i, p: L[L[i]]) -> L[i]:
-        p = {c: [] f c i r(n)}
-
-        f c, p i p:
-            p[c].a(p)
-
-        o = []
-        v, c = s(), s()
+c T:
+    d __i__(s):
+        s.c = {}
+        s.i_w = F
         
-        d d(c):
-            i c i c:
-                r F
-            i c i v:
-                r T
-            c.a(c)
-            f p i p[c]:
-                i d(p) == F:
-                    r F
-            c.r(c)
-            v.a(c)
-            o.a(c)
-            r T
+c W:
+    d __i__(s):
+        s.r = T()      
+
+    d a(s, w):
+        c_n = s.r
+        f c i w:
+            c_n = c_n.c.s(c, T())
+        c_n.i_w = T
         
-        f c i r(n):
-            i d(c) == F:
-                r []
-        r o
+    d s(s, w):
+        d d(n, i):
+            i i == l(w):
+                r n.i_w
+               
+            i w[i] == ".":
+                f c i n.c.v():
+                    i d(c, i+1):
+                        r T
+                    
+            i w[i] i n.c:
+                r d(n.c[w[i]], i+1)
+            
+            r F
+    
+        r d(s.r, 0)
 ```
 
 ## Local Installation
