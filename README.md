@@ -16,88 +16,48 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 208 "Implement Trie (Prefix Tree)":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 209 "Minimum Size Subarray Sum":
 
 ## Example
 
 Solution
 
 ```python
-class Trie:
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        min_len = float("inf")
+        left, curr_sum = 0, 0
 
-    def __init__(self):
-        self.root = {}
+        for right in range(len(nums)):
+            curr_sum += nums[right]
+
+            while curr_sum >= target:
+                if right - left + 1 < min_len:
+                    min_len = right - left + 1
+                curr_sum -= nums[left]
+                left += 1
         
-    def insert(self, word: str) -> None:
-
-        curr = self.root
-
-        for letter in word:
-            if letter not in curr:
-                curr[letter] = {}
-            curr = curr[letter]
-
-        curr['*'] = ''
-
-    def search(self, word: str) -> bool:
-
-        curr = self.root
-        for letter in word:
-            if letter not in curr:
-                return False
-            curr = curr[letter]
-
-        return '*' in curr
-        
-    def startsWith(self, prefix: str) -> bool:
-
-        curr = self.root
-        for letter in prefix:
-            if letter not in curr:
-                return False
-            curr = curr[letter]
-
-        return True
+        return min_len if min_len != float("inf") else 0
 ```
 
 Solution with Stencil
 
 ```python
-c T:
+c S:
+    d m(s, t: i, n: L[i]) -> i:
+        m_l = f("i")
+        l, c_s = 0, 0
 
-    d __i__(s):
-        s.r = {}
+        f r i r(l(n)):
+            c_s += n[r]
+
+            w c_s >= t:
+                i r - l + 1 < m_l:
+                    m_l = r - l + 1
+                c_s -= n[l]
+                l += 1
         
-    d i(s, w: s) -> N:
-
-        c = s.r
-
-        f l i w:
-            i l n i c:
-                c[l] = {}
-            c = c[l]
-
-        c['*'] = ''
-
-    d s(s, w: s) -> b:
-
-        c = s.r
-        f l i w:
-            i l n i c:
-                r F
-            c = c[l]
-
-        r '*' i c
-        
-    d s(s, p: s) -> b:
-
-        c = s.r
-        f l i p:
-            i l n i c:
-                r F
-            c = c[l]
-
-        r T
+        r m_l i m_l != f("i") e 0
 ```
 
 ## Local Installation
