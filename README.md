@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 209 "Minimum Size Subarray Sum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 210 "Course Schedule II":
 
 ## Example
 
@@ -24,40 +24,66 @@ Solution
 
 ```python
 class Solution:
-    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        min_len = float("inf")
-        left, curr_sum = 0, 0
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        prereq = {c: [] for c in range(numCourses)}
 
-        for right in range(len(nums)):
-            curr_sum += nums[right]
+        for crs, pre in prerequisites:
+            prereq[crs].append(pre)
 
-            while curr_sum >= target:
-                if right - left + 1 < min_len:
-                    min_len = right - left + 1
-                curr_sum -= nums[left]
-                left += 1
+        output = []
+        visit, cycle = set(), set()
         
-        return min_len if min_len != float("inf") else 0
+        def dfs(crs):
+            if crs in cycle:
+                return False
+            if crs in visit:
+                return True
+            cycle.add(crs)
+            for pre in prereq[crs]:
+                if dfs(pre) == False:
+                    return False
+            cycle.remove(crs)
+            visit.add(crs)
+            output.append(crs)
+            return True
+        
+        for c in range(numCourses):
+            if dfs(c) == False:
+                return []
+        return output
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, t: i, n: L[i]) -> i:
-        m_l = f("i")
-        l, c_s = 0, 0
+    d f(s, n: i, p: L[L[i]]) -> L[i]:
+        p = {c: [] f c i r(n)}
 
-        f r i r(l(n)):
-            c_s += n[r]
+        f c, p i p:
+            p[c].a(p)
 
-            w c_s >= t:
-                i r - l + 1 < m_l:
-                    m_l = r - l + 1
-                c_s -= n[l]
-                l += 1
+        o = []
+        v, c = s(), s()
         
-        r m_l i m_l != f("i") e 0
+        d d(c):
+            i c i c:
+                r F
+            i c i v:
+                r T
+            c.a(c)
+            f p i p[c]:
+                i d(p) == F:
+                    r F
+            c.r(c)
+            v.a(c)
+            o.a(c)
+            r T
+        
+        f c i r(n):
+            i d(c) == F:
+                r []
+        r o
 ```
 
 ## Local Installation
