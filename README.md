@@ -16,144 +16,44 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 212 "Word Search II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 213 "House Robber II":
 
 ## Example
 
 Solution
 
 ```python
-class TrieNode:
-    def __init__(self):
-        self.children = {}
-        self.isWord = False
-        self.refs = 0
-
-    def addWord(self, word):
-        cur = self
-        cur.refs += 1
-        for c in word:
-            if c not in cur.children:
-                cur.children[c] = TrieNode()
-            cur = cur.children[c]
-            cur.refs += 1
-        cur.isWord = True
-
-    def removeWord(self, word):
-        cur = self
-        cur.refs -= 1
-        for c in word:
-            if c in cur.children:
-                cur = cur.children[c]
-                cur.refs -= 1
-
-
 class Solution:
-    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        root = TrieNode()
-        for w in words:
-            root.addWord(w)
+    def rob(self, nums: List[int]) -> int:
 
-        ROWS, COLS = len(board), len(board[0])
-        res, visit = set(), set()
+        def get_max(nums):
+            prev_rob = max_rob = 0
 
-        def dfs(r, c, node, word):
-            if (
-                r not in range(ROWS) 
-                or c not in range(COLS)
-                or board[r][c] not in node.children
-                or node.children[board[r][c]].refs < 1
-                or (r, c) in visit
-            ):
-                return
-
-            visit.add((r, c))
-            node = node.children[board[r][c]]
-            word += board[r][c]
-            if node.isWord:
-                node.isWord = False
-                res.add(word)
-                root.removeWord(word)
-
-            dfs(r + 1, c, node, word)
-            dfs(r - 1, c, node, word)
-            dfs(r, c + 1, node, word)
-            dfs(r, c - 1, node, word)
-            visit.remove((r, c))
-
-        for r in range(ROWS):
-            for c in range(COLS):
-                dfs(r, c, root, "")
-
-        return list(res)
+            for cur_val in nums:
+                temp = max(max_rob, prev_rob + cur_val)
+                prev_rob = max_rob
+                max_rob = temp    
+            return max_rob
+        
+        return max(get_max(nums[:-1]), get_max(nums[1:]), nums[0])
 ```
 
 Solution with Stencil
 
 ```python
-c T:
-    d __i__(s):
-        s.c = {}
-        s.i = F
-        s.r = 0
-
-    d a(s, w):
-        c = s
-        c.r += 1
-        f c i w:
-            i c n i c.c:
-                c.c[c] = T()
-            c = c.c[c]
-            c.r += 1
-        c.i = T
-
-    d r(s, w):
-        c = s
-        c.r -= 1
-        f c i w:
-            i c i c.c:
-                c = c.c[c]
-                c.r -= 1
-
-
 c S:
-    d f(s, b: L[L[s]], w: L[s]) -> L[s]:
-        r = T()
-        f w i w:
-            r.a(w)
+    d r(s, n: L[i]) -> i:
 
-        R, C = l(b), l(b[0])
-        r, v = s(), s()
+        d g_m(n):
+            p_r = m_r = 0
 
-        d d(r, c, n, w):
-            i (
-                r n i r(R) 
-                o c n i r(C)
-                o b[r][c] n i n.c
-                o n.c[b[r][c]].r < 1
-                o (r, c) i v
-            ):
-                r
-
-            v.a((r, c))
-            n = n.c[b[r][c]]
-            w += b[r][c]
-            i n.i:
-                n.i = F
-                r.a(w)
-                r.r(w)
-
-            d(r + 1, c, n, w)
-            d(r - 1, c, n, w)
-            d(r, c + 1, n, w)
-            d(r, c - 1, n, w)
-            v.r((r, c))
-
-        f r i r(R):
-            f c i r(C):
-                d(r, c, r, "")
-
-        r l(r)
+            f c_v i n:
+                t = m(m_r, p_r + c_v)
+                p_r = m_r
+                m_r = t    
+            r m_r
+        
+        r m(g_m(n[:-1]), g_m(n[1:]), n[0])
 ```
 
 ## Local Installation
