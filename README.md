@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 214 "Shortest Palindrome":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 215 "Kth Largest Element in an Array":
 
 ## Example
 
@@ -24,22 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def shortestPalindrome(self, s: str) -> str:
-        r = s[::-1]
-        for i in range(len(s) + 1):
-            if s.startswith(r[i:]):
-                return r[:i] + s
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = nums[:k]
+
+        heapq.heapify(heap)
+        for num in nums[k:]:
+            if num > heap[0]:
+                heapq.heappop(heap)
+                heapq.heappush(heap, num)
+        return heap[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, s: s) -> s:
-        r = s[::-1]
-        f i i r(l(s) + 1):
-            i s.s(r[i:]):
-                r r[:i] + s
+    d f(s, n: L[i], k: i) -> i:
+        h = n[:k]
+
+        h.h(h)
+        f n i n[k:]:
+            i n > h[0]:
+                h.h(h)
+                h.h(h, n)
+        r h[0]
 ```
 
 ## Local Installation
