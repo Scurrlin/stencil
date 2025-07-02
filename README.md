@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 215 "Kth Largest Element in an Array":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 216 "Combination Sum III":
 
 ## Example
 
@@ -24,30 +24,40 @@ Solution
 
 ```python
 class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
-        heap = nums[:k]
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        ans = []
 
-        heapq.heapify(heap)
-        for num in nums[k:]:
-            if num > heap[0]:
-                heapq.heappop(heap)
-                heapq.heappush(heap, num)
-        return heap[0]
+        def backtrack(curr, n, i):
+            if k == len(curr):
+                if n == 0:
+                    ans.append(curr.copy())
+                return
+            for d in range(i, 10):
+                curr.append(d)
+                backtrack(curr, n - d, d + 1)
+                curr.pop()
+        backtrack([], n, 1)
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, n: L[i], k: i) -> i:
-        h = n[:k]
+    d c(s, k: i, n: i) -> L[L[i]]:
+        a = []
 
-        h.h(h)
-        f n i n[k:]:
-            i n > h[0]:
-                h.h(h)
-                h.h(h, n)
-        r h[0]
+        d b(c, n, i):
+            i k == l(c):
+                i n == 0:
+                    a.a(c.c())
+                r
+            f d i r(i, 1):
+                c.a(d)
+                b(c, n - d, d + 1)
+                c.p()
+        b([], n, 1)
+        r a
 ```
 
 ## Local Installation
