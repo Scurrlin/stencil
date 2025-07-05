@@ -16,64 +16,36 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 218 "The Skyline Problem":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 219 "Contains Duplicate II":
 
 ## Example
 
 Solution
 
 ```python
-from sortedcontainers import SortedList
-
 class Solution:
-    def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
-        if len(buildings) == 0: 
-            return []
-        
-        buildings.sort(key = lambda v: v[2])
-        pos, height = [0], [0]
-        for left, right, h in buildings: 
-            i = bisect_left(pos, left)
-            j = bisect_right(pos, right)
-            height[i:j] = [h, height[j - 1]]
-            pos[i:j] = [left, right]
-        print(height, pos)
-        res = []
-        prev = 0
-        for v, h in zip(pos, height): 
-            if h != prev:
-                res.append([v, h]) 
-                prev = h
-                
-        return res
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        seen = {}
+        for i, j in enumerate(nums):
+            if j in seen and i - seen[j] <= k:
+                return True
+            else:
+                seen[j] = i
+        return False
 ```
 
 Solution with Stencil
 
 ```python
-f s i S
-
 c S:
-    d g(s, b: L[L[i]]) -> L[L[i]]:
-        i l(b) == 0: 
-            r []
-        
-        b.s(k = l v: v[2])
-        p, h = [0], [0]
-        f l, r, h i b: 
-            i = b_l(p, l)
-            j = b_r(p, r)
-            h[i:j] = [h, h[j - 1]]
-            p[i:j] = [l, r]
-        p(h, p)
-        r = []
-        p = 0
-        f v, h i z(p, h): 
-            i h != p:
-                r.a([v, h]) 
-                p = h
-                
-        r r
+    d c(s, n: L[i], k: i) -> b:
+        s = {}
+        f i, j i e(n):
+            i j i s a i - s[j] <= k:
+                r T
+            e:
+                s[j] = i
+        r F
 ```
 
 ## Local Installation
