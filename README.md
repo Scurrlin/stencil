@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 216 "Combination Sum III":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 217 "Contains Duplicate":
 
 ## Example
 
@@ -24,40 +24,26 @@ Solution
 
 ```python
 class Solution:
-    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        ans = []
-
-        def backtrack(curr, n, i):
-            if k == len(curr):
-                if n == 0:
-                    ans.append(curr.copy())
-                return
-            for d in range(i, 10):
-                curr.append(d)
-                backtrack(curr, n - d, d + 1)
-                curr.pop()
-        backtrack([], n, 1)
-        return ans
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        nums.sort()
+        n = len(nums)
+        for i in range(1, n):
+            if nums[i] == nums[i - 1]:
+                return True
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, k: i, n: i) -> L[L[i]]:
-        a = []
-
-        d b(c, n, i):
-            i k == l(c):
-                i n == 0:
-                    a.a(c.c())
-                r
-            f d i r(i, 1):
-                c.a(d)
-                b(c, n - d, d + 1)
-                c.p()
-        b([], n, 1)
-        r a
+    d c(s, n: L[i]) -> b:
+        n.s()
+        n = l(n)
+        f i i r(1, n):
+            i n[i] == n[i - 1]:
+                r T
+        r F
 ```
 
 ## Local Installation
