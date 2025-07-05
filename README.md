@@ -16,34 +16,64 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 217 "Contains Duplicate":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 218 "The Skyline Problem":
 
 ## Example
 
 Solution
 
 ```python
+from sortedcontainers import SortedList
+
 class Solution:
-    def containsDuplicate(self, nums: List[int]) -> bool:
-        nums.sort()
-        n = len(nums)
-        for i in range(1, n):
-            if nums[i] == nums[i - 1]:
-                return True
-        return False
+    def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
+        if len(buildings) == 0: 
+            return []
+        
+        buildings.sort(key = lambda v: v[2])
+        pos, height = [0], [0]
+        for left, right, h in buildings: 
+            i = bisect_left(pos, left)
+            j = bisect_right(pos, right)
+            height[i:j] = [h, height[j - 1]]
+            pos[i:j] = [left, right]
+        print(height, pos)
+        res = []
+        prev = 0
+        for v, h in zip(pos, height): 
+            if h != prev:
+                res.append([v, h]) 
+                prev = h
+                
+        return res
 ```
 
 Solution with Stencil
 
 ```python
+f s i S
+
 c S:
-    d c(s, n: L[i]) -> b:
-        n.s()
-        n = l(n)
-        f i i r(1, n):
-            i n[i] == n[i - 1]:
-                r T
-        r F
+    d g(s, b: L[L[i]]) -> L[L[i]]:
+        i l(b) == 0: 
+            r []
+        
+        b.s(k = l v: v[2])
+        p, h = [0], [0]
+        f l, r, h i b: 
+            i = b_l(p, l)
+            j = b_r(p, r)
+            h[i:j] = [h, h[j - 1]]
+            p[i:j] = [l, r]
+        p(h, p)
+        r = []
+        p = 0
+        f v, h i z(p, h): 
+            i h != p:
+                r.a([v, h]) 
+                p = h
+                
+        r r
 ```
 
 ## Local Installation
