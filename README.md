@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 219 "Contains Duplicate II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 220 "Contains Duplicate III":
 
 ## Example
 
@@ -24,13 +24,19 @@ Solution
 
 ```python
 class Solution:
-    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        seen = {}
-        for i, j in enumerate(nums):
-            if j in seen and i - seen[j] <= k:
+    def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:
+        bucket = {}
+        for i, n in enumerate(nums):
+            bucket_i = n // (t + 1)
+            if bucket_i in bucket and abs(n - bucket[bucket_i]) <= t:
                 return True
-            else:
-                seen[j] = i
+            if bucket_i + 1 in bucket and abs(n - bucket[bucket_i + 1]) <= t:
+                return True
+            if bucket_i - 1 in bucket and abs(n - bucket[bucket_i - 1]) <= t:
+                return True
+            bucket[bucket_i] = n
+            if i >= k:
+                del bucket[nums[i - k] // (t + 1)]
         return False
 ```
 
@@ -38,13 +44,19 @@ Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: L[i], k: i) -> b:
-        s = {}
-        f i, j i e(n):
-            i j i s a i - s[j] <= k:
+    d c(s, n: L[i], k: i, t: i) -> b:
+        b = {}
+        f i, n i e(n):
+            b_i = n // (t + 1)
+            i b_i i b a a(n - b[b_i]) <= t:
                 r T
-            e:
-                s[j] = i
+            i b_i + 1 i b a a(n - b[b_i + 1]) <= t:
+                r T
+            i b_i - 1 i b a a(n - b[b_i - 1]) <= t:
+                r T
+            b[b_i] = n
+            i i >= k:
+                d b[n[i - k] // (t + 1)]
         r F
 ```
 
