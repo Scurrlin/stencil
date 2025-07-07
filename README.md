@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 220 "Contains Duplicate III":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 221 "Maximal Square":
 
 ## Example
 
@@ -24,40 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def containsNearbyAlmostDuplicate(self, nums: List[int], k: int, t: int) -> bool:
-        bucket = {}
-        for i, n in enumerate(nums):
-            bucket_i = n // (t + 1)
-            if bucket_i in bucket and abs(n - bucket[bucket_i]) <= t:
-                return True
-            if bucket_i + 1 in bucket and abs(n - bucket[bucket_i + 1]) <= t:
-                return True
-            if bucket_i - 1 in bucket and abs(n - bucket[bucket_i - 1]) <= t:
-                return True
-            bucket[bucket_i] = n
-            if i >= k:
-                del bucket[nums[i - k] // (t + 1)]
-        return False
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        dp = [[0] * n for _ in range(m)]
+        max_size = 0
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == '1':
+                    if i == 0 or j == 0:
+                        dp[i][j] = 1
+                    else:
+                        dp[i][j] = min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+                    max_size = max(max_size, dp[i][j])
+        return max_size * max_size
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: L[i], k: i, t: i) -> b:
-        b = {}
-        f i, n i e(n):
-            b_i = n // (t + 1)
-            i b_i i b a a(n - b[b_i]) <= t:
-                r T
-            i b_i + 1 i b a a(n - b[b_i + 1]) <= t:
-                r T
-            i b_i - 1 i b a a(n - b[b_i - 1]) <= t:
-                r T
-            b[b_i] = n
-            i i >= k:
-                d b[n[i - k] // (t + 1)]
-        r F
+    d m(s, m: L[L[s]]) -> i:
+        m, n = l(m), l(m[0])
+        d = [[0] * n f _ i r(m)]
+        m_s = 0
+        f i i r(m):
+            f j i r(n):
+                i m[i][j] == '1':
+                    i i == 0 o j == 0:
+                        d[i][j] = 1
+                    e:
+                        d[i][j] = m(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1]) + 1
+                    m_s = m(m_s, d[i][j])
+        r m_s * m_s
 ```
 
 ## Local Installation
