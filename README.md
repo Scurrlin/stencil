@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 222 "Count Complete Tree Nodes":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 223 "Rectangle Area":
 
 ## Example
 
@@ -24,42 +24,28 @@ Solution
 
 ```python
 class Solution:
-    def countNodes(self, root: Optional[TreeNode]) -> int:
-        count = 0
-
-        def dfs(node):
-            nonlocal count
-            count +=1
-            if node.left:
-                dfs(node.left)
-            if node.right:
-                dfs(node.right)
-            return
-        if not root:
-            return 0
-        dfs(root)
-        return count
+    def computeArea(self, ax1: int, ay1: int, ax2: int, ay2: int, bx1: int, by1: int, bx2: int, by2: int) -> int:
+        area1 = (ax2 - ax1) * (ay2 - ay1)
+        area2 = (bx2 - bx1) * (by2 - by1)
+        xOverlap = max(min(ax2, bx2) - max(ax1, bx1), 0)
+        yOverlap = max(min(ay2, by2) - max(ay1, by1), 0)
+        commonArea = xOverlap * yOverlap                 
+        totalArea = area1 + area2 - commonArea
+        return totalArea
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, r: O[T]) -> i:
-        c = 0
-
-        d d(n):
-            n c
-            c +=1
-            i n.l:
-                d(n.l)
-            i n.r:
-                d(n.r)
-            r
-        i n r:
-            r 0
-        d(r)
-        r c
+    d c(s, a: i, a: i, a: i, a: i, b: i, b: i, b: i, b: i) -> i:
+        a = (a - a) * (a - a)
+        a = (b - b) * (b - b)
+        x = m(m(a, b) - m(a, b), 0)
+        y = m(m(a, b) - m(a, b), 0)
+        c = x * y                 
+        t = a + a - c
+        r t
 ```
 
 ## Local Installation
