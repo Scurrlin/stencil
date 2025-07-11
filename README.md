@@ -16,98 +16,54 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 224 "Basic Calculator":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 225 "Implement Stack using Queues":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def calculate(self, s: str) -> int:
-        stack = []
-        result = 0
+class MyStack:
 
-        # current sign
-        sign = 1
-        i = 0
-        n = len(s)
-    
-        while i < n:
-            char = s[i]
-        
-            if char.isspace():
-                i += 1
-                continue
-        
-            if char.isdigit():
-                num = 0
-                while i < n and s[i].isdigit():
-                    num = num * 10 + int(s[i])
-                    i += 1
-                result += sign * num
-                continue
-        
-            if char == '+':
-                sign = 1
-            elif char == '-':
-                sign = -1
-            elif char == '(':
-                stack.append((result, sign))
-                result = 0
-                sign = 1
-            elif char == ')':
-                prev_result, prev_sign = stack.pop()
-                result = prev_result + prev_sign * result
-        
-            i += 1
+    def __init__(self):
+        self.q = deque()
 
-        return result
+    def push(self, x: int) -> None:
+        self.q.append(x)
+        for _ in range(len(self.q) - 1):
+            self.q.append(self.q.popleft())
+
+    def pop(self) -> int:
+        return self.q.popleft()
+        
+    def top(self) -> int:
+        return self.q[0]
+
+    def empty(self) -> bool:
+        return len(self.q) == 0
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, s: s) -> i:
-        s = []
-        r = 0
+c M:
 
-        # c s
-        s = 1
-        i = 0
-        n = l(s)
-    
-        w i < n:
-            c = s[i]
-        
-            i c.i():
-                i += 1
-                c
-        
-            i c.i():
-                n = 0
-                w i < n a s[i].i():
-                    n = n * 1 + i(s[i])
-                    i += 1
-                r += s * n
-                c
-        
-            i c == '+':
-                s = 1
-            e c == '-':
-                s = -1
-            e c == '(':
-                s.a((r, s))
-                r = 0
-                s = 1
-            e c == ')':
-                p_r, p_s = s.p()
-                r = p_r + p_s * r
-        
-            i += 1
+    d __i__(s):
+        s.q = d()
 
-        r r
+    d p(s, x: i) -> N:
+        s.q.a(x)
+        f _ i r(l(s.q) - 1):
+            s.q.a(s.q.p())
+
+    d p(s) -> i:
+        r s.q.p()
+        
+    d t(s) -> i:
+        r s.q[0]
+
+    d e(s) -> b:
+        r l(s.q) == 0
 ```
 
 ## Local Installation
