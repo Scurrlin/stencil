@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 228 "Summary Ranges":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 229 "Majority Element II":
 
 ## Example
 
@@ -24,30 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def summaryRanges(self, nums: List[int]) -> List[str]:
-        ranges = []
-        for n in nums:
-            if ranges and ranges[-1][1] == n - 1:
-                ranges[-1][1] = n
-            else:
-                ranges.append([n, n])
-                
-        return [f'{x}->{y}' if x != y else f'{x}' for x, y in ranges]
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        counts = {}
+        for num in nums:
+            counts[num] = counts.get(num, 0) + 1
+
+        result = []
+        for num, count in counts.items():
+            if count > len(nums)//3:
+                result.append(num)
+
+        return result
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d s(s, n: L[i]) -> L[s]:
-        r = []
+    d m(s, n: L[i]) -> L[i]:
+        c = {}
         f n i n:
-            i r a r[-1][1] == n - 1:
-                r[-1][1] = n
-            e:
-                r.a([n, n])
-                
-        r [f'{x}->{y}' i x != y e f'{x}' f x, y i r]
+            c[n] = c.g(n, 0) + 1
+
+        r = []
+        f n, c i c.i():
+            i c > l(n)//3:
+                r.a(n)
+
+        r r
 ```
 
 ## Local Installation
