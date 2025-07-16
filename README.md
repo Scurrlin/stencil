@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 229 "Majority Element II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 230 "Kth Smallest Element in a BST":
 
 ## Example
 
@@ -24,34 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def majorityElement(self, nums: List[int]) -> List[int]:
-        counts = {}
-        for num in nums:
-            counts[num] = counts.get(num, 0) + 1
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        stack = []
+        curr = root
 
-        result = []
-        for num, count in counts.items():
-            if count > len(nums)//3:
-                result.append(num)
-
-        return result
+        while stack or curr:
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            curr = stack.pop()
+            k -= 1
+            if k == 0:
+                return curr.val
+            curr = curr.right
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, n: L[i]) -> L[i]:
-        c = {}
-        f n i n:
-            c[n] = c.g(n, 0) + 1
+    d k(s, r: O[T], k: i) -> i:
+        s = []
+        c = r
 
-        r = []
-        f n, c i c.i():
-            i c > l(n)//3:
-                r.a(n)
-
-        r r
+        w s o c:
+            w c:
+                s.a(c)
+                c = c.l
+            c = s.p()
+            k -= 1
+            i k == 0:
+                r c.v
+            c = c.r
 ```
 
 ## Local Installation
