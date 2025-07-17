@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 230 "Kth Smallest Element in a BST":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 231 "Power of Two":
 
 ## Example
 
@@ -24,38 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        stack = []
-        curr = root
-
-        while stack or curr:
-            while curr:
-                stack.append(curr)
-                curr = curr.left
-            curr = stack.pop()
-            k -= 1
-            if k == 0:
-                return curr.val
-            curr = curr.right
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        if n == 1:
+            return True
+        while n % 2 == 0:
+            n /= 2
+            
+        return n == 1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d k(s, r: O[T], k: i) -> i:
-        s = []
-        c = r
-
-        w s o c:
-            w c:
-                s.a(c)
-                c = c.l
-            c = s.p()
-            k -= 1
-            i k == 0:
-                r c.v
-            c = c.r
+    d i(s, n: i) -> b:
+        i n <= 0:
+            r F
+        i n == 1:
+            r T
+        w n % 2 == 0:
+            n /= 2
+            
+        r n == 1
 ```
 
 ## Local Installation
