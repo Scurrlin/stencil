@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 233 "Number of Digit One":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 234 "Palindrome Linked List":
 
 ## Example
 
@@ -24,40 +24,40 @@ Solution
 
 ```python
 class Solution:
-  def countDigitOne(self, n: int) -> int:
-    ans, pow10 = 0, 1
-    
-    while pow10 <= n:
-        divisor = pow10 * 10
-        quotient = n // divisor
-        remainder = n % divisor
-        if quotient > 0:
-            ans += quotient * pow10
-        if remainder >= pow10:
-            ans += min(remainder - pow10 + 1, pow10)
-        pow10 *= 10
-
-    return ans
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+        
+        left, right = 0, len(arr) - 1
+        while left < right:
+            if arr[left] != arr[right]:
+                return False
+            left += 1
+            right -= 1
+        
+        return True
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-  d c(s, n: i) -> i:
-    a, p = 0, 1
-    
-    w p <= n:
-        d = p * 1
-        q = n // d
-        r = n % d
-        i q > 0:
-            a += q * p
-        i r >= p:
-            a += m(r - p + 1, p)
-        p *= 1
-
-    r a
+    d i(s, h: O[L]) -> b:
+        a = []
+        w h:
+            a.a(h.v)
+            h = h.n
+        
+        l, r = 0, l(a) - 1
+        w l < r:
+            i a[l] != a[r]:
+                r F
+            l += 1
+            r -= 1
+        
+        r T
 ```
 
 ## Local Installation
