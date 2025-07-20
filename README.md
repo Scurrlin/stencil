@@ -16,60 +16,48 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 232 "Implement Queue using Stacks":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 233 "Number of Digit One":
 
 ## Example
 
 Solution
 
 ```python
-class MyQueue:
+class Solution:
+  def countDigitOne(self, n: int) -> int:
+    ans, pow10 = 0, 1
+    
+    while pow10 <= n:
+        divisor = pow10 * 10
+        quotient = n // divisor
+        remainder = n % divisor
+        if quotient > 0:
+            ans += quotient * pow10
+        if remainder >= pow10:
+            ans += min(remainder - pow10 + 1, pow10)
+        pow10 *= 10
 
-    def __init__(self):
-        self.input = []
-        self.output = []
-
-    def push(self, x: int) -> None:
-        self.input.append(x)
-
-    def pop(self) -> int:
-        self.peek()
-        return self.output.pop()
-
-    def peek(self) -> int:
-        if not self.output:
-            while self.input:
-                self.output.append(self.input.pop())
-        return self.output[-1]
-
-    def empty(self) -> bool:
-        return not self.input and not self.output
+    return ans
 ```
 
 Solution with Stencil
 
 ```python
-c M:
+c S:
+  d c(s, n: i) -> i:
+    a, p = 0, 1
+    
+    w p <= n:
+        d = p * 1
+        q = n // d
+        r = n % d
+        i q > 0:
+            a += q * p
+        i r >= p:
+            a += m(r - p + 1, p)
+        p *= 1
 
-    d __i__(s):
-        s.i = []
-        s.o = []
-
-    d p(s, x: i) -> N:
-        s.i.a(x)
-
-    d p(s) -> i:
-        s.p()
-        r s.o.p()
-
-    d p(s) -> i:
-        i n s.o:
-            w s.i:
-                s.o.a(s.i.p())
-        r s.o[-1]
-
-    d e(s) -> b:
-        r n s.i a n s.o
+    r a
 ```
 
 ## Local Installation
