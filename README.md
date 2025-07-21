@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 234 "Palindrome Linked List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 235 "Lowest Common Ancestor of a Binary Search Tree":
 
 ## Example
 
@@ -24,40 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        arr = []
-        while head:
-            arr.append(head.val)
-            head = head.next
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         
-        left, right = 0, len(arr) - 1
-        while left < right:
-            if arr[left] != arr[right]:
-                return False
-            left += 1
-            right -= 1
-        
-        return True
+        while True:
+            if root.val < p.val and root.val < q.val:
+                root = root.right
+            elif root.val > p.val and root.val > q.val:
+                root = root.left
+            else:
+                return root
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, h: O[L]) -> b:
-        a = []
-        w h:
-            a.a(h.v)
-            h = h.n
+    d l(s, r: 'T', p: 'T', q: 'T') -> 'T':
         
-        l, r = 0, l(a) - 1
-        w l < r:
-            i a[l] != a[r]:
-                r F
-            l += 1
-            r -= 1
-        
-        r T
+        w T:
+            i r.v < p.v a r.v < q.v:
+                r = r.r
+            e r.v > p.v a r.v > q.v:
+                r = r.l
+            e:
+                r r
 ```
 
 ## Local Installation
