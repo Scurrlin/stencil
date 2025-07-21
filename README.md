@@ -24,8 +24,7 @@ Solution
 
 ```python
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':    
         while True:
             if root.val < p.val and root.val < q.val:
                 root = root.right
@@ -39,8 +38,7 @@ Solution with Stencil
 
 ```python
 c S:
-    d l(s, r: 'T', p: 'T', q: 'T') -> 'T':
-        
+    d l(s, r: 'T', p: 'T', q: 'T') -> 'T':    
         w T:
             i r.v < p.v a r.v < q.v:
                 r = r.r
