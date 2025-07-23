@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 237 "Delete Node in a Linked List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 238 "Product of Array Except Self":
 
 ## Example
 
@@ -24,18 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def deleteNode(self, node):
-        node.val = node.next.val
-        node.next = node.next.next
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        p = [1] * n
+        s = [1] * n
+
+        for i in range(1, n):
+            p[i] = p[i - 1] * nums[i - 1]
+
+        for i in range(n - 2, -1, -1):
+            s[i] = s[i + 1] * nums[i + 1]
+        
+        answer = [p[i] * s[i] for i in range(n)]
+        return answer
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d d(s, n):
-        n.v = n.n.v
-        n.n = n.n.n
+    d p(s, n: L[i]) -> L[i]:
+        n = l(n)
+        p = [1] * n
+        s = [1] * n
+
+        f i i r(1, n):
+            p[i] = p[i - 1] * n[i - 1]
+
+        f i i r(n - 2, -1, -1):
+            s[i] = s[i + 1] * n[i + 1]
+        
+        a = [p[i] * s[i] f i i r(n)]
+        r a
 ```
 
 ## Local Installation
