@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 235 "Lowest Common Ancestor of a Binary Search Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 236 "Lowest Common Ancestor of a Binary Tree":
 
 ## Example
 
@@ -24,28 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':    
-        while True:
-            if root.val < p.val and root.val < q.val:
-                root = root.right
-            elif root.val > p.val and root.val > q.val:
-                root = root.left
-            else:
-                return root
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        if root == p or root == q:
+            return root
+
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        if left and right:
+            return root
+
+        return left if left else right
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d l(s, r: 'T', p: 'T', q: 'T') -> 'T':    
-        w T:
-            i r.v < p.v a r.v < q.v:
-                r = r.r
-            e r.v > p.v a r.v > q.v:
-                r = r.l
-            e:
-                r r
+    d l(s, r: T, p: T, q: T) -> T:
+        i n r:
+            r N
+        i r == p o r == q:
+            r r
+
+        l = s.l(r.l, p, q)
+        r = s.l(r.r, p, q)
+
+        i l a r:
+            r r
+
+        r l i l e r
 ```
 
 ## Local Installation
