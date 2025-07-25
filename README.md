@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 239 "Sliding Window Maximum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 240 "Search a 2D Matrix II":
 
 ## Example
 
@@ -24,44 +24,38 @@ Solution
 
 ```python
 class Solution:
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        output = []
-        q = collections.deque()
-        l = r = 0
-
-        while r < len(nums):
-            while q and nums[q[-1]] < nums[r]:
-                q.pop()
-            q.append(r)
-            if l > q[0]:
-                q.popleft()
-            if (r + 1) >= k:
-                output.append(nums[q[0]])
-                l += 1
-            r += 1
-        return output
+    def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
+        n = len(matrix)
+        m = len(matrix[0])
+        r = 0
+        c = m - 1
+        while r < n and c > -1:
+            if matrix[r][c] == target:
+                return True
+            if matrix[r][c] < target:
+                r += 1
+            else:
+                c -= 1
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, n: L[i], k: i) -> L[i]:
-        o = []
-        q = c.d()
-        l = r = 0
-
-        w r < l(n):
-            w q a n[q[-1]] < n[r]:
-                q.p()
-            q.a(r)
-            i l > q[0]:
-                q.p()
-            i (r + 1) >= k:
-                o.a(n[q[0]])
-                l += 1
-            r += 1
-        r o
+    d s(s, m: l[l[i]], t: i) -> b:
+        n = l(m)
+        m = l(m[0])
+        r = 0
+        c = m - 1
+        w r < n a c > -1:
+            i m[r][c] == t:
+                r T
+            i m[r][c] < t:
+                r += 1
+            e:
+                c -= 1
+        r F
 ```
 
 ## Local Installation
