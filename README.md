@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 242 "Valid Anagram":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 257 "Binary Tree Paths":
 
 ## Example
 
@@ -24,22 +24,40 @@ Solution
 
 ```python
 class Solution:
-    def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        
-        return sorted(s) == sorted(t)
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        def dfs(node, path, result):
+            if not node:
+                return
+            path += str(node.val)
+            if not node.left and not node.right:
+                result.append(path)
+            else:
+                dfs(node.left, path + '->', result)
+                dfs(node.right, path + '->', result)
+
+        result = []
+        dfs(root, '', result)
+        return result
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, s: s, t: s) -> b:
-        i l(s) != l(t):
-            r F
-        
-        r s(s) == s(t)
+    d b(s, r: O[T]) -> L[s]:
+        d d(n, p, r):
+            i n n:
+                r
+            p += s(n.v)
+            i n n.l a n n.r:
+                r.a(p)
+            e:
+                d(n.l, p + '->', r)
+                d(n.r, p + '->', r)
+
+        r = []
+        d(r, '', r)
+        r r
 ```
 
 ## Local Installation
