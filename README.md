@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 257 "Binary Tree Paths":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 258 "Add Digits":
 
 ## Example
 
@@ -24,40 +24,28 @@ Solution
 
 ```python
 class Solution:
-    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        def dfs(node, path, result):
-            if not node:
-                return
-            path += str(node.val)
-            if not node.left and not node.right:
-                result.append(path)
-            else:
-                dfs(node.left, path + '->', result)
-                dfs(node.right, path + '->', result)
+    def addDigits(self, num: int) -> int:
+        if num <= 9:
+            return num
+        
+        num_array = list(map(int, str(num)))
+        digit_sum = sum(num_array)
 
-        result = []
-        dfs(root, '', result)
-        return result
+        return self.addDigits(digit_sum)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d b(s, r: O[T]) -> L[s]:
-        d d(n, p, r):
-            i n n:
-                r
-            p += s(n.v)
-            i n n.l a n n.r:
-                r.a(p)
-            e:
-                d(n.l, p + '->', r)
-                d(n.r, p + '->', r)
+    d a(s, n: i) -> i:
+        i n <= 9:
+            r n
+        
+        n_a = l(m(i, s(n)))
+        d_s = s(n_a)
 
-        r = []
-        d(r, '', r)
-        r r
+        r s.a(d_s)
 ```
 
 ## Local Installation
