@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 258 "Add Digits":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 260 "Single Number III":
 
 ## Example
 
@@ -24,28 +24,42 @@ Solution
 
 ```python
 class Solution:
-    def addDigits(self, num: int) -> int:
-        if num <= 9:
-            return num
-        
-        num_array = list(map(int, str(num)))
-        digit_sum = sum(num_array)
-
-        return self.addDigits(digit_sum)
+    def singleNumber(self, nums: list[int]) -> list[int]:
+        xor = 0
+        for num in nums:
+            xor ^= num
+    
+        set_bit = xor & -xor
+    
+        a, b = 0, 0
+        for num in nums:
+            if num & set_bit:
+                a ^= num
+            else:
+                b ^= num
+    
+        return [a, b]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d a(s, n: i) -> i:
-        i n <= 9:
-            r n
-        
-        n_a = l(m(i, s(n)))
-        d_s = s(n_a)
-
-        r s.a(d_s)
+    d s(s, n: l[i]) -> l[i]:
+        x = 0
+        f n i n:
+            x ^= n
+    
+        s_b = x & -x
+    
+        a, b = 0, 0
+        f n i n:
+            i n & s_b:
+                a ^= n
+            e:
+                b ^= n
+    
+        r [a, b]
 ```
 
 ## Local Installation
