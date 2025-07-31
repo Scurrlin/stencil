@@ -16,50 +16,40 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 260 "Single Number III":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 262 "Trips and Users":
 
 ## Example
 
 Solution
 
-```python
-class Solution:
-    def singleNumber(self, nums: list[int]) -> list[int]:
-        xor = 0
-        for num in nums:
-            xor ^= num
-    
-        set_bit = xor & -xor
-    
-        a, b = 0, 0
-        for num in nums:
-            if num & set_bit:
-                a ^= num
-            else:
-                b ^= num
-    
-        return [a, b]
+```sql
+SELECT request_at AS Day,
+    ROUND(SUM(status != 'completed') / COUNT(*), 2)
+    AS 'Cancellation Rate'
+FROM Trips
+WHERE request_at BETWEEN '2013-10-01' AND '2013-10-03'
+    AND client_id IN (
+        SELECT users_id FROM Users WHERE banned = 'No' AND role = 'client')
+    AND driver_id IN (
+        SELECT users_id FROM Users WHERE banned = 'No' AND role = 'driver')
+GROUP BY request_at
+ORDER BY request_at;
 ```
 
 Solution with Stencil
 
-```python
-c S:
-    d s(s, n: l[i]) -> l[i]:
-        x = 0
-        f n i n:
-            x ^= n
-    
-        s_b = x & -x
-    
-        a, b = 0, 0
-        f n i n:
-            i n & s_b:
-                a ^= n
-            e:
-                b ^= n
-    
-        r [a, b]
+```sql
+S r_a A D,
+    R(S(s != 'c') / C(*), 2)
+    A 'C R'
+F T
+W r_a B '2-1-0' A '2-1-0'
+    A c_i I (
+        S u_i F U W b = 'N' A r = 'c')
+    A d_i I (
+        S u_i F U W b = 'N' A r = 'd')
+G B r_a
+O B r_a;
 ```
 
 ## Local Installation
@@ -73,7 +63,7 @@ npm install @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-npx stencil path/to/your/file.py --start <start_line> --end <end_line>
+npx stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
 
 ## Global Installation
@@ -87,5 +77,5 @@ npm install -g @scurrlin/stencil
 Once installed, you can run it with the following command:
 
 ```bash
-stencil path/to/your/file.py --start <start_line> --end <end_line>
+stencil path/to/your/file.sql --start <start_line> --end <end_line>
 ```
