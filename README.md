@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 275 "H-Index II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 278 "First Bad Version":
 
 ## Example
 
@@ -24,36 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def hIndex(self, citations: List[int]) -> int:
-        n = len(citations)
-        left, right = 0, n - 1
-        while left <= right:
-            mid = (left + right) // 2
-            if citations[mid] == n - mid:
-                return n - mid
-            elif citations[mid] < n - mid:
-                left = mid + 1
+    def firstBadVersion(self, n):
+        i, j = 1, n
+        while (i < j):
+            pivot = (i + j) // 2
+            if (isBadVersion(pivot)):
+                j = pivot
             else:
-                right = mid - 1
-        return n - left
+                i = pivot + 1
+        return i
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d h(s, c: L[i]) -> i:
-        n = l(c)
-        l, r = 0, n - 1
-        w l <= r:
-            m = (l + r) // 2
-            i c[m] == n - m:
-                r n - m
-            e c[m] < n - m:
-                l = m + 1
+    d f(s, n):
+        i, j = 1, n
+        w (i < j):
+            p = (i + j) // 2
+            i (i(p)):
+                j = p
             e:
-                r = m - 1
-        r n - l
+                i = p + 1
+        r i
 ```
 
 ## Local Installation
