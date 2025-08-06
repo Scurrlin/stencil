@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 278 "First Bad Version":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 279 "Perfect Squares":
 
 ## Example
 
@@ -24,30 +24,34 @@ Solution
 
 ```python
 class Solution:
-    def firstBadVersion(self, n):
-        i, j = 1, n
-        while (i < j):
-            pivot = (i + j) // 2
-            if (isBadVersion(pivot)):
-                j = pivot
-            else:
-                i = pivot + 1
-        return i
+    def numSquares(self, n: int) -> int:
+        while n % 4 == 0:
+            n //= 4
+        if n % 8 == 7:
+            return 4
+        if int(math.isqrt(n)) ** 2 == n:
+            return 1
+        for i in range(1, int(math.isqrt(n)) + 1):
+            if int(math.isqrt(n - i * i)) ** 2 == n - i * i:
+                return 2
+        return 3
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, n):
-        i, j = 1, n
-        w (i < j):
-            p = (i + j) // 2
-            i (i(p)):
-                j = p
-            e:
-                i = p + 1
-        r i
+    d n(s, n: i) -> i:
+        w n % 4 == 0:
+            n //= 4
+        i n % 8 == 7:
+            r 4
+        i i(m.i(n)) ** 2 == n:
+            r 1
+        f i i r(1, i(m.i(n)) + 1):
+            i i(m.i(n - i * i)) ** 2 == n - i * i:
+                r 2
+        r 3
 ```
 
 ## Local Installation
