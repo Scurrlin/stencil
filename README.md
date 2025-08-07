@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 279 "Perfect Squares":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 282 "Expression and Operators":
 
 ## Example
 
@@ -24,34 +24,58 @@ Solution
 
 ```python
 class Solution:
-    def numSquares(self, n: int) -> int:
-        while n % 4 == 0:
-            n //= 4
-        if n % 8 == 7:
-            return 4
-        if int(math.isqrt(n)) ** 2 == n:
-            return 1
-        for i in range(1, int(math.isqrt(n)) + 1):
-            if int(math.isqrt(n - i * i)) ** 2 == n - i * i:
-                return 2
-        return 3
+    def addOperators(self, s: str, target: int) -> List[str]:
+        res = []
+
+        def dfs(i, path, cur_num, prevNum):
+            if i == len(s):
+                if cur_num == target:
+                    res.append(path)
+                return
+            
+            for j in range(i, len(s)):
+                if j > i and s[i] == '0':
+                    break
+                num = int(s[i:j + 1])
+
+                if i == 0:
+                    dfs(j + 1, path + str(num), cur_num + num, num)
+                else:
+                    dfs(j + 1, path + "+" + str(num), cur_num + num, num)
+                    dfs(j + 1, path + "-" + str(num), cur_num - num, -num)
+                    dfs(j + 1, path + "*" + str(num), cur_num - prevNum + prevNum * num, prevNum * num)
+        
+        dfs(0, "", 0, 0)
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d n(s, n: i) -> i:
-        w n % 4 == 0:
-            n //= 4
-        i n % 8 == 7:
-            r 4
-        i i(m.i(n)) ** 2 == n:
-            r 1
-        f i i r(1, i(m.i(n)) + 1):
-            i i(m.i(n - i * i)) ** 2 == n - i * i:
-                r 2
-        r 3
+    d a(s, s: s, t: i) -> L[s]:
+        r = []
+
+        d d(i, p, c_n, p):
+            i i == l(s):
+                i c_n == t:
+                    r.a(p)
+                r
+            
+            f j i r(i, l(s)):
+                i j > i a s[i] == '0':
+                    b
+                n = i(s[i:j + 1])
+
+                i i == 0:
+                    d(j + 1, p + s(n), c_n + n, n)
+                e:
+                    d(j + 1, p + "+" + s(n), c_n + n, n)
+                    d(j + 1, p + "-" + s(n), c_n - n, -n)
+                    d(j + 1, p + "*" + s(n), c_n - p + p * n, p * n)
+        
+        d(0, "", 0, 0)
+        r r
 ```
 
 ## Local Installation
