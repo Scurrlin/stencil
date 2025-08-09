@@ -16,32 +16,48 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 283 "Move Zeroes":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 284 "Peeking Iterator":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def moveZeroes(self, nums: List[int]) -> None:
-        i = 0
-        for j in range(len(nums)):
-            if nums[j] != 0:
-                nums[i], nums[j] = nums[j], nums[i]
-                i += 1
+class PeekingIterator:
+    def __init__(self, iterator):
+        self.iterator = iterator
+        self.to_peek = self.iterator.next() if self.iterator.hasNext() else None
+
+    def peek(self):
+        return self.to_peek
+
+    def next(self):
+        temp = self.to_peek
+        self.to_peek = self.iterator.next() if self.iterator.hasNext() else None
+        return temp
+
+    def hasNext(self):
+        return self.to_peek is not None
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d m(s, n: L[i]) -> N:
-        i = 0
-        f j i r(l(n)):
-            i n[j] != 0:
-                n[i], n[j] = n[j], n[i]
-                i += 1
+c P:
+    d __i__(s, i):
+        s.i = i
+        s.t_p = s.i.n() i s.i.h() e N
+
+    d p(s):
+        r s.t_p
+
+    d n(s):
+        t = s.t_p
+        s.t_p = s.i.n() i s.i.h() e N
+        r t
+
+    d h(s):
+        r s.t_p i n N
 ```
 
 ## Local Installation
