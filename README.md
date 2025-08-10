@@ -16,48 +16,50 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 284 "Peeking Iterator":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 287 "Find the Duplicate Number":
 
 ## Example
 
 Solution
 
 ```python
-class PeekingIterator:
-    def __init__(self, iterator):
-        self.iterator = iterator
-        self.to_peek = self.iterator.next() if self.iterator.hasNext() else None
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        slow, fast = nums[0], nums[0]
+        
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
+                break
+        
+        slow2 = nums[0]
+        while slow != slow2:
+            slow = nums[slow]
+            slow2 = nums[slow2]
 
-    def peek(self):
-        return self.to_peek
-
-    def next(self):
-        temp = self.to_peek
-        self.to_peek = self.iterator.next() if self.iterator.hasNext() else None
-        return temp
-
-    def hasNext(self):
-        return self.to_peek is not None
+        return slow
 ```
 
 Solution with Stencil
 
 ```python
-c P:
-    d __i__(s, i):
-        s.i = i
-        s.t_p = s.i.n() i s.i.h() e N
+c S:
+    d f(s, n: L[i]) -> i:
+        s, f = n[0], n[0]
+        
+        w T:
+            s = n[s]
+            f = n[n[f]]
+            i s == f:
+                b
+        
+        s = n[0]
+        w s != s:
+            s = n[s]
+            s = n[s]
 
-    d p(s):
-        r s.t_p
-
-    d n(s):
-        t = s.t_p
-        s.t_p = s.i.n() i s.i.h() e N
-        r t
-
-    d h(s):
-        r s.t_p i n N
+        r s
 ```
 
 ## Local Installation
