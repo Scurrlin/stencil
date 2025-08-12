@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 289 "Game of Life":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 290 "Word Pattern":
 
 ## Example
 
@@ -24,46 +24,24 @@ Solution
 
 ```python
 class Solution:
-    def gameOfLife(self, board: List[List[int]]) -> None:
-        m, n = len(board), len(board[0])
-    
-        for i in range(m):
-            for j in range(n):
-                ones = 0
-                for x in range(max(0, i - 1), min(m, i + 2)):
-                    for y in range(max(0, j - 1), min(n, j + 2)):
-                        ones += board[x][y] & 1
-                if board[i][j] == 1 and (ones == 3 or ones == 4):
-                    board[i][j] |= 0b10
-                if board[i][j] == 0 and ones == 3:
-                    board[i][j] |= 0b10
-
-        for i in range(m):
-            for j in range(n):
-                board[i][j] >>= 1
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        s = s.split()
+        return (
+            len(set(pattern)) ==
+            len(set(s)) ==
+            len(set(zip_longest(pattern, s))))
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, b: L[L[i]]) -> N:
-        m, n = l(b), l(b[0])
-    
-        f i i r(m):
-            f j i r(n):
-                o = 0
-                f x i r(m(0, i - 1), m(m, i + 2)):
-                    f y i r(m(0, j - 1), m(n, j + 2)):
-                        o += b[x][y] & 1
-                i b[i][j] == 1 a (o == 3 o o == 4):
-                    b[i][j] |= 0
-                i b[i][j] == 0 a o == 3:
-                    b[i][j] |= 0
-
-        f i i r(m):
-            f j i r(n):
-                b[i][j] >>= 1
+    d w(s, p: s, s: s) -> b:
+        s = s.s()
+        r (
+            l(s(p)) ==
+            l(s(s)) ==
+            l(s(z_l(p, s))))
 ```
 
 ## Local Installation
