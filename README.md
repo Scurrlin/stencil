@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 299 "Bulls and Cows":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 300 "Longest Increasing Subsequence":
 
 ## Example
 
@@ -24,32 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def getHint(self, secret: str, guess: str) -> str:
-        bull = 0
-        for i in range(len(secret)):
-            bull += int(secret[i] == guess[i])
-        
-        cows = 0
-        for c in set(secret):
-            cows += min(secret.count(c), guess.count(c))
-        
-        return f"{bull}A{cows - bull}B"
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        g = []
+
+        for x in nums:
+            j = bisect_left(g, x)
+            if j == len(g):
+                g.append(x)
+            else:
+                g[j] = x
+        return len(g)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, s: s, g: s) -> s:
-        b = 0
-        f i i r(l(s)):
-            b += i(s[i] == g[i])
-        
-        c = 0
-        f c i s(s):
-            c += m(s.c(c), g.c(c))
-        
-        r f"{b}A{c - b}B"
+    d l(s, n: L[i]) -> i:
+        g = []
+
+        f x i n:
+            j = b_l(g, x)
+            i j == l(g):
+                g.a(x)
+            e:
+                g[j] = x
+        r l(g)
 ```
 
 ## Local Installation
