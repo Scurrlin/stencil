@@ -16,72 +16,40 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 297 "Serialize and Deserialize Binary Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 299 "Bulls and Cows":
 
 ## Example
 
 Solution
 
 ```python
-class Codec:
-    def serialize(self, root):
-        vals = []
+class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        bull = 0
+        for i in range(len(secret)):
+            bull += int(secret[i] == guess[i])
         
-        def dfs(node):
-            if not node:
-                vals.append("null")
-                return
-            vals.append(str(node.val))
-            dfs(node.left)
-            dfs(node.right)
-        dfs(root)
-        return ",".join(vals)
-    
-
-    def deserialize(self, data):
-        vals = iter(data.split(","))
-
-        def dfs():
-            val = next(vals)
-            if val == "null":
-                return None
-            node = TreeNode(int(val))
-            node.left = dfs()
-            node.right = dfs()
-            return node        
-        return dfs()
+        cows = 0
+        for c in set(secret):
+            cows += min(secret.count(c), guess.count(c))
+        
+        return f"{bull}A{cows - bull}B"
 ```
 
 Solution with Stencil
 
 ```python
-c C:
-    d s(s, r):
-        v = []
+c S:
+    d g(s, s: s, g: s) -> s:
+        b = 0
+        f i i r(l(s)):
+            b += i(s[i] == g[i])
         
-        d d(n):
-            i n n:
-                v.a("n")
-                r
-            v.a(s(n.v))
-            d(n.l)
-            d(n.r)
-        d(r)
-        r ",".j(v)
-    
-
-    d d(s, d):
-        v = i(d.s(","))
-
-        d d():
-            v = n(v)
-            i v == "n":
-                r N
-            n = T(i(v))
-            n.l = d()
-            n.r = d()
-            r n        
-        r d()
+        c = 0
+        f c i s(s):
+            c += m(s.c(c), g.c(c))
+        
+        r f"{b}A{c - b}B"
 ```
 
 ## Local Installation
