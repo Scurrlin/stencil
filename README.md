@@ -16,60 +16,44 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 301 "Remove Invalid Parentheses":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 303 "Range Sum Query - Immutable":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def removeInvalidParentheses(self, s: str) -> List[str]:
-        res = set()
-        def bt(s, i0, j0, o, c):
-            count = 0
-            for i in range(i0, len(s)):
-                if s[i] == o: count += 1
-                if s[i] == c: count -= 1
-                if count >= 0: continue
-                for j in range(j0, i+1):
-                    if s[j] == c and (j == j0 or s[j-1] != c):
-                        bt(s[:j] + s[j+1:], i, j, o, c)
-                return
-            rev = s[::-1]
-            if o == '(': 
-                bt(rev, 0, 0, ')', '(')
-            else:
-                res.add(rev)
-            
-        bt(s, 0, 0, '(', ')')
-        return list(res)
+class NumArray:
+    def __init__(self, nums: List[int]):
+        self.sum = []
+        sum_till = 0
+        for i in nums:
+            sum_till += i
+            self.sum.append(sum_till)
+
+    def sumRange(self, i: int, j: int) -> int:
+        if i > 0 and j > 0:
+            return self.sum[j] - self.sum[i - 1]
+        else:
+            return self.sum[i or j]
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d r(s, s: s) -> L[s]:
-        r = s()
-        d b(s, i, j, o, c):
-            c = 0
-            f i i r(i, l(s)):
-                i s[i] == o: c += 1
-                i s[i] == c: c -= 1
-                i c >= 0: c
-                f j i r(j, i+1):
-                    i s[j] == c a (j == j o s[j-1] != c):
-                        b(s[:j] + s[j+1:], i, j, o, c)
-                r
-            r = s[::-1]
-            i o == '(': 
-                b(r, 0, 0, ')', '(')
-            e:
-                r.a(r)
-            
-        b(s, 0, 0, '(', ')')
-        r l(r)
+c N:
+    d __i__(s, n: L[i]):
+        s.s = []
+        s_t = 0
+        f i i n:
+            s_t += i
+            s.s.a(s_t)
+
+    d s(s, i: i, j: i) -> i:
+        i i > 0 a j > 0:
+            r s.s[j] - s.s[i - 1]
+        e:
+            r s.s[i o j]
 ```
 
 ## Local Installation
