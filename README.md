@@ -16,82 +16,38 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 307 "Range Sum Query - Mutable":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 309 "Best Time to Buy and Sell Stock with Cooldown":
 
 ## Example
 
 Solution
 
 ```python
-class NumArray:
-    def __init__(self, nums: List[int]):
-        self.nums = [0] + nums
-        self.ftree = self.nums.copy()
-
-        for i in range(1, len(self.ftree)):
-            parent = i + (i & -i)
-            if parent < len(self.ftree):
-                self.ftree[parent] += self.ftree[i]
-
-    def update(self, index: int, val: int) -> None:
-        index += 1
-        d = val - self.nums[index]
-        self.nums[index] = val
-
-        while index < len(self.ftree):
-            self.ftree[index] += d
-            index += index & -index
-
-    def sumRange(self, left: int, right: int) -> int:
-        left += 1
-        right += 1
-        l = self.get_prefix_sum(left) - self.nums[left]
-        r = self.get_prefix_sum(right)
-        return r - l
-
-    def get_prefix_sum(self, i: int) -> int:
-        result = 0
-        while i:
-            result += self.ftree[i]
-            i -= i & -i
-        return result
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        b = -10 ** 9
+        s = 0
+        s2 = 0
+        for i in range(len(prices)):
+            b = max(b, s2 - prices[i])
+            s2 = s
+            s = max(s, b + prices[i])
+        return s
 ```
 
 Solution with Stencil
 
 ```python
-c N:
-    d __i__(s, n: L[i]):
-        s.n = [0] + n
-        s.f = s.n.c()
-
-        f i i r(1, l(s.f)):
-            p = i + (i & -i)
-            i p < l(s.f):
-                s.f[p] += s.f[i]
-
-    d u(s, i: i, v: i) -> N:
-        i += 1
-        d = v - s.n[i]
-        s.n[i] = v
-
-        w i < l(s.f):
-            s.f[i] += d
-            i += i & -i
-
-    d s(s, l: i, r: i) -> i:
-        l += 1
-        r += 1
-        l = s.g_p_s(l) - s.n[l]
-        r = s.g_p_s(r)
-        r r - l
-
-    d g_p_s(s, i: i) -> i:
-        r = 0
-        w i:
-            r += s.f[i]
-            i -= i & -i
-        r r
+c S:
+    d m(s, p: L[i]) -> i:
+        b = -1 ** 9
+        s = 0
+        s = 0
+        f i i r(l(p)):
+            b = m(b, s - p[i])
+            s = s
+            s = m(s, b + p[i])
+        r s
 ```
 
 ## Local Installation
