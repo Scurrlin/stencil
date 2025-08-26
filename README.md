@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 312 "Burst Balloons":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 313 "Super Ugly Number":
 
 ## Example
 
@@ -24,44 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def maxCoins(self, nums: List[int]) -> int:
-        b = [1] + nums + [1]
-        n = len(b)
-        dp = [[0] * n for _ in range(n)]
-
-        for length in range(2, n):
-            for left in range(0, n - length):
-                right = left + length
-                best = 0
-                for k in range(left + 1, right):
-                    gain = b[left] * b[k] * b[right]
-                    total = gain + dp[left][k] + dp[k][right]
-                    if total > best:
-                        best = total
-                dp[left][right] = best
-        return dp[0][n - 1]
+    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+        queue = [1]
+        while n > 1:
+            n -= 1
+            num = heapq.heappop(queue)
+            for prime in primes:
+                heapq.heappush(queue, prime * num)
+                if num % prime == 0:
+                    break
+        return queue[0]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, n: L[i]) -> i:
-        b = [1] + n + [1]
-        n = l(b)
-        d = [[0] * n f _ i r(n)]
-
-        f l i r(2, n):
-            f l i r(0, n - l):
-                r = l + l
-                b = 0
-                f k i r(l + 1, r):
-                    g = b[l] * b[k] * b[r]
-                    t = g + d[l][k] + d[k][r]
-                    i t > b:
-                        b = t
-                d[l][r] = b
-        r d[0][n - 1]
+    d n(s, n: i, p: L[i]) -> i:
+        q = [1]
+        w n > 1:
+            n -= 1
+            n = h.h(q)
+            f p i p:
+                h.h(q, p * n)
+                i n % p == 0:
+                    b
+        r q[0]
 ```
 
 ## Local Installation
