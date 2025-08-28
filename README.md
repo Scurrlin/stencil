@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 313 "Super Ugly Number":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 315 "Count of Smaller Numbers After Self":
 
 ## Example
 
@@ -24,32 +24,26 @@ Solution
 
 ```python
 class Solution:
-    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
-        queue = [1]
-        while n > 1:
-            n -= 1
-            num = heapq.heappop(queue)
-            for prime in primes:
-                heapq.heappush(queue, prime * num)
-                if num % prime == 0:
-                    break
-        return queue[0]
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        arr, ans = sorted(nums), []
+        for num in nums:
+            i = bisect_left(arr, num)
+            ans.append(i)
+            del arr[i]
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d n(s, n: i, p: L[i]) -> i:
-        q = [1]
-        w n > 1:
-            n -= 1
-            n = h.h(q)
-            f p i p:
-                h.h(q, p * n)
-                i n % p == 0:
-                    b
-        r q[0]
+    d c(s, n: L[i]) -> L[i]:
+        a, a = s(n), []
+        f n i n:
+            i = b_l(a, n)
+            a.a(i)
+            d a[i]
+        r a
 ```
 
 ## Local Installation
