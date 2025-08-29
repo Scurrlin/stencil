@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 316 "Remove Duplicate Letters":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 318 "Maximum Product of Word Lengths":
 
 ## Example
 
@@ -24,42 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def removeDuplicateLetters(self, s: str) -> str:
-        last_occur = {}
-        for i, char in enumerate(s):
-            last_occur[char] = i        
-
-        stack = []  
-        visited = set()
-        for i in range(len(s)):
-            if s[i] in visited:
-                continue
-            while stack and s[i] < stack[-1] and i < last_occur.get(stack[-1], -1):
-                visited.remove(stack.pop())
-            visited.add(s[i])
-            stack.append(s[i])
-        return ''.join(stack)
+    def maxProduct(self, words: List[str]) -> int:
+        n = len(words)                        
+        char_set = [set(words[i]) for i in range(n)]
+        max_val = 0
+        for i in range(n):
+            for j in range(i + 1, n):
+                if not (char_set[i] & char_set[j]):
+                    max_val = max(max_val, len(words[i]) * len(words[j]))
+        return max_val
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, s: s) -> s:
-        l_o = {}
-        f i, c i e(s):
-            l_o[c] = i        
-
-        s = []  
-        v = s()
-        f i i r(l(s)):
-            i s[i] i v:
-                c
-            w s a s[i] < s[-1] a i < l_o.g(s[-1], -1):
-                v.r(s.p())
-            v.a(s[i])
-            s.a(s[i])
-        r ''.j(s)
+    d m(s, w: L[s]) -> i:
+        n = l(w)                        
+        c_s = [s(w[i]) f i i r(n)]
+        m_v = 0
+        f i i r(n):
+            f j i r(i + 1, n):
+                i n (c_s[i] & c_s[j]):
+                    m_v = m(m_v, l(w[i]) * l(w[j]))
+        r m_v
 ```
 
 ## Local Installation
