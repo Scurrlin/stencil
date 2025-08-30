@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 318 "Maximum Product of Word Lengths":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 319 "Bulb Switcher":
 
 ## Example
 
@@ -24,30 +24,16 @@ Solution
 
 ```python
 class Solution:
-    def maxProduct(self, words: List[str]) -> int:
-        n = len(words)                        
-        char_set = [set(words[i]) for i in range(n)]
-        max_val = 0
-        for i in range(n):
-            for j in range(i + 1, n):
-                if not (char_set[i] & char_set[j]):
-                    max_val = max(max_val, len(words[i]) * len(words[j]))
-        return max_val
+    def bulbSwitch(self, n: int) -> int:
+        return int(n ** (1/2))
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d m(s, w: L[s]) -> i:
-        n = l(w)                        
-        c_s = [s(w[i]) f i i r(n)]
-        m_v = 0
-        f i i r(n):
-            f j i r(i + 1, n):
-                i n (c_s[i] & c_s[j]):
-                    m_v = m(m_v, l(w[i]) * l(w[j]))
-        r m_v
+    d b(s, n: i) -> i:
+        r i(n ** (1/2))
 ```
 
 ## Local Installation
