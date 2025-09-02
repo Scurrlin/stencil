@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 322 "Coin Change":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 324 "Wiggle Sort II":
 
 ## Example
 
@@ -24,30 +24,22 @@ Solution
 
 ```python
 class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        minC = [amount + 1] * (amount + 1)
-        minC[0] = 0
-        
-        for i in range(1, amount + 1):
-            for c in coins:
-                if i - c >= 0:
-                    minC[i] = min(minC[i], 1 + minC[i - c])
-        return minC[-1] if minC[-1] != amount + 1 else -1
+    def wiggleSort(self, nums: List[int]) -> None:
+        n = len(nums)
+        nums.sort()
+        mid = (n - 1)//2
+        nums[::2], nums[1::2] = nums[mid::-1], nums[:mid:-1]
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, c: L[i], a: i) -> i:
-        m = [a + 1] * (a + 1)
-        m[0] = 0
-        
-        f i i r(1, a + 1):
-            f c i c:
-                i i - c >= 0:
-                    m[i] = m(m[i], 1 + m[i - c])
-        r m[-1] i m[-1] != a + 1 e -1
+    d w(s, n: L[i]) -> N:
+        n = l(n)
+        n.s()
+        m = (n - 1)//2
+        n[::2], n[1::2] = n[m::-1], n[:m:-1]
 ```
 
 ## Local Installation
