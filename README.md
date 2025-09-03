@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 324 "Wiggle Sort II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 326 "Power of Three":
 
 ## Example
 
@@ -24,22 +24,24 @@ Solution
 
 ```python
 class Solution:
-    def wiggleSort(self, nums: List[int]) -> None:
-        n = len(nums)
-        nums.sort()
-        mid = (n - 1)//2
-        nums[::2], nums[1::2] = nums[mid::-1], nums[:mid:-1]
+    def isPowerOfThree(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        while n % 3 == 0:
+            n //= 3
+        return n == 1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d w(s, n: L[i]) -> N:
-        n = l(n)
-        n.s()
-        m = (n - 1)//2
-        n[::2], n[1::2] = n[m::-1], n[:m:-1]
+    d i(s, n: i) -> b:
+        i n <= 0:
+            r F
+        w n % 3 == 0:
+            n //= 3
+        r n == 1
 ```
 
 ## Local Installation
