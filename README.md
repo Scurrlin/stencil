@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 326 "Power of Three":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 327 "Count of Range Sum":
 
 ## Example
 
@@ -24,24 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def isPowerOfThree(self, n: int) -> bool:
-        if n <= 0:
-            return False
-        while n % 3 == 0:
-            n //= 3
-        return n == 1
+    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
+        ans = prefix = 0 
+        seen = [0]
+        for x in nums: 
+            prefix += x 
+            low = bisect_left(seen, prefix - upper)
+            high = bisect_left(seen, prefix - lower + 1) 
+            ans += high - low
+            insort(seen, prefix)
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, n: i) -> b:
-        i n <= 0:
-            r F
-        w n % 3 == 0:
-            n //= 3
-        r n == 1
+    d c(s, n: L[i], l: i, u: i) -> i:
+        a = p = 0 
+        s = [0]
+        f x i n: 
+            p += x 
+            l = b_l(s, p - u)
+            h = b_l(s, p - l + 1) 
+            a += h - l
+            i(s, p)
+        r a
 ```
 
 ## Local Installation
