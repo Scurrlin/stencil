@@ -16,42 +16,60 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 328 "Odd Even Linked List":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 329 "Longest Increasing Path in a Matrix":
 
 ## Example
 
 Solution
 
 ```python
-class Solution(object):
-    def oddEvenList(self, head):
-        if not head or not head.next:
-            return head
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        if not matrix or not matrix[0]:
+            return 0
         
-        odd, even = head, head.next
-        even_head = even
-        while even and even.next:
-            odd.next, even.next = odd.next.next, even.next.next
-            odd, even = odd.next, even.next
-        odd.next = even_head
-        return head
+        rows, cols = len(matrix), len(matrix[0])
+        dp =[[0] * cols for i in range(rows)]
+        def dfs(i, j):
+            if not dp[i][j]:
+                val = matrix[i][j]
+                dp[i][j] = 1 + max(
+                    dfs(i - 1, j) if i and val > matrix[i - 1][j] else 0,
+                    dfs(i + 1, j) if i < rows - 1 and val > matrix[i + 1][j] else 0,
+                    dfs(i, j - 1) if j and val > matrix[i][j - 1] else 0,
+                    dfs(i, j + 1) if j < cols - 1 and val > matrix[i][j + 1] else 0)
+            return dp[i][j]
+        
+        for r in range(rows):
+            for c in range(cols):
+                dfs(r, c)
+        return max(max(x) for x in dp)
 ```
 
 Solution with Stencil
 
 ```python
-c S(o):
-    d o(s, h):
-        i n h o n h.n:
-            r h
+c S:
+    d l(s, m: L[L[i]]) -> i:
+        i n m o n m[0]:
+            r 0
         
-        o, e = h, h.n
-        e_h = e
-        w e a e.n:
-            o.n, e.n = o.n.n, e.n.n
-            o, e = o.n, e.n
-        o.n = e_h
-        r h
+        r, c = l(m), l(m[0])
+        d =[[0] * c f i i r(r)]
+        d d(i, j):
+            i n d[i][j]:
+                v = m[i][j]
+                d[i][j] = 1 + m(
+                    d(i - 1, j) i i a v > m[i - 1][j] e 0,
+                    d(i + 1, j) i i < r - 1 a v > m[i + 1][j] e 0,
+                    d(i, j - 1) i j a v > m[i][j - 1] e 0,
+                    d(i, j + 1) i j < c - 1 a v > m[i][j + 1] e 0)
+            r d[i][j]
+        
+        f r i r(r):
+            f c i r(c):
+                d(r, c)
+        r m(m(x) f x i d)
 ```
 
 ## Local Installation
