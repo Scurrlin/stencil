@@ -16,40 +16,42 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 327 "Count of Range Sum":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 328 "Odd Even Linked List":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
-        ans = prefix = 0 
-        seen = [0]
-        for x in nums: 
-            prefix += x 
-            low = bisect_left(seen, prefix - upper)
-            high = bisect_left(seen, prefix - lower + 1) 
-            ans += high - low
-            insort(seen, prefix)
-        return ans
+class Solution(object):
+    def oddEvenList(self, head):
+        if not head or not head.next:
+            return head
+        
+        odd, even = head, head.next
+        even_head = even
+        while even and even.next:
+            odd.next, even.next = odd.next.next, even.next.next
+            odd, even = odd.next, even.next
+        odd.next = even_head
+        return head
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, n: L[i], l: i, u: i) -> i:
-        a = p = 0 
-        s = [0]
-        f x i n: 
-            p += x 
-            l = b_l(s, p - u)
-            h = b_l(s, p - l + 1) 
-            a += h - l
-            i(s, p)
-        r a
+c S(o):
+    d o(s, h):
+        i n h o n h.n:
+            r h
+        
+        o, e = h, h.n
+        e_h = e
+        w e a e.n:
+            o.n, e.n = o.n.n, e.n.n
+            o, e = o.n, e.n
+        o.n = e_h
+        r h
 ```
 
 ## Local Installation
