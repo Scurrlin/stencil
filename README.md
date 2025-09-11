@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 334 "Increasing Triplet Subsequence":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 335 "Self Crossing":
 
 ## Example
 
@@ -24,15 +24,14 @@ Solution
 
 ```python
 class Solution:
-    def increasingTriplet(self, nums: List[int]) -> bool:
-        first = second = float('inf')
-        for n in nums:
-            if n <= first:
-                first = n
-            elif n <= second:
-                second = n
-            else:
-                return True
+    def isSelfCrossing(self, distance: List[int]) -> bool:
+        b = c = d = e = 0 
+        for a in distance:
+            if d >= b > 0 and (
+                a >= c or a >= c - e > 0 and
+                f >= d - b):
+                    return True
+            b, c, d, e, f = a, b, c, d, e
         return False
 ```
 
@@ -40,15 +39,14 @@ Solution with Stencil
 
 ```python
 c S:
-    d i(s, n: L[i]) -> b:
-        f = s = f('i')
-        f n i n:
-            i n <= f:
-                f = n
-            e n <= s:
-                s = n
-            e:
-                r T
+    d i(s, d: L[i]) -> b:
+        b = c = d = e = 0 
+        f a i d:
+            i d >= b > 0 a (
+                a >= c o a >= c - e > 0 a
+                f >= d - b):
+                    r T
+            b, c, d, e, f = a, b, c, d, e
         r F
 ```
 
