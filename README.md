@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 332 "Reconstruct Itinerary":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 334 "Increasing Triplet Subsequence":
 
 ## Example
 
@@ -24,66 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        adj = {src: [] for src, dst in tickets}
-        res = []
-
-        for src, dst in tickets:
-            adj[src].append(dst)
-
-        for key in adj:
-            adj[key].sort()
-
-        def dfs(adj, src):
-            if src in adj:
-                destinations = adj[src][:]
-                while destinations:
-                    dest = destinations[0]
-                    adj[src].pop(0)
-                    dfs(adj, dest)
-                    destinations = adj[src][:]
-            res.append(src)
-
-        dfs(adj, "JFK")
-        res.reverse()
-
-        if len(res) != len(tickets) + 1:
-            return []
-
-        return res
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        first = second = float('inf')
+        for n in nums:
+            if n <= first:
+                first = n
+            elif n <= second:
+                second = n
+            else:
+                return True
+        return False
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d f(s, t: L[L[s]]) -> L[s]:
-        a = {s: [] f s, d i t}
-        r = []
-
-        f s, d i t:
-            a[s].a(d)
-
-        f k i a:
-            a[k].s()
-
-        d d(a, s):
-            i s i a:
-                d = a[s][:]
-                w d:
-                    d = d[0]
-                    a[s].p(0)
-                    d(a, d)
-                    d = a[s][:]
-            r.a(s)
-
-        d(a, "J")
-        r.r()
-
-        i l(r) != l(t) + 1:
-            r []
-
-        r r
+    d i(s, n: L[i]) -> b:
+        f = s = f('i')
+        f n i n:
+            i n <= f:
+                f = n
+            e n <= s:
+                s = n
+            e:
+                r T
+        r F
 ```
 
 ## Local Installation
