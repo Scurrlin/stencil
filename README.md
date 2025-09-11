@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 331 "Verify Preorder Serialization of a Binary Tree":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 332 "Reconstruct Itinerary":
 
 ## Example
 
@@ -24,30 +24,66 @@ Solution
 
 ```python
 class Solution:
-    def isValidSerialization(self, preorder: str) -> bool:
-        degree = 1
-        for node in preorder.split(','):
-            degree -= 1
-            if degree < 0:
-                return False
-            if node != '#':
-                degree += 2
-        return degree == 0
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        adj = {src: [] for src, dst in tickets}
+        res = []
+
+        for src, dst in tickets:
+            adj[src].append(dst)
+
+        for key in adj:
+            adj[key].sort()
+
+        def dfs(adj, src):
+            if src in adj:
+                destinations = adj[src][:]
+                while destinations:
+                    dest = destinations[0]
+                    adj[src].pop(0)
+                    dfs(adj, dest)
+                    destinations = adj[src][:]
+            res.append(src)
+
+        dfs(adj, "JFK")
+        res.reverse()
+
+        if len(res) != len(tickets) + 1:
+            return []
+
+        return res
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, p: s) -> b:
-        d = 1
-        f n i p.s(','):
-            d -= 1
-            i d < 0:
-                r F
-            i n != '#':
-                d += 2
-        r d == 0
+    d f(s, t: L[L[s]]) -> L[s]:
+        a = {s: [] f s, d i t}
+        r = []
+
+        f s, d i t:
+            a[s].a(d)
+
+        f k i a:
+            a[k].s()
+
+        d d(a, s):
+            i s i a:
+                d = a[s][:]
+                w d:
+                    d = d[0]
+                    a[s].p(0)
+                    d(a, d)
+                    d = a[s][:]
+            r.a(s)
+
+        d(a, "J")
+        r.r()
+
+        i l(r) != l(t) + 1:
+            r []
+
+        r r
 ```
 
 ## Local Installation
