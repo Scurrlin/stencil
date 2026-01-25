@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 335 "Self Crossing":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 337 "House Robber III":
 
 ## Example
 
@@ -24,30 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def isSelfCrossing(self, distance: List[int]) -> bool:
-        b = c = d = e = 0 
-        for a in distance:
-            if d >= b > 0 and (
-                a >= c or a >= c - e > 0 and
-                f >= d - b):
-                    return True
-            b, c, d, e, f = a, b, c, d, e
-        return False
+    def rob(self, root: Optional[TreeNode]) -> int:
+        
+        def dfs(node = root):
+            if not node: 
+                return (0, 0)
+            L, R = dfs(node.left), dfs(node.right)
+            return (node.val + L[1] + R[1], max(L) + max(R))
+        
+        return max(dfs())
+        return max(dfs(root))
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, d: L[i]) -> b:
-        b = c = d = e = 0 
-        f a i d:
-            i d >= b > 0 a (
-                a >= c o a >= c - e > 0 a
-                f >= d - b):
-                    r T
-            b, c, d, e, f = a, b, c, d, e
-        r F
+    d r(s, r: O[T]) -> i:
+        
+        d d(n = r):
+            i n n: 
+                r (0, 0)
+            L, R = d(n.l), d(n.r)
+            r (n.v + L[1] + R[1], m(L) + m(R))
+        
+        r m(d())
+        r m(d(r))
 ```
 
 ## Local Installation
