@@ -16,38 +16,48 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 338 "Counting Bits":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 341 "Flatten Nested List Iterator":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def countBits(self, n: int) -> List[int]:
-        dp = [0] * (n + 1)
-        offset = 1
+class NestedIterator:
+    def __init__(self, nestedList: [NestedInteger]):
+        self.stack = nestedList[::-1]
 
-        for i in range(1, n + 1):
-            if offset * 2 == i:
-                offset = i
-            dp[i] = 1 + dp[i - offset]
-        return dp
+    def next(self) -> int:
+        return self.stack.pop().getInteger()
+
+    def hasNext(self) -> bool:
+        while self.stack:
+            top = self.stack[-1]
+            if top.isInteger():
+                return True
+            self.stack.pop()
+            self.stack.extend(top.getList()[::-1])
+        return False
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, n: i) -> L[i]:
-        d = [0] * (n + 1)
-        o = 1
+c N:
+    d __i__(s, n: [N]):
+        s.s = n[::-1]
 
-        f i i r(1, n + 1):
-            i o * 2 == i:
-                o = i
-            d[i] = 1 + d[i - o]
-        r d
+    d n(s) -> i:
+        r s.s.p().g()
+
+    d h(s) -> b:
+        w s.s:
+            t = s.s[-1]
+            i t.i():
+                r T
+            s.s.p()
+            s.s.e(t.g()[::-1])
+        r F
 ```
 
 ## Local Installation
