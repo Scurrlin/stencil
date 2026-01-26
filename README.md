@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 337 "House Robber III":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 338 "Counting Bits":
 
 ## Example
 
@@ -24,32 +24,30 @@ Solution
 
 ```python
 class Solution:
-    def rob(self, root: Optional[TreeNode]) -> int:
-        
-        def dfs(node = root):
-            if not node: 
-                return (0, 0)
-            L, R = dfs(node.left), dfs(node.right)
-            return (node.val + L[1] + R[1], max(L) + max(R))
-        
-        return max(dfs())
-        return max(dfs(root))
+    def countBits(self, n: int) -> List[int]:
+        dp = [0] * (n + 1)
+        offset = 1
+
+        for i in range(1, n + 1):
+            if offset * 2 == i:
+                offset = i
+            dp[i] = 1 + dp[i - offset]
+        return dp
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d r(s, r: O[T]) -> i:
-        
-        d d(n = r):
-            i n n: 
-                r (0, 0)
-            L, R = d(n.l), d(n.r)
-            r (n.v + L[1] + R[1], m(L) + m(R))
-        
-        r m(d())
-        r m(d(r))
+    d c(s, n: i) -> L[i]:
+        d = [0] * (n + 1)
+        o = 1
+
+        f i i r(1, n + 1):
+            i o * 2 == i:
+                o = i
+            d[i] = 1 + d[i - o]
+        r d
 ```
 
 ## Local Installation
