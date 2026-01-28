@@ -16,48 +16,28 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 341 "Flatten Nested List Iterator":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 342 "Power of Four":
 
 ## Example
 
 Solution
 
 ```python
-class NestedIterator:
-    def __init__(self, nestedList: [NestedInteger]):
-        self.stack = nestedList[::-1]
-
-    def next(self) -> int:
-        return self.stack.pop().getInteger()
-
-    def hasNext(self) -> bool:
-        while self.stack:
-            top = self.stack[-1]
-            if top.isInteger():
-                return True
-            self.stack.pop()
-            self.stack.extend(top.getList()[::-1])
-        return False
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        return math.log(n, 4).is_integer()
 ```
 
 Solution with Stencil
 
 ```python
-c N:
-    d __i__(s, n: [N]):
-        s.s = n[::-1]
-
-    d n(s) -> i:
-        r s.s.p().g()
-
-    d h(s) -> b:
-        w s.s:
-            t = s.s[-1]
-            i t.i():
-                r T
-            s.s.p()
-            s.s.e(t.g()[::-1])
-        r F
+c S:
+    d i(s, n: i) -> b:
+        i n <= 0:
+            r F
+        r m.l(n, 4).i_i()
 ```
 
 ## Local Installation
