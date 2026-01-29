@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 343 "Integer Break":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 344 "Reverse String":
 
 ## Example
 
@@ -24,44 +24,24 @@ Solution
 
 ```python
 class Solution:
-    def integerBreak(self, n: int) -> int:
-        if n == 2:
-            return 1
-        if n == 3:
-            return 2
-
-        threes = n // 3
-        remainder = n % 3
-
-        if remainder == 1:
-            threes -= 1
-            remainder = 4
-        elif remainder == 0:
-            remainder = 1
-        
-        return (3 ** threes) * remainder
+    def reverseString(self, s: List[str]) -> None:
+        l, r = 0, len(s) - 1
+        while l < r:
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -= 1
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, n: i) -> i:
-        i n == 2:
-            r 1
-        i n == 3:
-            r 2
-
-        t = n // 3
-        r = n % 3
-
-        i r == 1:
-            t -= 1
-            r = 4
-        e r == 0:
-            r = 1
-        
-        r (3 ** t) * r
+    d r(s, s: L[s]) -> N:
+        l, r = 0, l(s) - 1
+        w l < r:
+            s[l], s[r] = s[r], s[l]
+            l += 1
+            r -= 1
 ```
 
 ## Local Installation
