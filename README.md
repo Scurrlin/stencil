@@ -16,30 +16,44 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 347 "Top K Frequent Elements":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 349 "Intersection of Two Arrays":
 
 ## Example
 
 Solution
 
 ```python
-from collections import Counter
-
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        count = Counter(nums)
-        return [num for num, _ in count.most_common(k)]
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        mp = {}
+        for num in nums1:
+            mp[num] = mp.get(num, 0) + 1
+        
+        result = []
+        for num in nums2:
+            if num in mp:
+                result.append(num)
+                del mp[num]
+        
+        return result
 ```
 
 Solution with Stencil
 
 ```python
-f c i C
-
 c S:
-    d t(s, n: L[i], k: i) -> L[i]:
-        c = C(n)
-        r [n f n, _ i c.m_c(k)]
+    d i(s, n: L[i], n: L[i]) -> L[i]:
+        m = {}
+        f n i n:
+            m[n] = m.g(n, 0) + 1
+        
+        r = []
+        f n i n:
+            i n i m:
+                r.a(n)
+                d m[n]
+        
+        r r
 ```
 
 ## Local Installation
