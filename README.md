@@ -16,46 +16,72 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 350 "Intersection of Two Arrays II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 352 "Data Stream as Disjoint Intervals":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort(), nums2.sort()
-        i, j, result = 0, 0, []
-        while i < len(nums1) and j < len(nums2):
-            if nums1[i] == nums2[j]:
-                result.append(nums1[i])
-                i += 1
-                j += 1
-            elif nums1[i] < nums2[j]:
-                i += 1
-            else:
-                j += 1
-        return result
+class SummaryRanges:
+
+    def __init__(self):
+        self.nums = set()
+
+    def addNum(self, value: int) -> None:
+        self.nums.add(value)
+
+    def getIntervals(self) -> List[List[int]]:
+        intervals = []
+        seen = set()
+        for num in self.nums:
+            if num in seen: 
+                continue
+
+            left = num
+            while left - 1 in self.nums:
+                left -= 1
+                seen.add(left)
+
+            right = num
+            while right + 1 in self.nums:
+                right += 1
+                seen.add(right)
+            
+            intervals.append([left, right])
+        return sorted(intervals)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d i(s, n: L[i], n: L[i]) -> L[i]:
-        n.s(), n.s()
-        i, j, r = 0, 0, []
-        w i < l(n) a j < l(n):
-            i n[i] == n[j]:
-                r.a(n[i])
-                i += 1
-                j += 1
-            e n[i] < n[j]:
-                i += 1
-            e:
-                j += 1
-        r r
+
+    d __i__(s):
+        s.n = s()
+
+    d a(s, v: i) -> N:
+        s.n.a(v)
+
+    d g(s) -> L[L[i]]:
+        i = []
+        s = s()
+        f n i s.n:
+            i n i s: 
+                c
+
+            l = n
+            w l - 1 i s.n:
+                l -= 1
+                s.a(l)
+
+            r = n
+            w r + 1 i s.n:
+                r += 1
+                s.a(r)
+            
+            i.a([l, r])
+        r s(i)
 ```
 
 ## Local Installation
