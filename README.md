@@ -16,52 +16,30 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 344 "Reverse Vowels of a String":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 347 "Top K Frequent Elements":
 
 ## Example
 
 Solution
 
 ```python
+from collections import Counter
+
 class Solution:
-    def reverseVowels(self, s: str) -> str:
-        vowels = set('aeiouAEIOU')
-        s = list(s)
-        l, r = 0, len(s) - 1
-
-        while l < r:
-            if s[l] not in vowels:
-                l += 1
-            elif s[r] not in vowels:
-                r -= 1
-            else:
-                s[l], s[r] = s[r], s[l]
-                l += 1
-                r -= 1
-
-        return ''.join(s)
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        count = Counter(nums)
+        return [num for num, _ in count.most_common(k)]
 ```
 
 Solution with Stencil
 
 ```python
+f c i C
+
 c S:
-    d r(s, s: s) -> s:
-        v = s('a')
-        s = l(s)
-        l, r = 0, l(s) - 1
-
-        w l < r:
-            i s[l] n i v:
-                l += 1
-            e s[r] n i v:
-                r -= 1
-            e:
-                s[l], s[r] = s[r], s[l]
-                l += 1
-                r -= 1
-
-        r ''.j(s)
+    d t(s, n: L[i], k: i) -> L[i]:
+        c = C(n)
+        r [n f n, _ i c.m_c(k)]
 ```
 
 ## Local Installation
