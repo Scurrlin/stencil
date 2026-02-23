@@ -16,32 +16,64 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 357 "Count Numbers with Unique Digits":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 363 "Max Sum of Rectangle No Larger Than K":
 
 ## Example
 
 Solution
 
 ```python
+from bisect import bisect_left, insort
+
 class Solution:
-    def countNumbersWithUniqueDigits(self, n: int) -> int:
-        res, prev = 10, 9
-        for i in range(1, n):
-            prev *= 10 - i
-            res += prev            
-        return n and res or 1
+    def maxSumSubmatrix(self, matrix, k):
+        ans = float("-inf")
+        m, n = len(matrix), len(matrix[0])
+        for left in range(n):
+            rowSums = [0] * m
+            
+            for right in range(left, n):
+                currSum, prefixSums = 0, [0]
+                
+                for r in range(m):
+                    rowSums[r] += matrix[r][right]
+                    currSum += rowSums[r]
+                    
+                    idx = bisect_left(prefixSums, currSum - k)
+                    
+                    if idx < len(prefixSums):
+                        ans = max(ans, currSum - prefixSums[idx])
+                    insort(prefixSums, currSum)
+        
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
+f b i b_l, i
+
 c S:
-    d c(s, n: i) -> i:
-        r, p = 1, 9
-        f i i r(1, n):
-            p *= 1 - i
-            r += p            
-        r n a r o 1
+    d m(s, m, k):
+        a = f("-i")
+        m, n = l(m), l(m[0])
+        f l i r(n):
+            r = [0] * m
+            
+            f r i r(l, n):
+                c, p = 0, [0]
+                
+                f r i r(m):
+                    r[r] += m[r][r]
+                    c += r[r]
+                    
+                    i = b_l(p, c - k)
+                    
+                    i i < l(p):
+                        a = m(a, c - p[i])
+                    i(p, c)
+        
+        r a
 ```
 
 ## Local Installation
