@@ -1,0 +1,11 @@
+d S d
+  @s c_d(n :: [i]) :: b
+  d c_d(n) d
+    s_n = E.s(n)
+    c_a(s_n)
+  e
+
+  d c_a([x, y | r]) w x == y, d: t
+  d c_a([_ | r]), d: c_a(r)
+  d c_a([]), d: f
+e

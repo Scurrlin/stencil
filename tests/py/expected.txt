@@ -1,0 +1,8 @@
+c S:
+    d c(s, n: L[i]) -> b:
+        n.s()
+        n = l(n)
+        f i i r(1, n):
+            i n[i] == n[i - 1]:
+                r T
+        r F

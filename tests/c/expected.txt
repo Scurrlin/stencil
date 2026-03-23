@@ -1,0 +1,17 @@
+#i <s.h>
+#i <s.h>
+#i <s.h>
+
+i c(c v *a, c v *b) {
+    r (*(i*)a - *(i*)b);
+}
+
+b c(i* n, i n) {
+    q(n, n, s(i), c);
+    f (i i = 1; i < n; i++) {
+        i (n[i] == n[i - 1]) {
+            r t;
+        }
+    }
+    r f;
+}

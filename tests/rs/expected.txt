@@ -1,0 +1,11 @@
+i S {
+    p f c_d(m n: V<i>) -> b {
+        n.s();
+        f i i 1..n.l() {
+            i n[i] == n[i - 1] {
+                r t;
+            }
+        }
+        f
+    }
+}

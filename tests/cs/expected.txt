@@ -1,0 +1,14 @@
+u S;
+
+p c S {
+    p b C(i[] n) {
+        A.S(n);
+        i n = n.L;
+        f (i i = 1; i < n; i++) {
+            i (n[i] == n[i - 1]) {
+                r t;
+            }
+        }
+        r f;
+    }
+}

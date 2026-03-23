@@ -1,0 +1,7 @@
+d c_d(n)
+    n.s!
+    (1...n.l).e d |i|
+      r t i n[i] == n[i - 1]
+    e
+    f
+  e

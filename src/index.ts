@@ -1,35 +1,38 @@
-const fs = require('fs');
-const readline = require('readline');
+import fs from 'node:fs';
+import readline from 'node:readline';
 
-async function transformFile(filePath, options = {}) {
+interface TransformOptions {
+  startLine?: number | null;
+  endLine?: number | null;
+}
+
+export async function transformFile(
+  filePath: string,
+  options: TransformOptions = {}
+): Promise<string> {
   const { startLine = null, endLine = null } = options;
 
-  // Check if file exists
   if (!fs.existsSync(filePath)) {
     throw new Error(`File not found: ${filePath}`);
   }
 
-  // Create readable stream with UTF-8 encoding
   const fileStream = fs.createReadStream(filePath, { encoding: 'utf-8' });
 
-  // Handle stream errors
-  fileStream.on('error', (err) => {
+  fileStream.on('error', (err: Error) => {
     throw new Error(`Unable to read file: ${err.message}`);
   });
 
-  // Create interface for reading the file line by line
   const rl = readline.createInterface({
     input: fileStream,
     crlfDelay: Infinity
   });
 
   let currentLine = 0;
-  let transformedLines = [];
+  const transformedLines: string[] = [];
 
   for await (const line of rl) {
     currentLine++;
 
-    // Determine if the current line should be transformed
     if (
       (startLine === null || currentLine >= startLine) &&
       (endLine === null || currentLine <= endLine)
@@ -43,18 +46,10 @@ async function transformFile(filePath, options = {}) {
   return transformedLines.join('\n');
 }
 
-function transformLine(line) {
-  // Regex to match sequences of letters and numbers
+export function transformLine(line: string): string {
   // \p{L} matches any kind of letter from any language
   // \p{N} matches any kind of numeric character
-  // 'u' flag enables Unicode support
-  // 'g' flag enables global matching
   return line.replace(/[\p{L}\p{N}]+/gu, (match) => {
-    return match[0]; // Retain only the first character
+    return match[0];
   });
 }
-
-module.exports = {
-  transformFile,
-  transformLine
-};

@@ -1,0 +1,13 @@
+S
+    d.n A D,
+    e.n A E,
+    e.s A S
+F
+    E e
+    J D d O e.d = d.i
+W (
+    S C(D s)
+    F E e
+    W e.d = e.d A e.s >= e.s
+) <= 3
+O B D, S D;

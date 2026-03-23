@@ -1,0 +1,11 @@
+c S {
+    f c(_ n: [I]) -> B {
+        v s = n.s()
+        f i i 1..<s.c {
+            i s[i] == s[i - 1] {
+                r t
+            }
+        }
+        r f
+    }
+}

@@ -1,13 +1,33 @@
 {
   "name": "@scurrlin/stencil",
-  "version": "1.34.5",
+  "version": "1.34.6",
+  "type": "module",
   "description": "A memorization tool that strips code down to first letters and punctuation only.",
-  "main": "src/index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
   "bin": {
-    "stencil": "./bin/cli.js"
+    "stencil": "./dist/bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "engines": {
+    "node": ">=22"
   },
   "scripts": {
-    "start": "node bin/cli.js"
+    "start": "node dist/bin/cli.js",
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
     "yargs": "^17.7.2"
@@ -20,5 +40,12 @@
     "leetcode"
   ],
   "author": "Sean Currlin",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/yargs": "^17.0.35",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.2",
+    "vitest": "^4.1.1"
+  }
 }
