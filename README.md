@@ -16,58 +16,42 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 373 "Find K Pairs with Smallest Sums":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 374 "Guess Number Higher or Lower":
 
 ## Example
 
 Solution
 
 ```python
-import heapq
-
 class Solution:
-    def kSmallestPairs(self, nums1, nums2, k):
-        if not nums1 or not nums2:
-            return []
-        res, heap = [], []
-        heap = []
-
-        for i in range(min(k, len(nums1))):
-            heapq.heappush(heap, (nums1[i] + nums2[0], i, 0))
-
-        while heap and len(res) < k:
-            total, i, j = heapq.heappop(heap)
-            res.append([nums1[i], nums2[j]])
-
-            if j + 1 < len(nums2):
-                heapq.heappush(heap, (nums1[i] + nums2[j + 1], i, j + 1))
-
-        return res
+    def guessNumber(self, n: int) -> int:
+        l, r = 1, n
+        while True:
+            mid = (l + r)//2
+            res = guess(mid)
+            if res > 0:
+                l = mid + 1
+            elif res < 0:
+                r = mid - 1
+            else:
+                return mid
 ```
 
 Solution with Stencil
 
 ```python
-i h
-
 c S:
-    d k(s, n, n, k):
-        i n n o n n:
-            r []
-        r, h = [], []
-        h = []
-
-        f i i r(m(k, l(n))):
-            h.h(h, (n[i] + n[0], i, 0))
-
-        w h a l(r) < k:
-            t, i, j = h.h(h)
-            r.a([n[i], n[j]])
-
-            i j + 1 < l(n):
-                h.h(h, (n[i] + n[j + 1], i, j + 1))
-
-        r r
+    d g(s, n: i) -> i:
+        l, r = 1, n
+        w T:
+            m = (l + r)//2
+            r = g(m)
+            i r > 0:
+                l = m + 1
+            e r < 0:
+                r = m - 1
+            e:
+                r m
 ```
 
 ## Local Installation
