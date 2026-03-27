@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 375 "Guess Number Higher or Lower II":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 376 "Wiggle Subsequence":
 
 ## Example
 
@@ -24,52 +24,32 @@ Solution
 
 ```python
 class Solution:
-    def getMoneyAmount(self, n: int) -> int:
-        dp = {}
+    def wiggleMaxLength(self, nums: List[int]) -> int:
+        n = len(nums)
+        up_seq, down_seq = 0, 0
 
-        def dfs(start, end):
-            if start == end:
-                return 0
-            if start + 1 == end:
-                return start
-            if (start, end) in dp:
-                return dp[(start, end)]
-
-            res = float('inf')
-            for mid in range((start + end)//2, end):
-                res = min(mid + max(dfs(start, mid - 1), dfs(mid + 1, end)), res)
-
-            dp[(start, end)] = res
-            return res
-
-        dfs(1, n)
-        return dfs(1, n)
+        for i in range(n - 1):
+            if nums[i] > nums[i + 1]: 
+                up_seq = down_seq + 1
+            elif nums[i] < nums[i + 1]:
+                down_seq = up_seq + 1
+        return 1 + max(up_seq, down_seq)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, n: i) -> i:
-        d = {}
+    d w(s, n: L[i]) -> i:
+        n = l(n)
+        u_s, d_s = 0, 0
 
-        d d(s, e):
-            i s == e:
-                r 0
-            i s + 1 == e:
-                r s
-            i (s, e) i d:
-                r d[(s, e)]
-
-            r = f('i')
-            f m i r((s + e)//2, e):
-                r = m(m + m(d(s, m - 1), d(m + 1, e)), r)
-
-            d[(s, e)] = r
-            r r
-
-        d(1, n)
-        r d(1, n)
+        f i i r(n - 1):
+            i n[i] > n[i + 1]: 
+                u_s = d_s + 1
+            e n[i] < n[i + 1]:
+                d_s = u_s + 1
+        r 1 + m(u_s, d_s)
 ```
 
 ## Local Installation
