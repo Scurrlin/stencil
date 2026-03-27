@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 371 "Sum of Two Integers":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 372 "Super Pow":
 
 ## Example
 
@@ -24,28 +24,28 @@ Solution
 
 ```python
 class Solution:
-    def getSum(self, a: int, b: int) -> int:
-        mask = 0xffffffff
-        while (b & mask) > 0:
-            carry = ( a & b ) << 1
-            a = (a ^ b) 
-            b = carry
-        
-        return (a & mask) if b > 0 else a
+    def superPow(self, a: int, b: List[int]) -> int:
+        exp = 0
+        for e in b:
+            exp = e + 10 * exp
+            exp %= 1140
+        if exp == 0:
+            exp = 1140 
+        return pow(a, exp, 1337)
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d g(s, a: i, b: i) -> i:
-        m = 0
-        w (b & m) > 0:
-            c = ( a & b ) << 1
-            a = (a ^ b) 
-            b = c
-        
-        r (a & m) i b > 0 e a
+    d s(s, a: i, b: L[i]) -> i:
+        e = 0
+        f e i b:
+            e = e + 1 * e
+            e %= 1
+        i e == 0:
+            e = 1 
+        r p(a, e, 1)
 ```
 
 ## Local Installation
