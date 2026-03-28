@@ -16,7 +16,7 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 377 "Combination Sum IV":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 378 "Kth Smallest Element in a Sorted Matrix":
 
 ## Example
 
@@ -24,32 +24,64 @@ Solution
 
 ```python
 class Solution:
-    def combinationSum4(self, nums: List[int], target: int) -> int:
-        dp = [0] * (target + 1)
-        dp[0] = 1
-        
-        for i in range(1, target + 1):
-            for num in nums:
-                if i - num >= 0:
-                    dp[i] += dp[i - num]
-                    
-        return dp[target]
+    def countElements(self, matrix, target):
+        n = len(matrix)
+        row, col, count = n - 1, 0, 0
+
+        while row >= 0 and col < n:
+            if matrix[row][col] <= target:
+                count += (row + 1)
+                col += 1
+            else:
+                row -= 1
+        return count
+
+    def kthSmallest(self, matrix, k: int) -> int:
+        n = len(matrix)
+        low, high = matrix[0][0], matrix[-1][-1]
+        ans = 0
+
+        while low <= high:
+            mid = (low + high)//2
+            count = self.countElements(matrix, mid)
+            if count >= k:
+                ans = mid
+                high = mid - 1
+            else:
+                low = mid + 1
+        return ans
 ```
 
 Solution with Stencil
 
 ```python
 c S:
-    d c(s, n: L[i], t: i) -> i:
-        d = [0] * (t + 1)
-        d[0] = 1
-        
-        f i i r(1, t + 1):
-            f n i n:
-                i i - n >= 0:
-                    d[i] += d[i - n]
-                    
-        r d[t]
+    d c(s, m, t):
+        n = l(m)
+        r, c, c = n - 1, 0, 0
+
+        w r >= 0 a c < n:
+            i m[r][c] <= t:
+                c += (r + 1)
+                c += 1
+            e:
+                r -= 1
+        r c
+
+    d k(s, m, k: i) -> i:
+        n = l(m)
+        l, h = m[0][0], m[-1][-1]
+        a = 0
+
+        w l <= h:
+            m = (l + h)//2
+            c = s.c(m, m)
+            i c >= k:
+                a = m
+                h = m - 1
+            e:
+                l = m + 1
+        r a
 ```
 
 ## Local Installation
