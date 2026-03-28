@@ -16,72 +16,60 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 378 "Kth Smallest Element in a Sorted Matrix":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 380 "Insert Delete GetRandom O(1)":
 
 ## Example
 
 Solution
 
 ```python
-class Solution:
-    def countElements(self, matrix, target):
-        n = len(matrix)
-        row, col, count = n - 1, 0, 0
+class RandomizedSet:
 
-        while row >= 0 and col < n:
-            if matrix[row][col] <= target:
-                count += (row + 1)
-                col += 1
-            else:
-                row -= 1
-        return count
+    def __init__(self):
+        self.nums = {}
+        
 
-    def kthSmallest(self, matrix, k: int) -> int:
-        n = len(matrix)
-        low, high = matrix[0][0], matrix[-1][-1]
-        ans = 0
+    def insert(self, val: int) -> bool:
+        if val in self.nums:
+            return False
+        self.nums[val] = 1
+        return True
 
-        while low <= high:
-            mid = (low + high)//2
-            count = self.countElements(matrix, mid)
-            if count >= k:
-                ans = mid
-                high = mid - 1
-            else:
-                low = mid + 1
-        return ans
+
+    def remove(self, val: int) -> bool:
+        if val in self.nums:
+            self.nums.pop(val)
+            return True
+        return False
+
+    def getRandom(self) -> int:
+        return random.choice(list(self.nums.keys()))
 ```
 
 Solution with Stencil
 
 ```python
-c S:
-    d c(s, m, t):
-        n = l(m)
-        r, c, c = n - 1, 0, 0
+c R:
 
-        w r >= 0 a c < n:
-            i m[r][c] <= t:
-                c += (r + 1)
-                c += 1
-            e:
-                r -= 1
-        r c
+    d __i__(s):
+        s.n = {}
+        
 
-    d k(s, m, k: i) -> i:
-        n = l(m)
-        l, h = m[0][0], m[-1][-1]
-        a = 0
+    d i(s, v: i) -> b:
+        i v i s.n:
+            r F
+        s.n[v] = 1
+        r T
 
-        w l <= h:
-            m = (l + h)//2
-            c = s.c(m, m)
-            i c >= k:
-                a = m
-                h = m - 1
-            e:
-                l = m + 1
-        r a
+
+    d r(s, v: i) -> b:
+        i v i s.n:
+            s.n.p(v)
+            r T
+        r F
+
+    d g(s) -> i:
+        r r.c(l(s.n.k()))
 ```
 
 ## Local Installation
