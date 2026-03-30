@@ -16,82 +16,40 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 381 "Insert Delete GetRandom O(1) - Duplicates allowed":
+Stencil is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 382 "Linked List Random Node":
 
 ## Example
 
 Solution
 
 ```python
-class RandomizedCollection:
+class Solution:
 
-    def __init__(self):
-        self.mp = defaultdict(set)
-        self.items = []   
-
-    def insert(self, val: int) -> bool:
-        ret = val not in self.mp
-        self.mp[val].add(len(self.items))
-        self.items.append(val)
-        return ret
-
-    def remove(self, val: int) -> bool:
-        if val not in self.mp:
-            return False
-        
-        i = self.mp[val].pop()
-
-        if len(self.mp[val]) == 0:
-            del self.mp[val]
-
-        if i != (len(self.items) - 1): 
-            last_val = self.items[-1]
-            self.items[i] = last_val
-            self.mp[last_val].remove(len(self.items) - 1)
-            self.mp[last_val].add(i)
-
-        self.items.pop()
-        return True
+    def __init__(self, head: ListNode):
+        self.nodes = []
+        while head:
+            self.nodes.append(head.val)
+            head = head.next
 
     def getRandom(self) -> int:
-        return random.choice(self.items)
+        i = random.randint(0, len(self.nodes) - 1)
+        return self.nodes[i]
 ```
 
 Solution with Stencil
 
 ```python
-c R:
+c S:
 
-    d __i__(s):
-        s.m = d(s)
-        s.i = []   
-
-    d i(s, v: i) -> b:
-        r = v n i s.m
-        s.m[v].a(l(s.i))
-        s.i.a(v)
-        r r
-
-    d r(s, v: i) -> b:
-        i v n i s.m:
-            r F
-        
-        i = s.m[v].p()
-
-        i l(s.m[v]) == 0:
-            d s.m[v]
-
-        i i != (l(s.i) - 1): 
-            l_v = s.i[-1]
-            s.i[i] = l_v
-            s.m[l_v].r(l(s.i) - 1)
-            s.m[l_v].a(i)
-
-        s.i.p()
-        r T
+    d __i__(s, h: L):
+        s.n = []
+        w h:
+            s.n.a(h.v)
+            h = h.n
 
     d g(s) -> i:
-        r r.c(s.i)
+        i = r.r(0, l(s.n) - 1)
+        r s.n[i]
 ```
 
 ## Local Installation
