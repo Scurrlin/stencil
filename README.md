@@ -14,38 +14,54 @@ Whether you are studying for technical interviews, or just starting your coding 
 
 Most people when they attempt to memorize something study the full text and then attempt to regurgitate it on a blank page. Shocking, I know... but what if there was a step in between? What if memorization and pattern recognition weren't all or nothing games? This is where Stencil comes in.
 
-[Stencil](https://www.npmjs.com/package/@scurrlin/stencil) is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 383 "Ransom Note":
+[Stencil](https://github.com/Scurrlin/stencil) is a language-agnostic memorization tool that strips code files down to their first letters while preserving spacing, capitalization, and punctuation. The "stencil" of the file is designed to act as a bridge between having something partially memorized and fully memorized. Below is an example of Stencil in action using LeetCode problem 384 "Shuffle an Array":
 
 ## Example
 
 Solution
 
 ```python
-from collections import Counter
+import random
 
 class Solution:
-    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        count = Counter(magazine)
-        for r in ransomNote:
-            if count[r] == 0:
-                return False
-            count[r] -= 1
-        return True
+
+    def __init__(self, nums: list[int]):
+        self.original = nums[:]
+
+    def reset(self) -> list[int]:
+        return self.original[:]
+
+    def shuffle(self) -> list[int]:
+        arr = self.original[:]
+        n = len(arr)
+
+        for i in range(n - 1, 0, -1):
+            j = random.randint(0, i)
+            arr[i], arr[j] = arr[j], arr[i]
+        return arr
 ```
 
 Solution with Stencil
 
 ```python
-f c i C
+i r
 
 c S:
-    d c(s, r: s, m: s) -> b:
-        c = C(m)
-        f r i r:
-            i c[r] == 0:
-                r F
-            c[r] -= 1
-        r T
+
+    d __i__(s, n: l[i]):
+        s.o = n[:]
+
+    d r(s) -> l[i]:
+        r s.o[:]
+
+    d s(s) -> l[i]:
+        a = s.o[:]
+        n = l(a)
+
+        f i i r(n - 1, 0, -1):
+            j = r.r(0, i)
+            a[i], a[j] = a[j], a[i]
+        r a
 ```
 
 ## Local Installation
